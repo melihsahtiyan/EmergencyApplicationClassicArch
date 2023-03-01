@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using Core.Entities;
+using Entity.Concrete;
 
 namespace Core.Utilities.Security.JWT
 {

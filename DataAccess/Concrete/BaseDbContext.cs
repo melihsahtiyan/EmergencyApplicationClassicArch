@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Entities.Concrete;
-using Core.Security.Entities;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
