@@ -1,9 +1,9 @@
-﻿using Core.Entities.Concrete;
+﻿using Entity.Abstract;
 using Entity.Concrete;
 
 namespace Entity.Concrete;
 
-public class RefreshToken : global::Entity.Concrete.Entity
+public class RefreshToken : IEntity
 {
     public int UserId { get; set; }
     public string Token { get; set; }

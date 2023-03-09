@@ -1,11 +1,11 @@
-﻿using Core.Entities;
-using Core.Entities.Concrete;
+﻿using Entity.Abstract;
 using Entity.Concrete;
 
-namespace Core.Entities.Concrete;
+namespace Entity.Concrete;
 
-public class UserOperationClaim : global::Entity.Concrete.Entity
+public class UserOperationClaim : IEntity
 {
+    public int Id { get; set; }
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
 
@@ -16,8 +16,9 @@ public class UserOperationClaim : global::Entity.Concrete.Entity
     {
     }
 
-    public UserOperationClaim(int id, int userId, int operationClaimId) : base(id)
+    public UserOperationClaim(int id, int userId, int operationClaimId) : base()
     {
+        Id = id;
         UserId = userId;
         OperationClaimId = operationClaimId;
     }

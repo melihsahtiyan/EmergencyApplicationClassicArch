@@ -1,11 +1,13 @@
-﻿using Entity.Concrete;
+﻿using Entity.Abstract;
+using Entity.Concrete;
 
 
-namespace Core.Entities.Concrete
+namespace Entity.Concrete
 {
 
-    public class EmailAuthenticator : Entity.Concrete.Entity
+    public class EmailAuthenticator : IEntity
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string? ActivationKey { get; set; }
         public bool IsVerified { get; set; }
