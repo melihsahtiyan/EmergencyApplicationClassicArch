@@ -26,6 +26,11 @@ namespace DataAccess.Concrete
         {
         }
 
+        public BaseDbContext()
+        {
+            
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>(e =>
