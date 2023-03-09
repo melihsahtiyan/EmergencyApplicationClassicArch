@@ -1,10 +1,12 @@
 ﻿using Core.Entities.Concrete;
 using Entity.Concrete;
+using Entity.Abstract;
 
-namespace Core.Entities.Concrete;
+namespace Entity.Concrete;
 
-public class OtpAuthenticator : global::Entity.Concrete.Entity
+public class OtpAuthenticator : IEntity
 {
+    public int Id { get; set; }
     public int UserId { get; set; }
     public byte[] SecretKey { get; set; }
     public bool IsVerified { get; set; }

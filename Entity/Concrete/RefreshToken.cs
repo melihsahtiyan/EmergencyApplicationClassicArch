@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Entity.Concrete;
 
-namespace Core.Entities.Concrete;
+namespace Entity.Concrete;
 
 public class RefreshToken : global::Entity.Concrete.Entity
 {

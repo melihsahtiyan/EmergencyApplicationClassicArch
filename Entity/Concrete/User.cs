@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Entities.Concrete;
 using Core.Enums;
-
+using Entity.Concrete;
 
 namespace Entity.Concrete
 {
-    public class User : global::Entity.Concrete.Entity
+    public class User : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,11 +18,12 @@ namespace Entity.Concrete
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
         public AuthenticatorType AuthenticatorType { get; set; }
-        public string IdentityNumber { get; set; }
-        public DateTime BirthDate { get; set; }
         public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
+        public string IdentityNumber { get; set; }
+        public DateTime BirthDate { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual SystemStaff SystemStaff { get; set; }
 
         public User()
         {
@@ -31,7 +32,7 @@ namespace Entity.Concrete
         }
 
 
-        public User(int id, string email, string firstName, string lastName, string identityNumber, byte[] passwordHash,
+        public User(int id,string email, string firstName, string lastName, string identityNumber, byte[] passwordHash,
             byte[] passwordSalt, DateTime birthDate, bool status) : this()
         {
             Id = id;

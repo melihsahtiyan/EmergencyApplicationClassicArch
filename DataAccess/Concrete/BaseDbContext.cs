@@ -17,10 +17,12 @@ namespace DataAccess.Concrete
         public DbSet<Post> Posts { get; set; }
         public DbSet<Source> Sources { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<SystemStaff> SystemStaffs { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<PostTemplates> PostTemplates { get; set; }
         public BaseDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
@@ -33,6 +35,7 @@ namespace DataAccess.Concrete
                 e.Property(c => c.Id).HasColumnName("Id");
                 e.Property(c => c.CategoryName).HasColumnName("CategoryName");
                 e.HasMany(c => c.Posts);
+                e.HasMany(c => c.PostTemplates);
             });
 
             modelBuilder.Entity<Post>(e =>
@@ -60,6 +63,16 @@ namespace DataAccess.Concrete
                 e.Property(s => s.Date).HasColumnName("Date");
                 e.Property(s => s.SourceCategory).HasColumnName("SourceCategory");
                 e.HasOne(s => s.Post).WithMany(p => p.Sources).HasForeignKey(p => p.PostId);
+            });
+
+            modelBuilder.Entity<SystemStaff>(e =>
+            {
+                e.ToTable("SystemStaffs").HasKey(k => k.Id);
+                e.Property(s => s.Id).HasColumnName("Id");
+                e.Property(s => s.UserId).HasColumnName("UserId");
+                e.Property(s => s.StaffNumber).HasColumnName("StaffNumber");
+                e.Property(s => s.StaffStatus).HasColumnName("StaffStatus");
+                e.HasOne(s => s.User).WithOne(u => u.SystemStaff).HasForeignKey<SystemStaff>(s => s.UserId);
             });
 
             modelBuilder.Entity<User>(a =>
@@ -95,14 +108,14 @@ namespace DataAccess.Concrete
                 a.Property(r => r.Token).HasColumnName("Token");
                 a.HasOne(r => r.User).WithMany(u => u.RefreshTokens).HasForeignKey(u => u.UserId);
             });
-            
+
             modelBuilder.Entity<UserOperationClaim>(a =>
             {
                 a.ToTable("UserOperationClaims").HasKey(k => k.Id);
                 a.Property(u => u.Id).HasColumnName("Id");
                 a.Property(u => u.UserId).HasColumnName("UserId");
                 a.Property(u => u.OperationClaimId).HasColumnName("OperationClaimId");
-                a.HasOne(u => u.User).WithMany(u=> u.UserOperationClaims).HasForeignKey(u => u.UserId);
+                a.HasOne(u => u.User).WithMany(u => u.UserOperationClaims).HasForeignKey(u => u.UserId);
                 a.HasOne(u => u.OperationClaim).WithMany(o => o.UserOperationClaims)
                     .HasForeignKey(o => o.OperationClaimId);
             });
@@ -113,6 +126,16 @@ namespace DataAccess.Concrete
                 a.Property(o => o.Id).HasColumnName("Id");
                 a.Property(o => o.Name).HasColumnName("Name");
                 a.HasMany(u => u.UserOperationClaims);
+            });
+
+            modelBuilder.Entity<PostTemplates>(a =>
+            {
+                a.ToTable("PostTemplates").HasKey(k => k.Id);
+                a.Property(o => o.Id).HasColumnName("Id");
+                a.Property(o => o.CategoryId).HasColumnName("CategoryId");
+                a.Property(o => o.Description).HasColumnName("Description");
+                a.Property(o => o.Title).HasColumnName("Title");
+                a.HasOne(o => o.Category).WithMany(c => c.PostTemplates).HasForeignKey(c => c.CategoryId);
             });
         }
     }
