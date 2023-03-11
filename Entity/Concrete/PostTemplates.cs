@@ -8,7 +8,7 @@ using Entity.Abstract;
 
 namespace Entity.Concrete
 {
-    public class PostTemplates : IEntity
+    public class PostTemplates : Entity
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -5,7 +5,7 @@ using Entity.Concrete;
 namespace Entity.Concrete
 {
 
-    public class EmailAuthenticator : IEntity
+    public class EmailAuthenticator : Entity
     {
         public int Id { get; set; }
         public int UserId { get; set; }

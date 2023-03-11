@@ -25,6 +25,10 @@ namespace DataAccess.Concrete
         public BaseDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
+        public BaseDbContext()
+        {
+            
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
