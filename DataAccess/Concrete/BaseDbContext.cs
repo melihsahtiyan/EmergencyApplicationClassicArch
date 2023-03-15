@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -13,6 +14,7 @@ namespace DataAccess.Concrete
 {
     public class BaseDbContext : DbContext
     {
+        
         public DbSet<Post> Posts { get; set; }
         public DbSet<Source> Sources { get; set; }
         public DbSet<User> Users { get; set; }
@@ -25,6 +27,10 @@ namespace DataAccess.Concrete
         public BaseDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
+        public BaseDbContext()
+        {
+            
+        }
 
         public BaseDbContext()
         {
@@ -33,6 +39,9 @@ namespace DataAccess.Concrete
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>(e =>
             {
                 e.ToTable("Categories").HasKey(k => k.Id);

@@ -3,7 +3,7 @@ using Entity.Abstract;
 
 namespace Entity.Concrete;
 
-public class OtpAuthenticator : IEntity
+public class OtpAuthenticator : Entity
 {
     public int Id { get; set; }
     public int UserId { get; set; }

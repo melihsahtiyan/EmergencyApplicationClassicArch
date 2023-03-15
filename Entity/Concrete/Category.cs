@@ -7,7 +7,7 @@ using Entity.Abstract;
 
 namespace Entity.Concrete
 {
-    public class Category : IEntity
+    public class Category : Entity
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }

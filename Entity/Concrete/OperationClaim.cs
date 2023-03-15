@@ -2,7 +2,7 @@
 
 namespace Entity.Concrete;
 
-public class OperationClaim : IEntity
+public class OperationClaim : Entity
 {
     public int Id { get; set; }
     public string Name { get; set; }

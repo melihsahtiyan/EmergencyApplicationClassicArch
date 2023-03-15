@@ -7,7 +7,7 @@ using Entity.Abstract;
 
 namespace Entity.Concrete
 {
-    public class Source : IEntity
+    public class Source : Entity
     {
         public int Id { get; set; }
         public string SourcePath { get; set; }

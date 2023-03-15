@@ -8,7 +8,7 @@ using Entity.Abstract;
 
 namespace Entity.Concrete
 {
-    public class Post : IEntity
+    public class Post : Entity
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }

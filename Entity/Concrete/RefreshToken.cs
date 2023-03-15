@@ -3,7 +3,7 @@ using Entity.Concrete;
 
 namespace Entity.Concrete;
 
-public class RefreshToken : IEntity
+public class RefreshToken : Entity
 {
     public int Id { get; set; }
     public int UserId { get; set; }
