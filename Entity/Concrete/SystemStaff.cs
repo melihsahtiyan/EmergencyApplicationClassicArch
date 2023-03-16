@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entity.Abstract;
 
 namespace Entity.Concrete
 {
     public class SystemStaff : Entity
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public bool StaffStatus { get; set; }
         public string StaffNumber { get; set; }

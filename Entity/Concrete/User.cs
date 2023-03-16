@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Enums;
-using Entity.Concrete;
 
 namespace Entity.Concrete
 {
@@ -21,8 +20,11 @@ namespace Entity.Concrete
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
         public string IdentityNumber { get; set; }
         public DateTime BirthDate { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual SystemStaff SystemStaff { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
+        public virtual ICollection<Contact> ContactUsers { get; set; }
 
         public User()
         {
@@ -31,7 +33,7 @@ namespace Entity.Concrete
         }
 
 
-        public User(int id,string email, string firstName, string lastName, string identityNumber, byte[] passwordHash,
+        public User(int id, string email, string firstName, string lastName, string identityNumber, byte[] passwordHash,
             byte[] passwordSalt, DateTime birthDate, bool status) : this()
         {
             Id = id;
@@ -45,4 +47,6 @@ namespace Entity.Concrete
             Status = status;
         }
     }
+
+
 }
