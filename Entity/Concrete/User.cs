@@ -14,11 +14,11 @@ namespace Entity.Concrete
         public string Email { get; set; }
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
+        public string IdentityNumber { get; set; }
         public bool Status { get; set; }
         public AuthenticatorType AuthenticatorType { get; set; }
         public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
-        public string IdentityNumber { get; set; }
         public DateTime BirthDate { get; set; }
         public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

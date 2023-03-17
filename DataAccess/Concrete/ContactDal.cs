@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class ContactDal : EfEntityRepositoryBase<Contact, BaseDbContext>, IContactDal
     {
+        
     }
 }

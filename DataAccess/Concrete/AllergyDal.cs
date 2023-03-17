@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class AllergyDal : EfEntityRepositoryBase<Allergy, BaseDbContext>, IAllergyDal
     {
+
     }
 }

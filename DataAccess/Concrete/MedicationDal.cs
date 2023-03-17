@@ -10,7 +10,7 @@ using Entity.Concrete;
 namespace DataAccess.Concrete
 {
     public class MedicationDal : EfEntityRepositoryBase<Medication, BaseDbContext>, IMedicationDal
-
     {
+        
     }
 }

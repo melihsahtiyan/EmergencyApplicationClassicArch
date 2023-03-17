@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Entity.Abstract;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Core.DataAccess.EntityFramework
 {
@@ -12,9 +13,10 @@ namespace Core.DataAccess.EntityFramework
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
+
         public void Add(TEntity entity)
         {
-            using (_context)
+            using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;

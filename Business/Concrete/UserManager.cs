@@ -32,6 +32,12 @@ namespace Business.Concrete
 
         public IDataResult<User> GetByMail(string email)
         {
+            var result = _userDal.Get(u => u.Email == email);
+            if (result == null)
+            {
+                return new ErrorDataResult<User>("Kullanıcı bulunamadı.");
+            }
+
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
     }

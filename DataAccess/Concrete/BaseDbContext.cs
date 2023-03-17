@@ -31,14 +31,13 @@ namespace DataAccess.Concrete
         public DbSet<UserAllergies> UserAllergies { get; set; }
         public DbSet<UserMedications> UserMedications { get; set; }
         public DbSet<UserMedicalHistories> UserMedicalHistories { get; set; }
-        public BaseDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(
+                "Server=MELIH\\SQLEXPRESS;Database=EmergencyApplicationDatabase; Trusted_Connection=True; TrustServerCertificate=true");
         }
 
-        public BaseDbContext()
-        {
-
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -166,6 +165,17 @@ namespace DataAccess.Concrete
                 a.HasMany(u => u.Posts);
             });
 
+            modelBuilder.Entity<UserOperationClaim>(a =>
+            {
+                a.ToTable("UserOperationClaims").HasKey(k => k.Id);
+                a.Property(u => u.Id).HasColumnName("Id");
+                a.Property(u => u.UserId).HasColumnName("UserId");
+                a.Property(u => u.OperationClaimId).HasColumnName("OperationClaimId");
+                a.HasOne(u => u.User).WithMany(u => u.UserOperationClaims).HasForeignKey(u => u.UserId);
+                a.HasOne(u => u.OperationClaim).WithMany(o => o.UserOperationClaims)
+                    .HasForeignKey(o => o.OperationClaimId);
+            });
+
             modelBuilder.Entity<UserProfile>(e =>
             {
                 e.ToTable("UserProfiles").HasKey(k => k.Id);
@@ -199,16 +209,6 @@ namespace DataAccess.Concrete
                 a.HasOne(r => r.User).WithMany(u => u.RefreshTokens).HasForeignKey(u => u.UserId);
             });
 
-            modelBuilder.Entity<UserOperationClaim>(a =>
-            {
-                a.ToTable("UserOperationClaims").HasKey(k => k.Id);
-                a.Property(u => u.Id).HasColumnName("Id");
-                a.Property(u => u.UserId).HasColumnName("UserId");
-                a.Property(u => u.OperationClaimId).HasColumnName("OperationClaimId");
-                a.HasOne(u => u.User).WithMany(u => u.UserOperationClaims).HasForeignKey(u => u.UserId);
-                a.HasOne(u => u.OperationClaim).WithMany(o => o.UserOperationClaims)
-                    .HasForeignKey(o => o.OperationClaimId);
-            });
 
             modelBuilder.Entity<OperationClaim>(a =>
             {

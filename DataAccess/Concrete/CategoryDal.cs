@@ -11,6 +11,6 @@ namespace DataAccess.Concrete
 {
     public class CategoryDal : EfEntityRepositoryBase<Category, BaseDbContext>, ICategoryDal
     {
-
+     
     }
 }
