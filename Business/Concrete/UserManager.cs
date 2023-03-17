@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
@@ -25,11 +26,6 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
-        public void Add(User user)
-        {
-            _userDal.Add(user);
-        }
-
         public IDataResult<User> GetByMail(string email)
         {
             var result = _userDal.Get(u => u.Email == email);
@@ -39,6 +35,34 @@ namespace Business.Concrete
             }
 
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        IResult IUserService.Add(User user)
+        {
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
+        }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
+        }
+
+        public IDataResult<User> GetById(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+        }
+
+        public IResult Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult(Messages.UserUpdated);
+        }
+
+        public IResult Delete(User user)
+        {
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.UserDeleted);
         }
     }
 }
