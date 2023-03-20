@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<UserAllergies>> GetAll();
         IDataResult<UserAllergies> GetById(int userAllergiesId);
+        IDataResult<List<UserAllergies>> GetUserAllergiesByUserId(int userId);
         IResult Add(UserAllergies userAllergies);
         IResult Update(UserAllergies userAllergies);
         IResult Delete(UserAllergies userAllergies);

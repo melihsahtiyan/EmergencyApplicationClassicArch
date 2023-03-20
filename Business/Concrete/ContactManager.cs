@@ -44,6 +44,12 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.ContactExists);
             }
+
+            var checkLimit = CheckIfLimitExceeded(contact.UserId);
+            if (checkLimit)
+            {
+                return new ErrorResult(Messages.ContactLimitExceeded);
+            }
             _contactDal.Add(contact);
             
             return new SuccessResult(Messages.ContactAdded);
@@ -75,6 +81,16 @@ namespace Business.Concrete
         {
             var result = _contactDal.GetAll(c => c.ContactId == contactId && c.UserId == userId);
             if (result.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckIfLimitExceeded(int userId)
+        {
+            var result = _contactDal.GetAll(c => c.UserId == userId);
+            if (result.Count == 5)
             {
                 return true;
             }

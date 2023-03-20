@@ -15,5 +15,6 @@ namespace Business.Abstract
         IResult Add(UserMedicalHistories userMedicalHistories);
         IResult Update(UserMedicalHistories userMedicalHistories);
         IResult Delete(UserMedicalHistories userMedicalHistories);
+        IDataResult<List<UserMedicalHistories>> GetByUserId(int userId);
     }
 }

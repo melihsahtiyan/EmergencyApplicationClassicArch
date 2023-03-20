@@ -32,6 +32,18 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
+            builder.RegisterType<ContactManager>().As<IContactService>().SingleInstance();
+            builder.RegisterType<ContactDal>().As<IContactDal>().SingleInstance().InstancePerLifetimeScope();
+
+            builder.RegisterType<AllergyManager>().As<IAllergyService>().SingleInstance();
+            builder.RegisterType<AllergyDal>().As<IAllergyDal>().SingleInstance().InstancePerLifetimeScope();
+
+            builder.RegisterType<MedicalHistoryManager>().As<IMedicalHistoryService>().SingleInstance();
+            builder.RegisterType<MedicalHistoryDal>().As<IMedicalHistoryDal>().SingleInstance().InstancePerLifetimeScope();
+
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<CategoryDal>().As<ICategoryDal>().SingleInstance().InstancePerLifetimeScope();
+
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             
 
