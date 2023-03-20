@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Contact>> GetAll();
         IDataResult<List<Contact>> GetById(int contactId);
+        IDataResult<List<Contact>> GetContactsByUserId(int userId);
         IResult Add(Contact contact);
         IResult Update(Contact contact);
         IResult Delete(Contact contact);

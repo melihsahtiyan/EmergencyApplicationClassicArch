@@ -3,49 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Concrete;
 
 namespace Business.Constants
 {
     public static class Messages
     {
-        public static string UserNotFound = "Kullanıcı bulunamadı";
-        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
-        public static string PasswordError = "Şifre hatalı";
-        public static string SuccessfulLogin = "Sisteme giriş başarılı";
-        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
-        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
+        public static string UserNotFound = "User not found";
+        public static string UserRegistered = "User registered!";
+        public static string PasswordError = "Password error!";
+        public static string SuccessfulLogin = "Successful login";
+        public static string UserAlreadyExists = "User already exists";
+        public static string AccessTokenCreated = "Access token created!";
+        public static string WrongEmailOrPassword = "Wrong email or password";
 
-        public static string CategoryAdded = "Kategori başarıyla eklendi";
-        public static string CategoryDeleted = "Kategori başarıyla silindi";
-        public static string CategoryUpdated = "Kategori başarıyla güncellendi";
-        public static string CategoriesListed = "Kategoriler başarıyla listelendi";
+        public static string CategoryAdded = "Category added";
+        public static string CategoryDeleted = "Category deleted";
+        public static string CategoryUpdated = "Category updated";
+        public static string CategoriesListed = "Category listed";
 
-        public static string MedicationAdded = "İlaç başarıyla eklendi";
-        public static string MedicationDeleted = "İlaç başarıyla silindi";
-        public static string MedicationUpdated = "İlaç başarıyla güncellendi";
-        public static string MedicationsListed = "İlaçlar başarıyla listelendi";
+        public static string MedicationAdded = "Medication added";
+        public static string MedicationDeleted = "Medication deleted";
+        public static string MedicationUpdated = "Medication updated";
+        public static string MedicationsListed = "Medication listed";
 
-        public static string SystemStaffAdded = "Sistem personeli başarıyla eklendi";
-        public static string SystemStaffDeleted = "Sistem personeli başarıyla silindi";
-        public static string SystemStaffUpdated = "Sistem personeli başarıyla güncellendi";
-        public static string SystemStaffsListed = "Sistem personelleri başarıyla listelendi";
+        public static string SystemStaffAdded = "System Staff added";
+        public static string SystemStaffDeleted = "System Staff deleted";
+        public static string SystemStaffUpdated = "System Staff updated";
+        public static string SystemStaffsListed = "System Staff listed";
 
-        public static string UserMedicationsAdded = "Kullanıcı ilaçları başarıyla eklendi";
-        public static string UserMedicationsDeleted = "Kullanıcı ilaçları başarıyla silindi";
-        public static string UserMedicationsUpdated = "Kullanıcı ilaçları başarıyla güncellendi";
-        public static string UserMedicationsListed = "Kullanıcı ilaçları başarıyla listelendi";
+        public static string UserMedicationsAdded = "User medications added";
+        public static string UserMedicationsDeleted = "User medications deleted";
+        public static string UserMedicationsUpdated = "User medications Updated";
+        public static string UserMedicationsListed = "User medications listed";
 
-        public static string UserAdded = "Kullanıcı başarıyla eklendi";
-        public static string UserDeleted = "Kullanıcı başarıyla silindi";
-        public static string UserUpdated = "Kullanıcı başarıyla güncellendi";
-        public static string UsersListed = "Kullanıcılar başarıyla listelendi";
+        public static string UserAdded = "User added";
+        public static string UserDeleted = "User deleted";
+        public static string UserUpdated = "User updated";
+        public static string UsersListed = "User listed";
 
-        public static string AllergyAdded = "Alerji başarıyla eklendi";
-        public static string AllergyDeleted = "Alerji başarıyla silindi";
-        public static string AllergyUpdated = "Alerji başarıyla güncellendi";
-        public static string AllergiesListed = "Alerjiler başarıyla listelendi";
+        public static string AllergyAdded = "Allergy added";
+        public static string AllergyDeleted = "Allergy deleted";
+        public static string AllergyUpdated = "Allergy updated";
+        public static string AllergiesListed = "Allergy listed";
 
-        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string AuthorizationDenied = "Authorization denied!";
 
+        public static string ContactListed = "Contact listed";
+        public static string ContactExists = "Contact exists";
+        public static string ContactAdded = "Contact added";
+        public static string ContactNotExists = "Contact not exists";
+        public static string ContactDeleted = "Contact deleted";
+        
+        public static string MedicalHistoriesListed = "Medical histories listed";
+        public static string MedicalHistoryListed = "Medical history listed";
+        public static string MedicalHistoryNotFound = "Medical history not found";
+        public static string MedicalHistoryAdded = "Medical history added";
+        public static string MedicalHistoryExists = "Medical history exists";
+        public static string MedicalHistoryDeleted = "Medical history deleted";
+        public static string MedicalHistoryUpdated = "Medical history updated";
+        
     }
 }
