@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Allergy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Allergy allergy)
+        public IActionResult Add(AllergyForCreateDto allergy)
         {
             var result = _allergyService.Add(allergy);
             if (result.Success)
@@ -44,8 +45,8 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("update")]
-        public IActionResult Update(Allergy allergy)
+        [HttpPut("update")]
+        public IActionResult Update(AllergyForCreateDto allergy)
         {
             var result = _allergyService.Update(allergy);
             if (result.Success)
@@ -54,8 +55,8 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("delete")]
-        public IActionResult Delete(Allergy allergy)
+        [HttpDelete("delete")]
+        public IActionResult Delete(AllergyForCreateDto allergy)
         {
             var result = _allergyService.Delete(allergy);
             if (result.Success)

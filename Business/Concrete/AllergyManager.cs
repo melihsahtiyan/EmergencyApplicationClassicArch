@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Dtos.Allergy;
 
 namespace Business.Concrete
 {
@@ -20,15 +21,26 @@ namespace Business.Concrete
             _allergyDal = allergyDal;
         }
 
-        public IResult Add(Allergy allergy)
+        public IResult Add(AllergyForCreateDto allergy)
         {
-            _allergyDal.Add(allergy);
+            var result = new Allergy()
+            {
+                Name = allergy.Name,
+                Description = allergy.Description
+            };
+            _allergyDal.Add(result);
             return new SuccessResult(Messages.AllergyAdded);
         }
 
-        public IResult Delete(Allergy allergy)
+        public IResult Delete(AllergyForCreateDto allergy)
         {
-            _allergyDal.Delete(allergy);
+            var result = new Allergy()
+            {
+                Id = allergy.Id,
+                Name = allergy.Name,
+                Description = allergy.Description
+            };
+            _allergyDal.Delete(result);
             return new SuccessResult(Messages.AllergyDeleted);
         }
 
@@ -42,9 +54,15 @@ namespace Business.Concrete
             return new SuccessDataResult<Allergy>(_allergyDal.Get(a => a.Id == allergyId));
         }
 
-        public IResult Update(Allergy allergy)
+        public IResult Update(AllergyForCreateDto allergy)
         {
-            _allergyDal.Update(allergy);
+            var result = new Allergy()
+            {
+                Id = allergy.Id,
+                Name = allergy.Name,
+                Description = allergy.Description,
+            };
+            _allergyDal.Update(result);
             return new SuccessResult(Messages.AllergyUpdated);
         }
     }
