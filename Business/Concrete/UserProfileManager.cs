@@ -32,7 +32,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<UserProfile>(Messages.UserProfileNotFound);
             }
-            return new SuccessDataResult<UserProfile>(result, Messages.UserProfileListed);
+            return new SuccessDataResult<UserProfile>(result, Messages.UserProfilesListed);
         }
 
         public IResult Add(UserProfile userProfile)

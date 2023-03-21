@@ -31,7 +31,7 @@ namespace Business.Concrete
             var result = _userDal.Get(u => u.Email == email);
             if (result == null)
             {
-                return new ErrorDataResult<User>("Kullanıcı bulunamadı.");
+                return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
@@ -39,6 +39,11 @@ namespace Business.Concrete
 
         IResult IUserService.Add(User user)
         {
+            var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
+            if (!check)
+            {
+                return new ErrorResult(Messages.UserExists);
+            }
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
@@ -50,19 +55,40 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+            var result = _userDal.Get(u => u.Id == userId);
+            if (result == null)
+            {
+                return new ErrorDataResult<User>(Messages.UserNotFound);
+            }
+            return new SuccessDataResult<User>(result, Messages.UserListed);
         }
 
         public IResult Update(User user)
         {
+            var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
+            if (!check)
+            {
+                return new ErrorResult(Messages.UserExists);
+            }
             _userDal.Update(user);
             return new SuccessResult(Messages.UserUpdated);
         }
 
         public IResult Delete(User user)
         {
+            var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
+            if (!check)
+            {
+                return new ErrorResult(Messages.UserNotFound);
+            }
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
+        }
+
+        private bool CheckIfUserUserExists(int id, string identityNumber)
+        {
+            var result = _userDal.GetAll(u => u.Id == id || u.IdentityNumber == identityNumber).Any();
+            return result;
         }
     }
 }

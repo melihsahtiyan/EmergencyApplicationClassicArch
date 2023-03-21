@@ -9,7 +9,6 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string UserNotFound = "User not found";
         public static string UserRegistered = "User registered!";
         public static string PasswordError = "Password error!";
         public static string SuccessfulLogin = "Successful login";
@@ -33,7 +32,9 @@ namespace Business.Constants
         public static string SystemStaffAdded = "System Staff added";
         public static string SystemStaffDeleted = "System Staff deleted";
         public static string SystemStaffUpdated = "System Staff updated";
-        public static string SystemStaffsListed = "System Staff listed";
+        public static string SystemStaffsListed = "System Staffs listed";
+        public static string SystemStaffExists = "System Staff is already exists";
+        public static string SystemStaffNotFound = "System Staff not found";
 
         public static string UserMedicationAdded = "User medications added";
         public static string UserMedicationDeleted = "User medications deleted";
@@ -46,7 +47,11 @@ namespace Business.Constants
         public static string UserAdded = "User added";
         public static string UserDeleted = "User deleted";
         public static string UserUpdated = "User updated";
-        public static string UsersListed = "User listed";
+        public static string UsersListed = "Users listed";
+        public static string UserListed = "User listed";
+        public static string UserNotFound = "User not found";
+        public static string UserExists = "User exists";
+
 
         public static string AllergyAdded = "Allergy added";
         public static string AllergyDeleted = "Allergy deleted";
