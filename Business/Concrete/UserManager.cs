@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using Entity.Concrete;
+using Entity.Dtos.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
 
-        IResult IUserService.Add(User user)
+        IResult IUserService.Add(UserForCreateDto user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (!check)
@@ -63,7 +64,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(result, Messages.UserListed);
         }
 
-        public IResult Update(User user)
+        public IResult Update(UserForCreateDto user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (!check)
@@ -74,7 +75,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public IResult Delete(User user)
+        public IResult Delete(UserForCreateDto user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (!check)

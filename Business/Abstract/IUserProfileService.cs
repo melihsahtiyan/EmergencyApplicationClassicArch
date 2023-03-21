@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrete;
+using Entity.Dtos.UserProfile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
         IDataResult<List<UserProfile>> GetAll();
         IDataResult<UserProfile> GetById(int userProfileId);
-        IResult Add(UserProfile userProfile);
-        IResult Update(UserProfile userProfile);
-        IResult Delete(UserProfile userProfile);
+        IResult Add(UserProfileForCreateDto userProfile);
+        IResult Update(UserProfileForCreateDto userProfile);
+        IResult Delete(UserProfileForCreateDto userProfile);
     }
 }

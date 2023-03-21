@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.UserProfile;
 
 namespace Business.Concrete
 {
@@ -35,7 +36,7 @@ namespace Business.Concrete
             return new SuccessDataResult<UserProfile>(result, Messages.UserProfilesListed);
         }
 
-        public IResult Add(UserProfile userProfile)
+        public IResult Add(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (check)
@@ -46,7 +47,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserProfileAdded);
         }
 
-        public IResult Update(UserProfile userProfile)
+        public IResult Update(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (!check)
@@ -57,7 +58,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserProfileUpdated);
         }
 
-        public IResult Delete(UserProfile userProfile)
+        public IResult Delete(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (!check)
