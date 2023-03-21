@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.MedicalHistory;
 
 namespace Business.Concrete
 {
@@ -35,7 +36,7 @@ namespace Business.Concrete
             return new SuccessDataResult<MedicalHistory>(result, Messages.MedicalHistoryListed);
         }
 
-        public IResult Add(MedicalHistory medicalHistory)
+        public IResult Add(MedicalHistoryForCreateDto medicalHistory)
         {
             var check = CheckIfMedicalHistoryByName(medicalHistory.Name);
 
@@ -44,11 +45,17 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            _medicalHistoryDal.Add(medicalHistory);
+            var result = new MedicalHistory()
+            {
+                Name = medicalHistory.Name,
+                Description = medicalHistory.Description
+            };
+
+            _medicalHistoryDal.Add(result);
             return new SuccessResult(Messages.MedicalHistoryAdded);
         }
 
-        public IResult Update(MedicalHistory medicalHistory)
+        public IResult Update(MedicalHistoryForCreateDto medicalHistory)
         {
             var check = CheckIfMedicalHistoryById(medicalHistory.Id);
 
@@ -64,11 +71,18 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            _medicalHistoryDal.Update(medicalHistory);
+            var result = new MedicalHistory()
+            {
+                Id = medicalHistory.Id,
+                Name = medicalHistory.Name,
+                Description = medicalHistory.Description
+            };
+
+            _medicalHistoryDal.Update(result);
             return new SuccessResult(Messages.MedicalHistoryUpdated);
         }
 
-        public IResult Delete(MedicalHistory medicalHistory)
+        public IResult Delete(MedicalHistoryForCreateDto medicalHistory)
         {
             var check = CheckIfMedicalHistoryById(medicalHistory.Id);
 
@@ -77,7 +91,14 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            _medicalHistoryDal.Delete(medicalHistory);
+            var result = new MedicalHistory()
+            {
+                Id = medicalHistory.Id,
+                Name = medicalHistory.Name,
+                Description = medicalHistory.Description
+            };
+
+            _medicalHistoryDal.Delete(result);
             return new SuccessResult(Messages.MedicalHistoryDeleted);
         }
 

@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.MedicalHistory;
 
 namespace Business.Concrete
 {
@@ -31,36 +32,59 @@ namespace Business.Concrete
             return new SuccessDataResult<UserMedicalHistories>(result, Messages.MedicalHistoryListed);
         }
 
-        public IResult Add(UserMedicalHistories userMedicalHistories)
+        public IResult Add(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
             var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId,userMedicalHistories.MedicalHistoryId);
             if (!check)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
-            _userMedicalHistoryDal.Add(userMedicalHistories);
+
+            var result = new UserMedicalHistories()
+            {
+                UserId = userMedicalHistories.UserId,
+                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
+            };
+
+            _userMedicalHistoryDal.Add(result);
             return new SuccessResult(Messages.MedicalHistoryAdded);
         }
 
-        public IResult Update(UserMedicalHistories userMedicalHistories)
+        public IResult Update(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
             var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
             if (!check)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
-            _userMedicalHistoryDal.Update(userMedicalHistories);
+
+            var result = new UserMedicalHistories()
+            {
+                Id = userMedicalHistories.Id,
+                UserId = userMedicalHistories.UserId,
+                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
+            };
+
+            _userMedicalHistoryDal.Update(result);
             return new SuccessResult(Messages.MedicalHistoryUpdated);
         }
 
-        public IResult Delete(UserMedicalHistories userMedicalHistories)
+        public IResult Delete(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
             var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
             if (!check)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
-            _userMedicalHistoryDal.Delete(userMedicalHistories);
+
+            var result = new UserMedicalHistories()
+            {
+                Id = userMedicalHistories.Id,
+                UserId = userMedicalHistories.UserId,
+                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
+            };
+
+            _userMedicalHistoryDal.Delete(result);
             return new SuccessResult(Messages.MedicalHistoryDeleted);
         }
 

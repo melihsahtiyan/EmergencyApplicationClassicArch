@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Allergy;
 
 namespace Business.Concrete
 {
@@ -39,36 +40,59 @@ namespace Business.Concrete
             return new SuccessDataResult<UserAllergies>(result, Messages.UserAllergiesListed);
         }
 
-        public IResult Add(UserAllergies userAllergies)
+        public IResult Add(UserAllergiesForCreateDto userAllergies)
         {
             var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
             if (check)
             {
                 return new ErrorResult(Messages.UserAllergiesExists);
             }
-            _userAllergiesDal.Add(userAllergies);
+
+            var result = new UserAllergies()
+            {
+                UserId = userAllergies.UserId,
+                AllergyId = userAllergies.AllergyId
+            };
+
+            _userAllergiesDal.Add(result);
             return new SuccessResult(Messages.UserAllergiesAdded);
         }
 
-        public IResult Update(UserAllergies userAllergies)
+        public IResult Update(UserAllergiesForCreateDto userAllergies)
         {
             var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
             if (!check)
             {
                 return new ErrorResult(Messages.UserAllergiesNotFound);
             }
-            _userAllergiesDal.Update(userAllergies);
+
+            var result = new UserAllergies()
+            {
+                Id = userAllergies.Id,
+                UserId = userAllergies.UserId,
+                AllergyId = userAllergies.AllergyId
+            };
+
+            _userAllergiesDal.Update(result);
             return new SuccessResult(Messages.UserAllergiesUpdated);
         }
 
-        public IResult Delete(UserAllergies userAllergies)
+        public IResult Delete(UserAllergiesForCreateDto userAllergies)
         {
             var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
             if (!check)
             {
                 return new ErrorResult(Messages.UserAllergiesNotFound);
             }
-            _userAllergiesDal.Delete(userAllergies);
+
+            var result = new UserAllergies()
+            {
+                Id = userAllergies.Id,
+                UserId = userAllergies.UserId,
+                AllergyId = userAllergies.AllergyId
+            };
+
+            _userAllergiesDal.Delete(result);
             return new SuccessResult(Messages.UserAllergiesDeleted);
         }
 

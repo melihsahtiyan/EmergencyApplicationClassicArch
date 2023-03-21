@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Medication;
 
 namespace Business.Concrete
 {
@@ -36,18 +37,24 @@ namespace Business.Concrete
             return new SuccessDataResult<Medication>(result, Messages.MedicationListed);
         }
 
-        public IResult Add(Medication medication)
+        public IResult Add(MedicationForCreateDto medication)
         {
             var check = CheckIfMedicationByName(medication.Name);
             if (check)
             {
                 return new ErrorResult(Messages.MedicationExists);
             }
-            _medicationDal.Add(medication);
+
+            var result = new Medication()
+            {
+                Name = medication.Name,
+                Description = medication.Description
+            };
+            _medicationDal.Add(result);
             return new SuccessResult(Messages.MedicationAdded);
         }
 
-        public IResult Update(Medication medication)
+        public IResult Update(MedicationForCreateDto medication)
         {
             var check = CheckIfMedicationById(medication.Id);
             
@@ -63,11 +70,18 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicationExists);
             }
 
-            _medicationDal.Update(medication);
+            var result = new Medication()
+            {
+                Id = medication.Id,
+                Name = medication.Name,
+                Description = medication.Description
+            };
+
+            _medicationDal.Update(result);
             return new SuccessResult(Messages.MedicationUpdated);
         }
 
-        public IResult Delete(Medication medication)
+        public IResult Delete(MedicationForCreateDto medication)
         {
             var check = CheckIfMedicationById(medication.Id);
             
@@ -76,7 +90,14 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicationNotFound);
             }
 
-            _medicationDal.Delete(medication);
+            var result = new Medication()
+            {
+                Id = medication.Id,
+                Name = medication.Name,
+                Description = medication.Description
+            };
+
+            _medicationDal.Delete(result);
             return new SuccessResult(Messages.MedicationDeleted);
         }
 

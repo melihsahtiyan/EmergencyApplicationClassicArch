@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.MedicalHistory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,7 +46,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(UserMedicalHistories userMedicalHistory)
+        public IActionResult Add(UserMedicalHistoriesForCreateDto userMedicalHistory)
         {
             var result = _userMedicalHistoriesService.Add(userMedicalHistory);
             if (result.Success)
@@ -54,8 +55,8 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("update")]
-        public IActionResult Update(UserMedicalHistories userMedicalHistory)
+        [HttpPut("update")]
+        public IActionResult Update(UserMedicalHistoriesForCreateDto userMedicalHistory)
         {
             var result = _userMedicalHistoriesService.Update(userMedicalHistory);
             if (result.Success)
@@ -64,8 +65,8 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("delete")]
-        public IActionResult Delete(UserMedicalHistories userMedicalHistory)
+        [HttpDelete("delete")]
+        public IActionResult Delete(UserMedicalHistoriesForCreateDto userMedicalHistory)
         {
             var result = _userMedicalHistoriesService.Delete(userMedicalHistory);
             if (result.Success)

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Medication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Medication medication)
+        public IActionResult Add(MedicationForCreateDto medication)
         {
             var result = _medicationService.Add(medication);
             if (result.Success)
@@ -44,5 +45,28 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPut("update")]
+        public IActionResult Update(MedicationForCreateDto medication)
+        {
+            var result = _medicationService.Update(medication);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(MedicationForCreateDto medication)
+        {
+            var result = _medicationService.Delete(medication);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

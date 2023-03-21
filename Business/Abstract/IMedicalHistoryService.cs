@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Dtos.MedicalHistory;
 
 namespace Business.Abstract
 {
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
         IDataResult<List<MedicalHistory>> GetAll();
         IDataResult<MedicalHistory> GetById(int medicalHistoryId);
-        IResult Add(MedicalHistory medicalHistory);
-        IResult Update(MedicalHistory medicalHistory);
-        IResult Delete(MedicalHistory medicalHistory);
+        IResult Add(MedicalHistoryForCreateDto medicalHistory);
+        IResult Update(MedicalHistoryForCreateDto medicalHistory);
+        IResult Delete(MedicalHistoryForCreateDto medicalHistory);
     }
 }

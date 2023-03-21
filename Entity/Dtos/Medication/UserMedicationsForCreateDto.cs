@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity.Abstract;
 
-namespace Entity.Dtos.MedicalHistory
+namespace Entity.Dtos.Medication
 {
-    public class UserMedicalHistoryForCreateDto : IDto
+    public class UserMedicationsForCreateDto : IDto
     {
         public int Id { get; set; }
-        public int MedicalHistoryId { get; set; }
+        public int MedicationId { get; set; }
         public int UserId { get; set; }
     }
 }
