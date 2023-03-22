@@ -69,11 +69,12 @@ namespace Business.Concrete
             var check = CheckIfContactExists(contact.ContactId, contact.UserId);
             if (!check)
             {
-                return new ErrorResult(Messages.ContactNotExists);
+                return new ErrorResult(Messages.ContactNotFound);
             }
 
             var result = new Contact()
             {
+                Id = contact.Id,
                 UserId = contact.UserId,
                 ContactId = contact.ContactId,
                 ContactRelation = contact.ContactRelation
@@ -88,16 +89,16 @@ namespace Business.Concrete
             var check = CheckIfContactExists(contact.ContactId, contact.UserId);
             if (!check)
             {
-                return new ErrorResult(Messages.ContactNotExists);
+                return new ErrorResult(Messages.ContactNotFound);
             }
 
             var result = new Contact()
             {
+                Id = contact.Id,
                 UserId = contact.UserId,
                 ContactId = contact.ContactId,
                 ContactRelation = contact.ContactRelation
             };
-
 
             _contactDal.Delete(result);
             return new SuccessResult(Messages.ContactDeleted);

@@ -109,12 +109,8 @@ namespace Business.Concrete
 
         private bool CheckIfUserProfileByName(int userId)
         {
-            var result = _userProfileDal.Get(u => u.UserId == userId);
-            if (result == null)
-            {
-                return true;
-            }
-            return false;
+            var result = _userProfileDal.GetAll(u => u.UserId == userId).Any();
+            return result;
         }
     }
 }

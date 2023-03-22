@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +39,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(User user)
+        public IActionResult Add(UserForCreateDto user)
         {
             var result = _userService.Add(user);
             if (result.Success)

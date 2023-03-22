@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Category;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
@@ -40,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Category category)
+        public IActionResult Add(CategoryForCreateDto category)
         {
             var result = _categoryService.Add(category);
             if (result.Success)
@@ -51,7 +52,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Category category)
+        public IActionResult Update(CategoryForCreateDto category)
         {
             var result = _categoryService.Update(category);
             if (result.Success)
@@ -62,7 +63,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(Category category)
+        public IActionResult Delete(CategoryForCreateDto category)
         {
             var result = _categoryService.Delete(category);
             if (result.Success)

@@ -20,6 +20,9 @@ namespace Business.Constants
         public static string CategoryDeleted = "Category deleted";
         public static string CategoryUpdated = "Category updated";
         public static string CategoriesListed = "Category listed";
+        public static string CategoryListed = "Category listed";
+        public static string CategoryNotFound = "Category not found";
+        public static string CategoryExists = "Category exists";
 
         public static string MedicationAdded = "Medication added";
         public static string MedicationDeleted = "Medication deleted";
@@ -57,6 +60,9 @@ namespace Business.Constants
         public static string AllergyDeleted = "Allergy deleted";
         public static string AllergyUpdated = "Allergy updated";
         public static string AllergiesListed = "Allergy listed";
+        public static string AllergyListed = "Allergy listed";
+        public static string AllergyNotFound = "Allergy not found";
+        public static string AllergyExists = "Allergy exists";
 
         public static string AuthorizationDenied = "Authorization denied!";
 
@@ -67,6 +73,7 @@ namespace Business.Constants
         public static string ContactDeleted = "Contact deleted";
         public static string ContactLimitExceeded = "Contact limit exceeded";
         public static string ContactUpdated = "Contact updated";
+        public static string ContactNotFound = "Contact not found";
 
         public static string MedicalHistoriesListed = "Medical histories listed";
         public static string MedicalHistoryListed = "Medical history listed";

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Contact;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,7 +54,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult Add(Contact contact)
+        public IActionResult Add(ContactForCreateDto contact)
         {
             var result = _contactService.Add(contact);
             if (result.Success)
@@ -65,7 +66,7 @@ namespace WebApi.Controllers
 
         [HttpPut]
         [Route("update")]
-        public IActionResult Update(Contact contact)
+        public IActionResult Update(ContactForCreateDto contact)
         {
             var result = _contactService.Update(contact);
             if (result.Success)
@@ -77,7 +78,7 @@ namespace WebApi.Controllers
 
         [HttpDelete]
         [Route("delete")]
-        public IActionResult Delete(Contact contact)
+        public IActionResult Delete(ContactForCreateDto contact)
         {
             var result = _contactService.Delete(contact);
             if (result.Success)

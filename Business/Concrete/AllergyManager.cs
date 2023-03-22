@@ -23,17 +23,31 @@ namespace Business.Concrete
 
         public IResult Add(AllergyForCreateDto allergy)
         {
+            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
+            if (check)
+            {
+                return new ErrorResult(Messages.AllergyExists);
+            }
+
             var result = new Allergy()
             {
                 Name = allergy.Name,
                 Description = allergy.Description
             };
+
             _allergyDal.Add(result);
             return new SuccessResult(Messages.AllergyAdded);
         }
 
         public IResult Delete(AllergyForCreateDto allergy)
         {
+            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
+
+            if (!check)
+            {
+                return new ErrorResult(Messages.AllergyNotFound);
+            }
+
             var result = new Allergy()
             {
                 Id = allergy.Id,
@@ -56,6 +70,13 @@ namespace Business.Concrete
 
         public IResult Update(AllergyForCreateDto allergy)
         {
+            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
+
+            if (!check)
+            {
+                return new ErrorResult(Messages.AllergyNotFound);
+            }
+
             var result = new Allergy()
             {
                 Id = allergy.Id,
@@ -64,6 +85,12 @@ namespace Business.Concrete
             };
             _allergyDal.Update(result);
             return new SuccessResult(Messages.AllergyUpdated);
+        }
+
+        private bool CheckIfAllergyExists(int id, string name)
+        {
+            var result = _allergyDal.GetAll(a => a.Id == id || a.Name == name).Any();
+            return result;
         }
     }
 }

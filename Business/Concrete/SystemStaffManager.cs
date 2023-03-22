@@ -27,7 +27,15 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.SystemStaffExists);
             }
-            _systemStaffDal.Add(systemStaff);
+
+            var result = new SystemStaff()
+            {
+                UserId = systemStaff.UserId,
+                StaffStatus = systemStaff.StaffStatus,
+                StaffNumber = systemStaff.StaffNumber
+            };
+
+            _systemStaffDal.Add(result);
             return new SuccessResult(Messages.SystemStaffAdded);
         }
         public IResult Delete(SystemStaffForCreateDto systemStaff)
@@ -37,7 +45,16 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.SystemStaffNotFound);
             }
-            _systemStaffDal.Delete(systemStaff);
+
+            var result = new SystemStaff()
+            {
+                Id = systemStaff.Id,
+                UserId = systemStaff.UserId,
+                StaffStatus = systemStaff.StaffStatus,
+                StaffNumber = systemStaff.StaffNumber
+            };
+
+            _systemStaffDal.Delete(result);
             return new SuccessResult(Messages.SystemStaffDeleted);
         }
         public IDataResult<List<SystemStaff>> GetAll()
@@ -60,7 +77,16 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.SystemStaffNotFound);
             }
-            _systemStaffDal.Update(systemStaff);
+
+            var result = new SystemStaff()
+            {
+                Id = systemStaff.Id,
+                UserId = systemStaff.UserId,
+                StaffStatus = systemStaff.StaffStatus,
+                StaffNumber = systemStaff.StaffNumber
+            };
+
+            _systemStaffDal.Update(result);
             return new SuccessResult(Messages.SystemStaffUpdated);
         }
 

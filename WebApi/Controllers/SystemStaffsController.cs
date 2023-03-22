@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.SystemStaff;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(SystemStaff systemStaff)
+        public IActionResult Add(SystemStaffForCreateDto systemStaff)
         {
             var result = _systemStaffService.Add(systemStaff);
             if (result.Success)
@@ -46,7 +47,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(SystemStaff systemStaff)
+        public IActionResult Update(SystemStaffForCreateDto systemStaff)
         {
             var result = _systemStaffService.Update(systemStaff);
             if (result.Success)
@@ -57,7 +58,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(SystemStaff systemStaff)
+        public IActionResult Delete(SystemStaffForCreateDto systemStaff)
         {
             var result = _systemStaffService.Delete(systemStaff);
             if (result.Success)

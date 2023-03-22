@@ -35,7 +35,7 @@ namespace Business.Concrete
         public IResult Add(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
             var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId,userMedicalHistories.MedicalHistoryId);
-            if (!check)
+            if (check)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }

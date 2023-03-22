@@ -38,13 +38,19 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
 
-        IResult IUserService.Add(UserForCreateDto user)
+        public IResult Add(UserForCreateDto user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
-            if (!check)
+            if (check)
             {
                 return new ErrorResult(Messages.UserExists);
             }
+
+            var result = new User()
+            {
+                
+            };
+
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }

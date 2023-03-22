@@ -40,7 +40,7 @@ namespace Business.Concrete
         {
             var check = CheckIfMedicalHistoryByName(medicalHistory.Name);
 
-            if (!check)
+            if (check)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }

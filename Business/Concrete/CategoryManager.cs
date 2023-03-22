@@ -23,13 +23,38 @@ namespace Business.Concrete
 
         public IResult Add(CategoryForCreateDto category)
         {
-            _categoryDal.Add(category);
+            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
+
+            if (check)
+            {
+                return new ErrorResult(Messages.CategoryExists);
+            }
+
+            var result = new Category() 
+            {
+                CategoryName = category.CategoryName 
+            };
+
+            _categoryDal.Add(result);
             return new SuccessResult(Messages.CategoryAdded);
         }
 
         public IResult Delete(CategoryForCreateDto category)
         {
-            _categoryDal.Delete(category);
+            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
+
+            if (!check)
+            {
+                return new ErrorResult(Messages.CategoryNotFound);
+            }
+
+            var result = new Category()
+            {
+                Id = category.Id,
+                CategoryName = category.CategoryName
+            };
+
+            _categoryDal.Delete(result);
             return new SuccessResult(Messages.CategoryDeleted);
         }
 
@@ -45,8 +70,26 @@ namespace Business.Concrete
 
         public IResult Update(CategoryForCreateDto category)
         {
-            _categoryDal.Update(category);
+            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
+            if (!check)
+            {
+                return new ErrorResult(Messages.CategoryNotFound);
+            }
+
+            var result = new Category()
+            {
+                Id = category.Id,
+                CategoryName = category.CategoryName
+            };
+
+            _categoryDal.Update(result);
             return new SuccessResult(Messages.CategoryUpdated);
+        }
+
+        private bool CheckIfCategoryExists(int id, string categoryName)
+        {
+            var result = _categoryDal.GetAll(c => c.Id == id || c.CategoryName == categoryName).Any();
+            return result;
         }
     }
 }

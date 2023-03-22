@@ -48,7 +48,14 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.UserMedicationExists);
             }
-            _userMedicationDal.Add(userMedications);
+
+            var result = new UserMedications()
+            {
+                UserId = userMedications.UserId,
+                MedicationId = userMedications.MedicationId
+            };
+
+            _userMedicationDal.Add(result);
             return new SuccessResult(Messages.UserMedicationAdded);
         }
 
@@ -66,7 +73,14 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.UserMedicationExists);
             }
 
-            _userMedicationDal.Update(userMedications);
+            var result = new UserMedications()
+            {
+                Id = userMedications.Id,
+                UserId = userMedications.UserId,
+                MedicationId = userMedications.MedicationId
+            };
+
+            _userMedicationDal.Update(result);
             return new SuccessResult(Messages.UserMedicationUpdated);
         }
 
@@ -77,7 +91,15 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.UserMedicationNotFound);
             }
-            _userMedicationDal.Delete(userMedications);
+
+            var result = new UserMedications()
+            {
+                Id = userMedications.Id,
+                UserId = userMedications.UserId,
+                MedicationId = userMedications.MedicationId
+            };
+
+            _userMedicationDal.Delete(result);
             return new SuccessResult(Messages.UserMedicationDeleted);
         }
 
