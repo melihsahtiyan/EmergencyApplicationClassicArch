@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using Entity.Concrete;
+using Entity.Dtos.SystemStaff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Business.Concrete
         {
             _systemStaffDal = systemStaffDal;
         }
-        public IResult Add(SystemStaff systemStaff)
+        public IResult Add(SystemStaffForCreateDto systemStaff)
         {
             var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
             if (check)
@@ -29,7 +30,7 @@ namespace Business.Concrete
             _systemStaffDal.Add(systemStaff);
             return new SuccessResult(Messages.SystemStaffAdded);
         }
-        public IResult Delete(SystemStaff systemStaff)
+        public IResult Delete(SystemStaffForCreateDto systemStaff)
         {
             var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
             if (!check)
@@ -52,7 +53,7 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<SystemStaff>(result, Messages.SystemStaffsListed);
         }
-        public IResult Update(SystemStaff systemStaff)
+        public IResult Update(SystemStaffForCreateDto systemStaff)
         {
             var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
             if (!check)

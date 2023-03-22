@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Medication;
 
 namespace Business.Concrete
 {
@@ -40,7 +41,7 @@ namespace Business.Concrete
             return new SuccessDataResult<UserMedications>(result, Messages.UserMedicationListed);
         }
 
-        public IResult Add(UserMedications userMedications)
+        public IResult Add(UserMedicationsForCreateDto userMedications)
         {
             var check = CheckIfUserMedicationExists(userMedications.UserId, userMedications.MedicationId);
             if (check)
@@ -51,7 +52,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserMedicationAdded);
         }
 
-        public IResult Update(UserMedications userMedications)
+        public IResult Update(UserMedicationsForCreateDto userMedications)
         {
             var check = CheckIfUserMedicationById(userMedications.Id);
             if (!check)
@@ -69,7 +70,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserMedicationUpdated);
         }
 
-        public IResult Delete(UserMedications userMedications)
+        public IResult Delete(UserMedicationsForCreateDto userMedications)
         {
             var check = CheckIfUserMedicationById(userMedications.Id);
             if (!check)

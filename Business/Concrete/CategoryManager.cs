@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,13 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-        public IResult Add(Category category)
+        public IResult Add(CategoryForCreateDto category)
         {
             _categoryDal.Add(category);
             return new SuccessResult(Messages.CategoryAdded);
         }
 
-        public IResult Delete(Category category)
+        public IResult Delete(CategoryForCreateDto category)
         {
             _categoryDal.Delete(category);
             return new SuccessResult(Messages.CategoryDeleted);
@@ -42,7 +43,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == categoryId));
         }
 
-        public IResult Update(Category category)
+        public IResult Update(CategoryForCreateDto category)
         {
             _categoryDal.Update(category);
             return new SuccessResult(Messages.CategoryUpdated);

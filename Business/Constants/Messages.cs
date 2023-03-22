@@ -66,6 +66,7 @@ namespace Business.Constants
         public static string ContactNotExists = "Contact not exists";
         public static string ContactDeleted = "Contact deleted";
         public static string ContactLimitExceeded = "Contact limit exceeded";
+        public static string ContactUpdated = "Contact updated";
 
         public static string MedicalHistoriesListed = "Medical histories listed";
         public static string MedicalHistoryListed = "Medical history listed";

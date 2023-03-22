@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.Contact;
 
 namespace Business.Concrete
 {
@@ -37,7 +38,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Contact>>(result, Messages.ContactListed);
         }
 
-        public IResult Add(Contact contact)
+        public IResult Add(ContactForCreateDto contact)
         {
             var check = CheckIfContactExists(contact.ContactId, contact.UserId);
             if (check)
@@ -50,31 +51,56 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.ContactLimitExceeded);
             }
-            _contactDal.Add(contact);
+
+            var result = new Contact()
+            {
+                UserId = contact.UserId,
+                ContactId = contact.ContactId,
+                ContactRelation = contact.ContactRelation
+            };
+
+            _contactDal.Add(result);
             
             return new SuccessResult(Messages.ContactAdded);
         }
 
-        public IResult Update(Contact contact)
+        public IResult Update(ContactForCreateDto contact)
         {
             var check = CheckIfContactExists(contact.ContactId, contact.UserId);
-            if (check)
+            if (!check)
             {
-                _contactDal.Update(contact);
-                return new SuccessResult(Messages.ContactAdded);
+                return new ErrorResult(Messages.ContactNotExists);
             }
-            return new ErrorResult(Messages.ContactNotExists);
+
+            var result = new Contact()
+            {
+                UserId = contact.UserId,
+                ContactId = contact.ContactId,
+                ContactRelation = contact.ContactRelation
+            };
+
+            _contactDal.Update(result);
+            return new SuccessResult(Messages.ContactUpdated);
         }
 
-        public IResult Delete(Contact contact)
+        public IResult Delete(ContactForCreateDto contact)
         {
             var check = CheckIfContactExists(contact.ContactId, contact.UserId);
-            if (check)
+            if (!check)
             {
-                _contactDal.Delete(contact);
-                return new SuccessResult(Messages.ContactDeleted);
+                return new ErrorResult(Messages.ContactNotExists);
             }
-            return new ErrorResult(Messages.ContactNotExists);
+
+            var result = new Contact()
+            {
+                UserId = contact.UserId,
+                ContactId = contact.ContactId,
+                ContactRelation = contact.ContactRelation
+            };
+
+
+            _contactDal.Delete(result);
+            return new SuccessResult(Messages.ContactDeleted);
         }
 
         private bool CheckIfContactExists(int contactId, int userId)

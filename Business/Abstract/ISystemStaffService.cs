@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrete;
+using Entity.Dtos.SystemStaff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
         IDataResult<List<SystemStaff>> GetAll();
         IDataResult<SystemStaff> GetById(int systemStaffId);
-        IResult Add(SystemStaff systemStaff);
-        IResult Update(SystemStaff systemStaff);
-        IResult Delete(SystemStaff systemStaff);
+        IResult Add(SystemStaffForCreateDto systemStaff);
+        IResult Update(SystemStaffForCreateDto systemStaff);
+        IResult Delete(SystemStaffForCreateDto systemStaff);
     }
 }
