@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Dtos.UserProfile;
 
 namespace Business.Abstract
 {
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
         IDataResult<List<UserProfile>> GetAll();
         IDataResult<UserProfile> GetById(int userProfileId);
-        IResult Add(UserProfile userProfile);
-        IResult Update(UserProfile userProfile);
-        IResult Delete(UserProfile userProfile);
+        IResult Add(UserProfileForCreateDto userProfile);
+        IResult Update(UserProfileForCreateDto userProfile);
+        IResult Delete(UserProfileForCreateDto userProfile);
     }
 }

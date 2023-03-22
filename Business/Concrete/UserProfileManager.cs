@@ -8,6 +8,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.UserProfile;
 
 namespace Business.Concrete
 {
@@ -35,36 +36,74 @@ namespace Business.Concrete
             return new SuccessDataResult<UserProfile>(result, Messages.UserProfilesListed);
         }
 
-        public IResult Add(UserProfile userProfile)
+        public IResult Add(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (check)
             {
                 return new ErrorResult(Messages.UserProfileExists);
             }
-            _userProfileDal.Add(userProfile);
+
+            var result = new UserProfile()
+            {
+                Address = userProfile.Address,
+                BloodType = userProfile.BloodType,
+                Height = userProfile.Height,
+                Weight = userProfile.Weight,
+                UserId = userProfile.UserId,
+                PhoneNumber = userProfile.PhoneNumber,
+                ProfilePicture = userProfile.ProfilePicture
+            };
+
+            _userProfileDal.Add(result);
             return new SuccessResult(Messages.UserProfileAdded);
         }
 
-        public IResult Update(UserProfile userProfile)
+        public IResult Update(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (!check)
             {
                 return new ErrorResult(Messages.UserProfileNotFound);
             }
-            _userProfileDal.Update(userProfile);
+
+            var result = new UserProfile()
+            {
+                Id = userProfile.Id,
+                Address = userProfile.Address,
+                BloodType = userProfile.BloodType,
+                Height = userProfile.Height,
+                Weight = userProfile.Weight,
+                UserId = userProfile.UserId,
+                PhoneNumber = userProfile.PhoneNumber,
+                ProfilePicture = userProfile.ProfilePicture
+            };
+
+            _userProfileDal.Update(result);
             return new SuccessResult(Messages.UserProfileUpdated);
         }
 
-        public IResult Delete(UserProfile userProfile)
+        public IResult Delete(UserProfileForCreateDto userProfile)
         {
             var check = CheckIfUserProfileByName(userProfile.UserId);
             if (!check)
             {
                 return new ErrorResult(Messages.UserProfileNotFound);
             }
-            _userProfileDal.Delete(userProfile);
+
+            var result = new UserProfile()
+            {
+                Id = userProfile.Id,
+                Address = userProfile.Address,
+                BloodType = userProfile.BloodType,
+                Height = userProfile.Height,
+                Weight = userProfile.Weight,
+                UserId = userProfile.UserId,
+                PhoneNumber = userProfile.PhoneNumber,
+                ProfilePicture = userProfile.ProfilePicture
+            };
+
+            _userProfileDal.Delete(result);
             return new SuccessResult(Messages.UserProfileDeleted);
         }
 

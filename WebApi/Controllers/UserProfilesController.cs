@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
+using Entity.Dtos.UserProfile;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(UserProfile userProfile)
+        public IActionResult Add(UserProfileForCreateDto userProfile)
         {
             var result = _userProfileService.Add(userProfile);
             if (result.Success)
@@ -45,7 +46,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(UserProfile userProfile)
+        public IActionResult Update(UserProfileForCreateDto userProfile)
         {
             var result = _userProfileService.Update(userProfile);
             if (result.Success)
@@ -55,7 +56,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(UserProfile userProfile)
+        public IActionResult Delete(UserProfileForCreateDto userProfile)
         {
             var result = _userProfileService.Delete(userProfile);
             if (result.Success)

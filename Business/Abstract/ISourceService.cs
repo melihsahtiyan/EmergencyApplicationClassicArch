@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Source>> GetAll();
         IDataResult<Source> GetById(int sourceId);
+        IDataResult<List<Source>> GetSourcesByUser(int userId);
         IResult Add(Source source);
         IResult Update(Source source);
         IResult Delete(Source source);
