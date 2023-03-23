@@ -36,10 +36,16 @@ namespace Business.Concrete
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 IdentityNumber = userForRegisterDto.IdentityNumber,
+                BirthDate = userForRegisterDto.BirthDate,
                 Status = true
             };
-            _userService.Add(user);
-            return new SuccessDataResult<User>(user, Messages.UserRegistered);
+            var result = _userService.Add(user);
+            if (result.Success)
+            {
+                return new SuccessDataResult<User>(user, Messages.UserRegistered);
+            }
+
+            return new ErrorDataResult<User>(Messages.UserNotRegister);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)

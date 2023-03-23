@@ -46,7 +46,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public IActionResult Update(SystemStaffForCreateDto systemStaff)
         {
             var result = _systemStaffService.Update(systemStaff);
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public IActionResult Delete(SystemStaffForCreateDto systemStaff)
         {
             var result = _systemStaffService.Delete(systemStaff);

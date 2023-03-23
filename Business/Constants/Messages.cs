@@ -99,5 +99,6 @@ namespace Business.Constants
         public static string UserProfileListed = "User profile listed";
         public static string UserProfileNotFound = "User profile not found";
         public static string UserProfileExists = "User profile exists";
+        public static string UserNotRegister = "User not register";
     }
 }

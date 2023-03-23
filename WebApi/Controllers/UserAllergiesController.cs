@@ -60,7 +60,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public IActionResult Update(UserAllergiesForCreateDto userAllergies)
         {
             var result = _userAllergiesService.Update(userAllergies);
@@ -71,7 +71,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public IActionResult Delete(UserAllergiesForCreateDto userAllergies)
         {
             var result = _userAllergiesService.Delete(userAllergies);
