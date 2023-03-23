@@ -38,18 +38,13 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
 
-        public IResult Add(UserForCreateDto user)
+        public IResult Add(User user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (check)
             {
                 return new ErrorResult(Messages.UserExists);
             }
-
-            var result = new User()
-            {
-                
-            };
 
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
@@ -70,7 +65,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(result, Messages.UserListed);
         }
 
-        public IResult Update(UserForCreateDto user)
+        public IResult Update(User user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (!check)
@@ -81,7 +76,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public IResult Delete(UserForCreateDto user)
+        public IResult Delete(User user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);
             if (!check)

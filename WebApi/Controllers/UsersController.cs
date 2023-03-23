@@ -39,7 +39,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(UserForCreateDto user)
+        public IActionResult Add(User user)
         {
             var result = _userService.Add(user);
             if (result.Success)
