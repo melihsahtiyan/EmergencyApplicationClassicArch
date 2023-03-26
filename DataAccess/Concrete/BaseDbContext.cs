@@ -120,6 +120,7 @@ namespace DataAccess.Concrete
                 e.Property(p => p.Date).HasColumnName("Date");
                 e.Property(p => p.Latitude).HasColumnName("Latitude");
                 e.Property(p => p.Longitude).HasColumnName("Longitude");
+                e.Property(p => p.Altitude).HasColumnName("Altitude");
                 e.Property(p => p.Title).HasColumnName("Title");
                 e.HasMany(p => p.Sources);
                 e.HasOne(p => p.User).WithMany(u => u.Posts).HasForeignKey(u => u.UserId);

@@ -14,6 +14,7 @@ namespace Entity.Concrete
         public DateTime Date { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public double Altitude { get; set; }
         public string Title { get; set; }
         public virtual ICollection<Source> Sources { get; set; }
         public virtual Category Category { get; set; }
