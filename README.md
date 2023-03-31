@@ -52,5 +52,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ---
 Other Repositories For This Project
-- [Mobile App (React-Native)](https://github.com/melihsahtiyan/Emergency-Application-React-Native)
+- [Mobile App (React-Native)](https://github.com/melihsahtiyan/emergency-app-mobile)
 - [Front-End  (React)](https://github.com/AtakanYigit/Emergency-Application-Call-Center-Front-End)
