@@ -1,9 +1,9 @@
-# Emergency Application Backend Classic Architectured
+# ResQ Backend Classic Architectured
 
 This is a web application written using C# .NET 6.
 
 ### About The App
-This is an application that helps people by allowing them to ask for help instanteniously. User can select a category of the accident and also they can give more information using images, videos, text or audio. Those Information are then shown on the call center side and authorities can evaluate the situation. Platform is easy to use and location information is automatically sent with the request.
+This is an application that helps people by allowing them to ask for help instantaneously. User can select a category of the accident and also they can give more information using images, videos, text or audio. Those Information are then shown on the call center side and authorities can evaluate the situation. Platform is easy to use and location information is automatically sent with the request.
 
 Introducing our revolutionary application designed to help people in times of emergency. Our platform enables users to request immediate assistance in case of an accident or emergency. With just a few taps, users can select the type of emergency and provide crucial information such as images, videos, text or audio to help first responders better assess the situation.
 
