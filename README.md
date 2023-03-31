@@ -11,10 +11,10 @@ Our app's advanced technology ensures that the information provided by the user 
 
 ---
 Complete project is built by:
-- Atakan Yiğit Çengeloğlu   https://github.com/AtakanYigit
-- Melih Sahtiyan            https://github.com/melihsahtiyan
-- Burak Tırman              https://github.com/buraktirman
-- Edvin Davulcu             https://github.com/CentEDO
+- [Atakan Yiğit Çengeloğlu](https://github.com/AtakanYigit)
+- [Melih Sahtiyan](https://github.com/melihsahtiyan)
+- [Burak Tırman](https://github.com/buraktirman)
+- [Edvin Davulcu](https://github.com/CentEDO)
 
 ## Packages Used
 
