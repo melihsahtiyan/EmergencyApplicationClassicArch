@@ -49,3 +49,8 @@ After starting the project, the application will run at `https://localhost:5001`
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
+
+---
+Other Repositories For This Project
+- Mobile App (React-Native) https://github.com/melihsahtiyan/Emergency-Application-React-Native
+- Front-End  (React)        https://github.com/AtakanYigit/Emergency-Application-Call-Center-Front-End
