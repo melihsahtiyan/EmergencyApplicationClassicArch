@@ -29,6 +29,23 @@ Technologies Used In This Project
 - Microsoft Sql Server
 - Google Cloud
 ---
+# Architecture
+## Layered Architecture
+Layered architecture is a common design pattern used in software development. In this architecture, application functions are divided into independent layers. Each layer performs a specific function, and upper layers perform higher-level functions using the results of the lower layers.
+
+This architecture makes it easier to maintain and update applications. For example, changing a lower layer does not affect upper layers. Therefore, the dependence between layers is minimized, increasing the flexibility of the software.
+
+### This application can be divided into three layers:
+
+1. Presentation layer: This layer manages the user interface. Users enter data through this layer and can view results.
+
+2. Business layer: This layer performs data processing functions. This layer processes data from the presentation layer and can interact with another system or save it to a database.
+
+3. Data layer: This layer provides access to the database and stores data. The business layer can save or query data through this layer.
+
+This way, the boundaries between layers are clarified, and each layer's responsibility is determined. This design makes the software scalable and easy to maintain.
+
+---
 
 ## Packages Used
 
