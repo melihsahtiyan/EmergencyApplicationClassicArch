@@ -15,6 +15,20 @@ Complete project is built by:
 - [Melih Sahtiyan](https://github.com/melihsahtiyan)
 - [Burak Tırman](https://github.com/buraktirman)
 - [Edvin Davulcu](https://github.com/CentEDO)
+---
+Technologies Used In This Repository
+- C# (.Net)
+- Microsoft Sql Server
+- Google Cloud
+---
+Technologies Used In This Project
+- React.js
+- React Native
+- SCSS
+- C# (.NET)
+- Microsoft Sql Server
+- Google Cloud
+---
 
 ## Packages Used
 
