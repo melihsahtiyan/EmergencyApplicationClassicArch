@@ -70,8 +70,9 @@ To use the project, follow these steps:
 
 1. Clone or download the project.
 2. Run the `dotnet restore` command to install the required dependencies.
-3. Run the `dotnet ef database update` command to create the database.
-4. Use the `dotnet run` command to start the project.
+3. Go to DataAccess -> Concrete -> BaseDbContext and change the connection string to yours.
+4. Run the `dotnet ef database update` command to create the database.
+5. Use the `dotnet run` command to start the project.
 
 ## Usage
 
