@@ -34,8 +34,7 @@ namespace DataAccess.Concrete
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=MELIH\\SQLEXPRESS;Database=EmergencyApplicationDatabase; Trusted_Connection=True; TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer(/* PASTE YOUR CONNECTION STRING HERE */);
         }
 
 
