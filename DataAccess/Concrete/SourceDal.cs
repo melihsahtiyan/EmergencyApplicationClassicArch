@@ -11,5 +11,8 @@ namespace DataAccess.Concrete
 {
     public class SourceDal : EfEntityRepositoryBase<Source, BaseDbContext>, ISourceDal
     {
+        public SourceDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

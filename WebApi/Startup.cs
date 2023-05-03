@@ -38,6 +38,7 @@ namespace WebAPI
             services.AddControllers();
             services.AddCors();
             services.AddHttpContextAccessor();
+            services.AddDataAccessServices(Configuration);
             services.AddSwaggerGen();
 
 
@@ -59,7 +60,7 @@ namespace WebAPI
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:5000").AllowAnyHeader());
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseWebSockets();
 

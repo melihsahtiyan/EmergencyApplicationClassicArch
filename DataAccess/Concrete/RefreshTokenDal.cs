@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class RefreshTokenDal : EfEntityRepositoryBase<RefreshToken, BaseDbContext>, IRefreshTokenDal
     {
+        public RefreshTokenDal(BaseDbContext context) : base(context) { }
     }
 }

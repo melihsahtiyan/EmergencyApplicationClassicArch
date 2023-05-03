@@ -11,6 +11,8 @@ namespace DataAccess.Concrete
 {
     public class EmailAuthenticatorDal : EfEntityRepositoryBase<EmailAuthenticator, BaseDbContext>, IEmailAuthenticatorDal
     {
-       
+        public EmailAuthenticatorDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

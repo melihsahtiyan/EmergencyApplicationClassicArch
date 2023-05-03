@@ -11,5 +11,8 @@ namespace DataAccess.Concrete
 {
     public class OtpAuthenticatorDal : EfEntityRepositoryBase<OtpAuthenticator, BaseDbContext>, IOtpAuthenticatorDal
     {
+        public OtpAuthenticatorDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

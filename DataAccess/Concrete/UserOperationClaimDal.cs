@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class UserOperationClaimDal : EfEntityRepositoryBase<UserOperationClaim, BaseDbContext>, IUserOperationClaimDal
     {
+        public UserOperationClaimDal(BaseDbContext context) : base(context) { }
     }
 }

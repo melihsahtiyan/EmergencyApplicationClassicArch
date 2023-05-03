@@ -13,5 +13,8 @@ namespace DataAccess.Concrete
         IUserMedicalHistoryDal
 
     {
+        public UserMedicalHistoryDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

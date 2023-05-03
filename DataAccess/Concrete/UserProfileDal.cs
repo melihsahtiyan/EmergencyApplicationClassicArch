@@ -11,5 +11,8 @@ namespace DataAccess.Concrete
 {
     public class UserProfileDal : EfEntityRepositoryBase<UserProfile, BaseDbContext>, IUserProfileDal
     {
+        public UserProfileDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

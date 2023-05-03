@@ -14,6 +14,7 @@ namespace DataAccess.Concrete
 {
     public class BaseDbContext : DbContext
     {
+        protected IConfiguration Configuration { get; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Source> Sources { get; set; }
         public DbSet<User> Users { get; set; }
@@ -32,12 +33,10 @@ namespace DataAccess.Concrete
         public DbSet<UserMedications> UserMedications { get; set; }
         public DbSet<UserMedicalHistories> UserMedicalHistories { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration) : base(dbContextOptions)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=MELIH\\SQLEXPRESS;Database=EmergencyApplicationDatabase; Trusted_Connection=True; TrustServerCertificate=true");
+            Configuration = configuration;
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

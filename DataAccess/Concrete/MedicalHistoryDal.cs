@@ -11,6 +11,7 @@ namespace DataAccess.Concrete
 {
     public class MedicalHistoryDal : EfEntityRepositoryBase<MedicalHistory, BaseDbContext>, IMedicalHistoryDal
     {
-       
+        public MedicalHistoryDal(BaseDbContext context) : base(context)
+        { }
     }
 }

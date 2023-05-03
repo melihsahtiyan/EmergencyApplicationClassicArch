@@ -11,5 +11,8 @@ namespace DataAccess.Concrete
 {
     public class UserMedicationDal : EfEntityRepositoryBase<UserMedications, BaseDbContext>, IUserMedicationDal
     {
+        public UserMedicationDal(BaseDbContext context) : base(context)
+        {
+        }
     }
 }

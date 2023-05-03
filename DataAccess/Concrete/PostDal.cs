@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class PostDal : EfEntityRepositoryBase<Post, BaseDbContext>, IPostDal
     {
+        public PostDal(BaseDbContext context) : base(context) { }
     }
 }

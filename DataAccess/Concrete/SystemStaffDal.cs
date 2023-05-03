@@ -11,5 +11,6 @@ namespace DataAccess.Concrete
 {
     public class SystemStaffDal : EfEntityRepositoryBase<SystemStaff, BaseDbContext>, ISystemStaffDal
     {
+        public SystemStaffDal(BaseDbContext context) : base(context) { }
     }
 }
