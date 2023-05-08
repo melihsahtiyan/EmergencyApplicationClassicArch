@@ -364,3 +364,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /WebApi/appsettings.json
+/DataAccess/Migrations/20230503133738_last-update.Designer.cs
+/DataAccess/Migrations/20230503133738_last-update.cs
