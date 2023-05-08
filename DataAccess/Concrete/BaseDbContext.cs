@@ -228,6 +228,7 @@ namespace DataAccess.Concrete
                 a.HasOne(o => o.Category).WithMany(c => c.PostTemplates).HasForeignKey(c => c.CategoryId);
             });
 
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

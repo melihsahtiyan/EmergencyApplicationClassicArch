@@ -18,7 +18,7 @@ namespace DataAccess
 
         {
             services.AddDbContext<BaseDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ResqDatabaseConnectionString")));
+                options.UseNpgsql(configuration.GetConnectionString("ResqDatabaseConnectionString")));
             services.AddScoped<IAllergyDal, AllergyDal>();
             services.AddScoped<ICategoryDal, CategoryDal>();
             services.AddScoped<IContactDal, ContactDal>();
