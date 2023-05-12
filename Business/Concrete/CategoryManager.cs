@@ -23,17 +23,14 @@ namespace Business.Concrete
 
         public IResult Add(CategoryForCreateDto category)
         {
-            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
+            var result = CheckIfCategoryExists(null, category.CategoryName);
 
-            if (check)
+            if (result != null)
             {
                 return new ErrorResult(Messages.CategoryExists);
             }
 
-            var result = new Category() 
-            {
-                CategoryName = category.CategoryName 
-            };
+            result.CategoryName = category.CategoryName;
 
             _categoryDal.Add(result);
             return new SuccessResult(Messages.CategoryAdded);
@@ -41,18 +38,14 @@ namespace Business.Concrete
 
         public IResult Delete(CategoryForCreateDto category)
         {
-            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
+            var result = CheckIfCategoryExists(category.Id, category.CategoryName);
 
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.CategoryNotFound);
             }
 
-            var result = new Category()
-            {
-                Id = category.Id,
-                CategoryName = category.CategoryName
-            };
+            result.CategoryName = category.CategoryName;
 
             _categoryDal.Delete(result);
             return new SuccessResult(Messages.CategoryDeleted);
@@ -70,25 +63,21 @@ namespace Business.Concrete
 
         public IResult Update(CategoryForCreateDto category)
         {
-            var check = CheckIfCategoryExists(category.Id, category.CategoryName);
-            if (!check)
+            var result = CheckIfCategoryExists(category.Id, category.CategoryName);
+            if (result == null)
             {
                 return new ErrorResult(Messages.CategoryNotFound);
             }
 
-            var result = new Category()
-            {
-                Id = category.Id,
-                CategoryName = category.CategoryName
-            };
+            result.CategoryName = category.CategoryName;
 
             _categoryDal.Update(result);
             return new SuccessResult(Messages.CategoryUpdated);
         }
 
-        private bool CheckIfCategoryExists(int id, string categoryName)
+        private Category CheckIfCategoryExists(int? id, string categoryName)
         {
-            var result = _categoryDal.GetAll(c => c.Id == id || c.CategoryName == categoryName).Any();
+            var result = _categoryDal.Get(c => c.Id == id || c.CategoryName == categoryName);
             return result;
         }
     }

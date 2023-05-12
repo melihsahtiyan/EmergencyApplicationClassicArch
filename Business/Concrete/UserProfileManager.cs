@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
 using Entity.Dtos.UserProfile;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
 {
@@ -36,48 +38,45 @@ namespace Business.Concrete
             return new SuccessDataResult<UserProfile>(result, Messages.UserProfilesListed);
         }
 
-        public IResult Add(UserProfileForCreateDto userProfile)
+        public IResult Add(UserProfileForCreateDto userProfile, IFormFile image)
         {
-            var check = CheckIfUserProfileByName(userProfile.UserId);
-            if (check)
+            var result = CheckIfUserProfileExists(userProfile.UserId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.UserProfileExists);
             }
+            
+            var profilePicturePath = FormFileHelper.Add(image);
 
-            var result = new UserProfile()
-            {
-                Address = userProfile.Address,
-                BloodType = userProfile.BloodType,
-                Height = userProfile.Height,
-                Weight = userProfile.Weight,
-                UserId = userProfile.UserId,
-                PhoneNumber = userProfile.PhoneNumber,
-                ProfilePicture = userProfile.ProfilePicture
-            };
+            result.Address = userProfile.Address;
+            result.BloodType = userProfile.BloodType;
+            result.Height = userProfile.Height;
+            result.Weight = userProfile.Weight;
+            result.PhoneNumber = userProfile.PhoneNumber;
+            result.ProfilePicture = profilePicturePath;
+            result.UserId = userProfile.UserId;
 
             _userProfileDal.Add(result);
             return new SuccessResult(Messages.UserProfileAdded);
         }
 
-        public IResult Update(UserProfileForCreateDto userProfile)
+        public IResult Update(UserProfileForCreateDto userProfile, IFormFile image)
         {
-            var check = CheckIfUserProfileByName(userProfile.UserId);
-            if (!check)
+            var result = CheckIfUserProfileExists(userProfile.UserId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserProfileNotFound);
             }
 
-            var result = new UserProfile()
-            {
-                Id = userProfile.Id,
-                Address = userProfile.Address,
-                BloodType = userProfile.BloodType,
-                Height = userProfile.Height,
-                Weight = userProfile.Weight,
-                UserId = userProfile.UserId,
-                PhoneNumber = userProfile.PhoneNumber,
-                ProfilePicture = userProfile.ProfilePicture
-            };
+            var profilePicture = FormFileHelper.Update(image, result.ProfilePicture);
+            
+            result.Address = userProfile.Address;
+            result.BloodType = userProfile.BloodType;
+            result.Height = userProfile.Height;
+            result.Weight = userProfile.Weight;
+            result.PhoneNumber = userProfile.PhoneNumber;
+            result.ProfilePicture = profilePicture;
+            result.UserId = userProfile.UserId;
 
             _userProfileDal.Update(result);
             return new SuccessResult(Messages.UserProfileUpdated);
@@ -85,31 +84,21 @@ namespace Business.Concrete
 
         public IResult Delete(UserProfileForCreateDto userProfile)
         {
-            var check = CheckIfUserProfileByName(userProfile.UserId);
-            if (!check)
+            var result = CheckIfUserProfileExists(userProfile.UserId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserProfileNotFound);
             }
 
-            var result = new UserProfile()
-            {
-                Id = userProfile.Id,
-                Address = userProfile.Address,
-                BloodType = userProfile.BloodType,
-                Height = userProfile.Height,
-                Weight = userProfile.Weight,
-                UserId = userProfile.UserId,
-                PhoneNumber = userProfile.PhoneNumber,
-                ProfilePicture = userProfile.ProfilePicture
-            };
+            FormFileHelper.Delete(result.ProfilePicture);
 
             _userProfileDal.Delete(result);
             return new SuccessResult(Messages.UserProfileDeleted);
         }
 
-        private bool CheckIfUserProfileByName(int userId)
+        private UserProfile CheckIfUserProfileExists(int userId)
         {
-            var result = _userProfileDal.GetAll(u => u.UserId == userId).Any();
+            var result = _userProfileDal.Get(u => u.UserId == userId);
             return result;
         }
     }

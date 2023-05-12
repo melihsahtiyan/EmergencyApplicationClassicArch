@@ -50,9 +50,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(SourceForCreateDto sourceForCreateDto)
+        public IActionResult Add([FromForm] SourceForCreateDto sourceForCreateDto,
+            [FromForm(Name = "Source")] IFormFile file)
         {
-            var result = _sourceService.Add(sourceForCreateDto);
+            var result = _sourceService.Add(sourceForCreateDto, file);
             if (result.Success)
             {
                 return Ok(result);

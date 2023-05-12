@@ -34,17 +34,14 @@ namespace Business.Concrete
 
         public IResult Add(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
-            var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId,userMedicalHistories.MedicalHistoryId);
-            if (check)
+            var result = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            var result = new UserMedicalHistories()
-            {
-                UserId = userMedicalHistories.UserId,
-                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
-            };
+            result.UserId = userMedicalHistories.UserId;
+            result.MedicalHistoryId = userMedicalHistories.MedicalHistoryId;
 
             _userMedicalHistoryDal.Add(result);
             return new SuccessResult(Messages.MedicalHistoryAdded);
@@ -52,18 +49,15 @@ namespace Business.Concrete
 
         public IResult Update(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
-            var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
-            if (!check)
+            var result = 
+                CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            var result = new UserMedicalHistories()
-            {
-                Id = userMedicalHistories.Id,
-                UserId = userMedicalHistories.UserId,
-                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
-            };
+            result.UserId = userMedicalHistories.UserId;
+            result.MedicalHistoryId = userMedicalHistories.MedicalHistoryId;
 
             _userMedicalHistoryDal.Update(result);
             return new SuccessResult(Messages.MedicalHistoryUpdated);
@@ -71,18 +65,15 @@ namespace Business.Concrete
 
         public IResult Delete(UserMedicalHistoriesForCreateDto userMedicalHistories)
         {
-            var check = CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
-            if (!check)
+            var result =
+                CheckIfUserMedicalHistoriesExists(userMedicalHistories.UserId, userMedicalHistories.MedicalHistoryId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            var result = new UserMedicalHistories()
-            {
-                Id = userMedicalHistories.Id,
-                UserId = userMedicalHistories.UserId,
-                MedicalHistoryId = userMedicalHistories.MedicalHistoryId
-            };
+            result.UserId = userMedicalHistories.UserId;
+            result.MedicalHistoryId = userMedicalHistories.MedicalHistoryId;
 
             _userMedicalHistoryDal.Delete(result);
             return new SuccessResult(Messages.MedicalHistoryDeleted);
@@ -98,14 +89,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<UserMedicalHistories>>(result, Messages.MedicalHistoryListed);
         }
 
-        private bool CheckIfUserMedicalHistoriesExists(int userId, int medicalHistoryId)
+        private UserMedicalHistories CheckIfUserMedicalHistoriesExists(int userId, int medicalHistoryId)
         {
-            var result = _userMedicalHistoryDal.Get(m => m.UserId == userId && m.MedicalHistoryId == medicalHistoryId);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            var result = _userMedicalHistoryDal
+                .Get(m => m.UserId == userId && m.MedicalHistoryId == medicalHistoryId);
+
+            return result;
         }
     }
 }

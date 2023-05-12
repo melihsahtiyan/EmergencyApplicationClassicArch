@@ -40,8 +40,8 @@ namespace Business.Concrete
 
         public IResult Add(ContactForCreateDto contact)
         {
-            var check = CheckIfContactExists(contact.ContactId, contact.UserId);
-            if (check)
+            var result = CheckIfContactExists(contact.ContactId, contact.UserId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.ContactExists);
             }
@@ -52,12 +52,9 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ContactLimitExceeded);
             }
 
-            var result = new Contact()
-            {
-                UserId = contact.UserId,
-                ContactId = contact.ContactId,
-                ContactRelation = contact.ContactRelation
-            };
+            result.UserId = contact.UserId;
+            result.ContactId = contact.ContactId;
+            result.ContactRelation = contact.ContactRelation;
 
             _contactDal.Add(result);
             
@@ -66,19 +63,15 @@ namespace Business.Concrete
 
         public IResult Update(ContactForCreateDto contact)
         {
-            var check = CheckIfContactExists(contact.ContactId, contact.UserId);
-            if (!check)
+            var result = CheckIfContactExists(contact.ContactId, contact.UserId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.ContactNotFound);
             }
 
-            var result = new Contact()
-            {
-                Id = contact.Id,
-                UserId = contact.UserId,
-                ContactId = contact.ContactId,
-                ContactRelation = contact.ContactRelation
-            };
+            result.UserId = contact.UserId;
+            result.ContactId = contact.ContactId;
+            result.ContactRelation = contact.ContactRelation;
 
             _contactDal.Update(result);
             return new SuccessResult(Messages.ContactUpdated);
@@ -86,32 +79,25 @@ namespace Business.Concrete
 
         public IResult Delete(ContactForCreateDto contact)
         {
-            var check = CheckIfContactExists(contact.ContactId, contact.UserId);
-            if (!check)
+            var result = CheckIfContactExists(contact.ContactId, contact.UserId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.ContactNotFound);
             }
 
-            var result = new Contact()
-            {
-                Id = contact.Id,
-                UserId = contact.UserId,
-                ContactId = contact.ContactId,
-                ContactRelation = contact.ContactRelation
-            };
+            result.UserId = contact.UserId;
+            result.ContactId = contact.ContactId;
+            result.ContactRelation = contact.ContactRelation;
 
             _contactDal.Delete(result);
             return new SuccessResult(Messages.ContactDeleted);
         }
 
-        private bool CheckIfContactExists(int contactId, int userId)
+        private Contact CheckIfContactExists(int contactId, int userId)
         {
-            var result = _contactDal.GetAll(c => c.ContactId == contactId && c.UserId == userId);
-            if (result.Count > 0)
-            {
-                return true;
-            }
-            return false;
+            var result = _contactDal.Get(c => c.ContactId == contactId && c.UserId == userId);
+            
+            return result;
         }
 
         private bool CheckIfLimitExceeded(int userId)

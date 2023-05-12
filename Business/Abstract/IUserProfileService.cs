@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Dtos.UserProfile;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Abstract
 {
@@ -14,8 +15,8 @@ namespace Business.Abstract
     {
         IDataResult<List<UserProfile>> GetAll();
         IDataResult<UserProfile> GetById(int userProfileId);
-        IResult Add(UserProfileForCreateDto userProfile);
-        IResult Update(UserProfileForCreateDto userProfile);
+        IResult Add(UserProfileForCreateDto userProfile, IFormFile image);
+        IResult Update(UserProfileForCreateDto userProfile, IFormFile image);
         IResult Delete(UserProfileForCreateDto userProfile);
     }
 }

@@ -43,17 +43,14 @@ namespace Business.Concrete
 
         public IResult Add(UserMedicationsForCreateDto userMedications)
         {
-            var check = CheckIfUserMedicationExists(userMedications.UserId, userMedications.MedicationId);
-            if (check)
+            var result = CheckIfUserMedicationExists(userMedications.UserId, userMedications.MedicationId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.UserMedicationExists);
             }
-
-            var result = new UserMedications()
-            {
-                UserId = userMedications.UserId,
-                MedicationId = userMedications.MedicationId
-            };
+            
+            result.UserId = userMedications.UserId;
+            result.MedicationId = userMedications.MedicationId;
 
             _userMedicationDal.Add(result);
             return new SuccessResult(Messages.UserMedicationAdded);
@@ -61,24 +58,20 @@ namespace Business.Concrete
 
         public IResult Update(UserMedicationsForCreateDto userMedications)
         {
-            var check = CheckIfUserMedicationById(userMedications.Id);
-            if (!check)
+            var result = CheckIfUserMedicationById(userMedications.Id);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserMedicationNotFound);
             }
 
-            var checkName = CheckIfUserMedicationExists(userMedications.UserId, userMedications.MedicationId);
-            if (checkName)
+            result = CheckIfUserMedicationExists(userMedications.UserId, userMedications.MedicationId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.UserMedicationExists);
             }
 
-            var result = new UserMedications()
-            {
-                Id = userMedications.Id,
-                UserId = userMedications.UserId,
-                MedicationId = userMedications.MedicationId
-            };
+            result.UserId = userMedications.UserId;
+            result.MedicationId = userMedications.MedicationId;
 
             _userMedicationDal.Update(result);
             return new SuccessResult(Messages.UserMedicationUpdated);
@@ -86,18 +79,14 @@ namespace Business.Concrete
 
         public IResult Delete(UserMedicationsForCreateDto userMedications)
         {
-            var check = CheckIfUserMedicationById(userMedications.Id);
-            if (!check)
+            var result = CheckIfUserMedicationById(userMedications.Id);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserMedicationNotFound);
             }
-
-            var result = new UserMedications()
-            {
-                Id = userMedications.Id,
-                UserId = userMedications.UserId,
-                MedicationId = userMedications.MedicationId
-            };
+            
+            result.UserId = userMedications.UserId;
+            result.MedicationId = userMedications.MedicationId;
 
             _userMedicationDal.Delete(result);
             return new SuccessResult(Messages.UserMedicationDeleted);
@@ -113,24 +102,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<UserMedications>>(result, Messages.UserMedicationListed);
         }
 
-        private bool CheckIfUserMedicationExists(int userId, int medicationId)
+        private UserMedications CheckIfUserMedicationExists(int userId, int medicationId)
         {
-            var result = _userMedicationDal.GetAll(m => m.UserId == userId && m.MedicationId == medicationId);
-            if (result.Count > 0)
-            {
-                return false;
-            }
-            return true;
+            var result = _userMedicationDal.Get(m => m.UserId == userId && m.MedicationId == medicationId);
+            
+            return result;
         }
 
-        private bool CheckIfUserMedicationById(int userMedicationId)
+        private UserMedications CheckIfUserMedicationById(int userMedicationId)
         {
             var result = _userMedicationDal.Get(m => m.Id == userMedicationId);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            
+            return result;
         }
     }
 }

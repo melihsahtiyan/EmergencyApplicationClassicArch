@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace Business.Abstract
 {
@@ -15,7 +17,7 @@ namespace Business.Abstract
         IDataResult<List<Source>> GetAllByPostId(int postId);
         IDataResult<Source> GetById(int sourceId);
         //IDataResult<List<Source>> GetSourcesByUser(int userId);
-        IResult Add(SourceForCreateDto sourceForCreateDto);
+        IResult Add(SourceForCreateDto sourceForCreateDto, IFormFile file);
         IResult Update(SourceForCreateDto sourceForCreateDto);
         IResult Delete(SourceForCreateDto sourceForCreateDto);
     }

@@ -42,17 +42,14 @@ namespace Business.Concrete
 
         public IResult Add(UserAllergiesForCreateDto userAllergies)
         {
-            var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
-            if (check)
+            var result = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserAllergiesExists);
             }
 
-            var result = new UserAllergies()
-            {
-                UserId = userAllergies.UserId,
-                AllergyId = userAllergies.AllergyId
-            };
+            result.UserId = userAllergies.UserId;
+            result.AllergyId = userAllergies.AllergyId;
 
             _userAllergiesDal.Add(result);
             return new SuccessResult(Messages.UserAllergiesAdded);
@@ -60,18 +57,14 @@ namespace Business.Concrete
 
         public IResult Update(UserAllergiesForCreateDto userAllergies)
         {
-            var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
-            if (!check)
+            var result = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserAllergiesNotFound);
             }
 
-            var result = new UserAllergies()
-            {
-                Id = userAllergies.Id,
-                UserId = userAllergies.UserId,
-                AllergyId = userAllergies.AllergyId
-            };
+            result.UserId = userAllergies.UserId;
+            result.AllergyId = userAllergies.AllergyId;
 
             _userAllergiesDal.Update(result);
             return new SuccessResult(Messages.UserAllergiesUpdated);
@@ -79,18 +72,12 @@ namespace Business.Concrete
 
         public IResult Delete(UserAllergiesForCreateDto userAllergies)
         {
-            var check = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
-            if (!check)
+            var result = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
+            if (result == null)
             {
                 return new ErrorResult(Messages.UserAllergiesNotFound);
             }
-
-            var result = new UserAllergies()
-            {
-                Id = userAllergies.Id,
-                UserId = userAllergies.UserId,
-                AllergyId = userAllergies.AllergyId
-            };
+            
 
             _userAllergiesDal.Delete(result);
             return new SuccessResult(Messages.UserAllergiesDeleted);
@@ -106,9 +93,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<UserAllergies>>(result, Messages.UserAllergiesListed);
         }
 
-        private bool CheckIfUserAllergiesExists(int userId, int allergyId)
+        private UserAllergies CheckIfUserAllergiesExists(int userId, int allergyId)
         {
-            var result = _userAllergiesDal.GetAll(ua => ua.UserId == userId && ua.AllergyId == allergyId).Any();
+            var result = _userAllergiesDal.Get(ua => ua.UserId == userId && ua.AllergyId == allergyId);
             return result;
         }
     }

@@ -23,17 +23,14 @@ namespace Business.Concrete
 
         public IResult Add(AllergyForCreateDto allergy)
         {
-            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
-            if (check)
+            var result = CheckIfAllergyExists(null, allergy.Name);
+            if (result != null)
             {
                 return new ErrorResult(Messages.AllergyExists);
             }
 
-            var result = new Allergy()
-            {
-                Name = allergy.Name,
-                Description = allergy.Description
-            };
+            result.Name = allergy.Name;
+            result.Description = allergy.Description;
 
             _allergyDal.Add(result);
             return new SuccessResult(Messages.AllergyAdded);
@@ -41,19 +38,16 @@ namespace Business.Concrete
 
         public IResult Delete(AllergyForCreateDto allergy)
         {
-            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
+            var result = CheckIfAllergyExists(allergy.Id, allergy.Name);
 
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.AllergyNotFound);
             }
 
-            var result = new Allergy()
-            {
-                Id = allergy.Id,
-                Name = allergy.Name,
-                Description = allergy.Description
-            };
+            result.Name = allergy.Name;
+            result.Description = allergy.Description;
+            
             _allergyDal.Delete(result);
             return new SuccessResult(Messages.AllergyDeleted);
         }
@@ -70,26 +64,23 @@ namespace Business.Concrete
 
         public IResult Update(AllergyForCreateDto allergy)
         {
-            var check = CheckIfAllergyExists(allergy.Id, allergy.Name);
+            var result = CheckIfAllergyExists(allergy.Id, allergy.Name);
 
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.AllergyNotFound);
             }
 
-            var result = new Allergy()
-            {
-                Id = allergy.Id,
-                Name = allergy.Name,
-                Description = allergy.Description,
-            };
+            result.Name = allergy.Name;
+            result.Description = allergy.Description;
+
             _allergyDal.Update(result);
             return new SuccessResult(Messages.AllergyUpdated);
         }
 
-        private bool CheckIfAllergyExists(int id, string name)
+        private Allergy CheckIfAllergyExists(int? id, string name)
         {
-            var result = _allergyDal.GetAll(a => a.Id == id || a.Name == name).Any();
+            var result = _allergyDal.Get(a => a.Id == id || a.Name == name);
             return result;
         }
     }

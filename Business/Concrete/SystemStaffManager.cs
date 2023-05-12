@@ -22,37 +22,31 @@ namespace Business.Concrete
         }
         public IResult Add(SystemStaffForCreateDto systemStaff)
         {
-            var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
-            if (check)
+            var result = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
+            if (result != null)
             {
                 return new ErrorResult(Messages.SystemStaffExists);
             }
 
-            var result = new SystemStaff()
-            {
-                UserId = systemStaff.UserId,
-                StaffStatus = systemStaff.StaffStatus,
-                StaffNumber = systemStaff.StaffNumber
-            };
+
+            result.UserId = systemStaff.UserId;
+            result.StaffStatus = systemStaff.StaffStatus;
+            result.StaffNumber = systemStaff.StaffNumber;
 
             _systemStaffDal.Add(result);
             return new SuccessResult(Messages.SystemStaffAdded);
         }
         public IResult Delete(SystemStaffForCreateDto systemStaff)
         {
-            var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
-            if (!check)
+            var result = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
+            if (result == null)
             {
                 return new ErrorResult(Messages.SystemStaffNotFound);
             }
 
-            var result = new SystemStaff()
-            {
-                Id = systemStaff.Id,
-                UserId = systemStaff.UserId,
-                StaffStatus = systemStaff.StaffStatus,
-                StaffNumber = systemStaff.StaffNumber
-            };
+            result.UserId = systemStaff.UserId;
+            result.StaffStatus = systemStaff.StaffStatus;
+            result.StaffNumber = systemStaff.StaffNumber;
 
             _systemStaffDal.Delete(result);
             return new SuccessResult(Messages.SystemStaffDeleted);
@@ -72,27 +66,23 @@ namespace Business.Concrete
         }
         public IResult Update(SystemStaffForCreateDto systemStaff)
         {
-            var check = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
-            if (!check)
+            var result = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
+            if (result == null)
             {
                 return new ErrorResult(Messages.SystemStaffNotFound);
             }
 
-            var result = new SystemStaff()
-            {
-                Id = systemStaff.Id,
-                UserId = systemStaff.UserId,
-                StaffStatus = systemStaff.StaffStatus,
-                StaffNumber = systemStaff.StaffNumber
-            };
+            result.UserId = systemStaff.UserId;
+            result.StaffStatus = systemStaff.StaffStatus;
+            result.StaffNumber = systemStaff.StaffNumber;
 
             _systemStaffDal.Update(result);
             return new SuccessResult(Messages.SystemStaffUpdated);
         }
 
-        private bool CheckIfSystemStaffExists(int userId, string staffNumber)
+        private SystemStaff CheckIfSystemStaffExists(int userId, string staffNumber)
         {
-            var result = _systemStaffDal.GetAll(ss => ss.UserId == userId && ss.StaffNumber == staffNumber).Any();
+            var result = _systemStaffDal.Get(ss => ss.UserId == userId && ss.StaffNumber == staffNumber);
             return result;
         }
     }

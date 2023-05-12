@@ -38,18 +38,15 @@ namespace Business.Concrete
 
         public IResult Add(MedicalHistoryForCreateDto medicalHistory)
         {
-            var check = CheckIfMedicalHistoryByName(medicalHistory.Name);
+            var result = CheckIfMedicalHistoryExists(medicalHistory.Name);
 
-            if (check)
+            if (result != null)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            var result = new MedicalHistory()
-            {
-                Name = medicalHistory.Name,
-                Description = medicalHistory.Description
-            };
+            result.Name = medicalHistory.Name;
+            result.Description = medicalHistory.Description;
 
             _medicalHistoryDal.Add(result);
             return new SuccessResult(Messages.MedicalHistoryAdded);
@@ -57,26 +54,22 @@ namespace Business.Concrete
 
         public IResult Update(MedicalHistoryForCreateDto medicalHistory)
         {
-            var check = CheckIfMedicalHistoryById(medicalHistory.Id);
+            var result = CheckIfMedicalHistoryExists(medicalHistory.Id);
 
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            var checkName = CheckIfMedicalHistoryByName(medicalHistory.Name);
+            var checkName = CheckIfMedicalHistoryExists(medicalHistory.Name);
 
-            if (!checkName)
+            if (result != null)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            var result = new MedicalHistory()
-            {
-                Id = medicalHistory.Id,
-                Name = medicalHistory.Name,
-                Description = medicalHistory.Description
-            };
+            result.Name = medicalHistory.Name;
+            result.Description = medicalHistory.Description;
 
             _medicalHistoryDal.Update(result);
             return new SuccessResult(Messages.MedicalHistoryUpdated);
@@ -84,44 +77,32 @@ namespace Business.Concrete
 
         public IResult Delete(MedicalHistoryForCreateDto medicalHistory)
         {
-            var check = CheckIfMedicalHistoryById(medicalHistory.Id);
+            var result = CheckIfMedicalHistoryExists(medicalHistory.Id);
 
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            var result = new MedicalHistory()
-            {
-                Id = medicalHistory.Id,
-                Name = medicalHistory.Name,
-                Description = medicalHistory.Description
-            };
+            result.Name = medicalHistory.Name;
+            result.Description = medicalHistory.Description;
 
             _medicalHistoryDal.Delete(result);
             return new SuccessResult(Messages.MedicalHistoryDeleted);
         }
 
-        public bool CheckIfMedicalHistoryByName(string name)
+        public MedicalHistory CheckIfMedicalHistoryExists(string name)
         {
             var result = _medicalHistoryDal.Get(m => m.Name == name);
-
-            if (result != null)
-            {
-                return false;
-            }
-            return true;
+            
+            return result;
         }
         
-        public bool CheckIfMedicalHistoryById(int id)
+        public MedicalHistory CheckIfMedicalHistoryExists(int id)
         {
             var result = _medicalHistoryDal.Get(m => m.Id == id);
-
-            if (result != null)
-            {
-                return false;
-            }
-            return true;
+            
+            return result;
         }
     }
 }

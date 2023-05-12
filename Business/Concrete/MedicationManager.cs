@@ -39,43 +39,36 @@ namespace Business.Concrete
 
         public IResult Add(MedicationForCreateDto medication)
         {
-            var check = CheckIfMedicationByName(medication.Name);
-            if (check)
+            var result = CheckIfMedicationExists(medication.Name);
+            if (result != null)
             {
                 return new ErrorResult(Messages.MedicationExists);
             }
 
-            var result = new Medication()
-            {
-                Name = medication.Name,
-                Description = medication.Description
-            };
+            result.Name = medication.Name;
+            result.Description = medication.Description;
+
             _medicationDal.Add(result);
             return new SuccessResult(Messages.MedicationAdded);
         }
 
         public IResult Update(MedicationForCreateDto medication)
         {
-            var check = CheckIfMedicationById(medication.Id);
+            var result = CheckIfMedicationExists(medication.Id);
             
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicationNotFound);
             }
             
-            var checkName = CheckIfMedicationByName(medication.Name);
+            var checkName = CheckIfMedicationExists(medication.Name);
             
-            if (!checkName)
+            if (checkName != null)
             {
                 return new ErrorResult(Messages.MedicationExists);
             }
 
-            var result = new Medication()
-            {
-                Id = medication.Id,
-                Name = medication.Name,
-                Description = medication.Description
-            };
+            
 
             _medicationDal.Update(result);
             return new SuccessResult(Messages.MedicationUpdated);
@@ -83,42 +76,32 @@ namespace Business.Concrete
 
         public IResult Delete(MedicationForCreateDto medication)
         {
-            var check = CheckIfMedicationById(medication.Id);
+            var result = CheckIfMedicationExists(medication.Id);
             
-            if (!check)
+            if (result == null)
             {
                 return new ErrorResult(Messages.MedicationNotFound);
             }
 
-            var result = new Medication()
-            {
-                Id = medication.Id,
-                Name = medication.Name,
-                Description = medication.Description
-            };
+            result.Name = medication.Name;
+            result.Description = medication.Description;
 
             _medicationDal.Delete(result);
             return new SuccessResult(Messages.MedicationDeleted);
         }
 
-        private bool CheckIfMedicationByName(string name)
+        private Medication CheckIfMedicationExists(string name)
         {
             var result = _medicationDal.Get(m => m.Name == name);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            
+            return result;
         }
 
-        private bool CheckIfMedicationById(int id)
+        private Medication CheckIfMedicationExists(int id)
         {
             var result = _medicationDal.Get(m => m.Id == id);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            
+            return result;
         }
     }
 }

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Utilities.Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace Business.Concrete
 {
@@ -20,13 +23,20 @@ namespace Business.Concrete
             _sourceDal = sourceDal;
         }
 
-        public IResult Add(SourceForCreateDto sourceForCreateDto)
+        public IResult Add(SourceForCreateDto sourceForCreateDto, IFormFile file)
         {
-            var result = new Source() { 
+
+            var sourcePath = FormFileHelper.Add(file);
+            if (sourcePath == null)
+            {
+                return new ErrorResult("File could not be added!");
+            }
+            var result = new Source()
+            {
                 Date = sourceForCreateDto.Date,
                 PostId = sourceForCreateDto.PostId,
                 SourceCategory = sourceForCreateDto.SourceCategory,
-                SourcePath = sourceForCreateDto.SourcePath  
+                SourcePath = sourceForCreateDto.SourcePath
             };
             _sourceDal.Add(result);
             return new SuccessResult();
@@ -34,15 +44,14 @@ namespace Business.Concrete
 
         public IResult Delete(SourceForCreateDto sourceForCreateDto)
         {
-            var result = new Source()
+            var result = CheckIfSourceExists(sourceForCreateDto.Id);
+
+            if (result == null)
             {
-                Date = sourceForCreateDto.Date,
-                PostId = sourceForCreateDto.PostId,
-                SourceCategory = sourceForCreateDto.SourceCategory,
-                SourcePath = sourceForCreateDto.SourcePath,
-                Id = sourceForCreateDto.Id
-            };
-            _sourceDal.Delete(result);  
+                return new ErrorResult("Source could not be found!");
+            }
+
+            _sourceDal.Delete(result);
             return new SuccessResult();
         }
 
@@ -54,14 +63,14 @@ namespace Business.Concrete
 
         public IDataResult<List<Source>> GetAllByPostId(int postId)
         {
-            _sourceDal.Get(p=>p.PostId== postId);
+            _sourceDal.Get(p => p.PostId == postId);
             return new SuccessDataResult<List<Source>>();
         }
 
         public IDataResult<Source> GetById(int sourceId)
         {
             _sourceDal.Get(p => p.Id == sourceId);
-            return new SuccessDataResult<Source>(); 
+            return new SuccessDataResult<Source>();
 
         }
 
@@ -72,16 +81,26 @@ namespace Business.Concrete
 
         public IResult Update(SourceForCreateDto sourceForCreateDto)
         {
-            var result = new Source()
+            var result = CheckIfSourceExists(sourceForCreateDto.Id);
+
+            if (result == null)
             {
-                Date = sourceForCreateDto.Date,
-                PostId = sourceForCreateDto.PostId,
-                SourceCategory = sourceForCreateDto.SourceCategory,
-                SourcePath = sourceForCreateDto.SourcePath,
-                Id = sourceForCreateDto.Id
-            };
+                return new ErrorResult("Source could not be found!");
+            }
+
+            result.Date = sourceForCreateDto.Date;
+            result.PostId = sourceForCreateDto.PostId;
+            result.SourceCategory = sourceForCreateDto.SourceCategory;
+            result.SourcePath = sourceForCreateDto.SourcePath;
+            result.Id = sourceForCreateDto.Id;
+
             _sourceDal.Update(result);
-            return new SuccessResult();     
+            return new SuccessResult();
+        }
+
+        private Source CheckIfSourceExists(int sourceId)
+        {
+            return _sourceDal.Get(s => s.Id == sourceId);
         }
     }
 }
