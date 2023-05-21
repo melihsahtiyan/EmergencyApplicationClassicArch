@@ -32,6 +32,7 @@ namespace DataAccess.Concrete
         public DbSet<UserAllergies> UserAllergies { get; set; }
         public DbSet<UserMedications> UserMedications { get; set; }
         public DbSet<UserMedicalHistories> UserMedicalHistories { get; set; }
+        public DbSet<GptChats> GptChats { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration) : base(dbContextOptions)
         {
@@ -40,6 +41,26 @@ namespace DataAccess.Concrete
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>(a =>
+            {
+                a.ToTable("Users").HasKey(k => k.Id);
+                a.Property(u => u.Id).HasColumnName("Id");
+                a.Property(u => u.Email).HasColumnName("Email");
+                a.Property(u => u.FirstName).HasColumnName("FirstName");
+                a.Property(u => u.LastName).HasColumnName("LastName");
+                a.Property(u => u.PasswordHash).HasColumnName("PasswordHash");
+                a.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt");
+                a.Property(u => u.BirthDate).HasColumnName("BirthDate");
+                a.Property(u => u.IdentityNumber).HasColumnName("IdentityNumber");
+                a.Property(u => u.AuthenticatorType).HasColumnName("AuthenticatorType");
+                a.Property(u => u.Status).HasColumnName("Status");
+                a.HasMany(u => u.RefreshTokens);
+                a.HasMany(u => u.UserOperationClaims);
+                a.HasMany(u => u.Posts);
+                a.HasMany(u => u.GptChats);
+            });
+
+
             modelBuilder.Entity<Category>(e =>
             {
                 e.ToTable("Categories").HasKey(k => k.Id);
@@ -47,6 +68,21 @@ namespace DataAccess.Concrete
                 e.Property(c => c.CategoryName).HasColumnName("CategoryName");
                 e.HasMany(c => c.Posts);
                 e.HasMany(c => c.PostTemplates);
+            });
+
+            modelBuilder.Entity<GptChats>(e => 
+            {
+                e.ToTable("GptChats").HasKey(g => g.Id);
+                e.Property(g => g.Id).HasColumnName("Id");
+                e.Property(g => g.Message).HasColumnName("Message");
+                e.Property(g => g.Model).HasColumnName("Model");
+                e.Property(g => g.Usage).HasColumnName("Usage");
+                e.Property(g => g.UserId).HasColumnName("UserId");
+                e.Property(g => g.PostId).HasColumnName("PostId");
+                e.Property(g => g.ResponseId).HasColumnName("ResponseId");
+                e.Property(g => g.Status);
+                e.HasOne(g => g.User).WithMany(u => u.GptChats).HasForeignKey(u => u.UserId);
+                e.HasOne(g => g.Post).WithMany(p => p.GptChats).HasForeignKey(p => p.PostId);
             });
 
             modelBuilder.Entity<Contact>(e =>
@@ -145,24 +181,6 @@ namespace DataAccess.Concrete
                 e.Property(s => s.StaffNumber).HasColumnName("StaffNumber");
                 e.Property(s => s.StaffStatus).HasColumnName("StaffStatus");
                 e.HasOne(s => s.User).WithOne(u => u.SystemStaff).HasForeignKey<SystemStaff>(s => s.UserId);
-            });
-
-            modelBuilder.Entity<User>(a =>
-            {
-                a.ToTable("Users").HasKey(k => k.Id);
-                a.Property(u => u.Id).HasColumnName("Id");
-                a.Property(u => u.Email).HasColumnName("Email");
-                a.Property(u => u.FirstName).HasColumnName("FirstName");
-                a.Property(u => u.LastName).HasColumnName("LastName");
-                a.Property(u => u.PasswordHash).HasColumnName("PasswordHash");
-                a.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt");
-                a.Property(u => u.BirthDate).HasColumnName("BirthDate");
-                a.Property(u => u.IdentityNumber).HasColumnName("IdentityNumber");
-                a.Property(u => u.AuthenticatorType).HasColumnName("AuthenticatorType");
-                a.Property(u => u.Status).HasColumnName("Status");
-                a.HasMany(u => u.RefreshTokens);
-                a.HasMany(u => u.UserOperationClaims);
-                a.HasMany(u => u.Posts);
             });
 
             modelBuilder.Entity<UserOperationClaim>(a =>

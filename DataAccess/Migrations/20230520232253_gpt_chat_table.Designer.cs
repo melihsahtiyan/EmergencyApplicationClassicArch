@@ -3,6 +3,7 @@ using System;
 using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230520232253_gpt_chat_table")]
+    partial class gpt_chat_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Model");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer")
-                        .HasColumnName("PostId");
-
                     b.Property<string>("ResponseId")
                         .IsRequired()
                         .HasColumnType("text")
@@ -134,8 +133,6 @@ namespace DataAccess.Migrations
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -640,19 +637,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Concrete.GptChats", b =>
                 {
-                    b.HasOne("Entity.Concrete.Post", "Post")
-                        .WithMany("GptChats")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Concrete.User", "User")
                         .WithMany("GptChats")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
@@ -836,8 +825,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Concrete.Post", b =>
                 {
-                    b.Navigation("GptChats");
-
                     b.Navigation("Sources");
                 });
 

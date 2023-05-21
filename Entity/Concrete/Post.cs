@@ -19,6 +19,7 @@ namespace Entity.Concrete
         public virtual ICollection<Source> Sources { get; set; }
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<GptChats> GptChats { get; set; }
 
         public Post()
         {

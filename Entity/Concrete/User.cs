@@ -25,6 +25,7 @@ namespace Entity.Concrete
         public virtual SystemStaff SystemStaff { get; set; }
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Contact> ContactUsers { get; set; }
+        public virtual ICollection<GptChats> GptChats { get; set; }
 
         public User()
         {
