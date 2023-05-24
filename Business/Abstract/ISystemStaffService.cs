@@ -12,7 +12,8 @@ namespace Business.Abstract
     public interface ISystemStaffService
     {
         IDataResult<List<SystemStaff>> GetAll();
-        IDataResult<SystemStaff> GetById(int systemStaffId);
+        IDataResult<SystemStaff> GetById(int id);
+        IDataResult<SystemStaff> GetByStaffNumber(string staffNumber);
         IResult Add(SystemStaffForCreateDto systemStaff);
         IResult Update(SystemStaffForCreateDto systemStaff);
         IResult Delete(SystemStaffForCreateDto systemStaff);

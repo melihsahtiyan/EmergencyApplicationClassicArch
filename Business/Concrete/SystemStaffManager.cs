@@ -20,6 +20,17 @@ namespace Business.Concrete
         {
             _systemStaffDal = systemStaffDal;
         }
+
+        public IDataResult<SystemStaff> GetByStaffNumber(string staffNumber)
+        {
+            var result = _systemStaffDal.Get(ss => ss.StaffNumber == staffNumber);
+            if (result == null)
+            {
+                return new ErrorDataResult<SystemStaff>(Messages.SystemStaffNotFound);
+            }
+            return new SuccessDataResult<SystemStaff>(result, Messages.SystemStaffsListed);
+        }
+
         public IResult Add(SystemStaffForCreateDto systemStaff)
         {
             var result = CheckIfSystemStaffExists(systemStaff.UserId, systemStaff.StaffNumber);
@@ -29,9 +40,12 @@ namespace Business.Concrete
             }
 
 
-            result.UserId = systemStaff.UserId;
-            result.StaffStatus = systemStaff.StaffStatus;
-            result.StaffNumber = systemStaff.StaffNumber;
+            result = new SystemStaff()
+            {
+                StaffNumber = systemStaff.StaffNumber,
+                StaffStatus = systemStaff.StaffStatus,
+                UserId = systemStaff.UserId
+            };
 
             _systemStaffDal.Add(result);
             return new SuccessResult(Messages.SystemStaffAdded);

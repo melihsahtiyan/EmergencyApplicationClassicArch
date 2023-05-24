@@ -35,7 +35,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+            return new SuccessDataResult<User>(result);
         }
 
         public IResult Add(User user)

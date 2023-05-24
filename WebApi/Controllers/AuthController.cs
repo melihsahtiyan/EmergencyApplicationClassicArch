@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entities.Dtos;
+using Entity.Dtos.SystemStaff;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +52,43 @@ namespace WebApi.Controllers
             }
 
             return BadRequest(registerResult.Message);
+        }
+
+        [HttpPost("resgisterStaff")]
+        public ActionResult RegisterStaff(SystemStaffForRegisterDto staffForCreateDto)
+        {
+            var staffExists = _authService.UserExists(staffForCreateDto.Email);
+            if (!staffExists.Success)
+            {
+                return BadRequest(staffExists.Message);
+            }
+
+            var registerResult = _authService.SystemStaffRegister(staffForCreateDto);
+            if (registerResult.Success)
+            {
+                var result = _authService.CreateAccessToken(registerResult.Data);
+                return Ok(result.Data);
+            }
+
+            return BadRequest(registerResult.Message);
+        }
+
+        [HttpPost("loginStaff")]
+        public ActionResult LoginStaff(SystemStaffForLoginDto staffForLoginDto)
+        {
+            var staffToLogin = _authService.SystemStaffLogin(staffForLoginDto);
+            if (!staffToLogin.Success)
+            {
+                return BadRequest(staffToLogin.Message);
+            }
+
+            var result = _authService.CreateAccessToken(staffToLogin.Data);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.Message);
         }
     }
 }
