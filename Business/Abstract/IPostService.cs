@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrete;
+using Entity.Dtos.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
         IDataResult<List<Post>> GetAll();
         IDataResult<Post> GetById(int postId);
-        IResult Add(Post post);
-        IResult Update(Post post);
-        IResult Delete(Post post);
+        IResult Add(PostForCreateDto post);
+        IResult Update(PostForCreateDto post);
+        IResult Delete(PostForCreateDto post);
     }
 }

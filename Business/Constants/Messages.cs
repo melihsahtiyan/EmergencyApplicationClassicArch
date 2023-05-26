@@ -83,6 +83,13 @@ namespace Business.Constants
         public static string MedicalHistoryDeleted = "Medical history deleted";
         public static string MedicalHistoryUpdated = "Medical history updated";
 
+        public static string PostsListed = "Posts listed";
+        public static string PostListed = "Post listed";
+        public static string PostNotFound = "Post not found";
+        public static string PostAdded = "Post added";
+        public static string PostDeleted = "Post deleted";
+        public static string PostUpdated = "Post updated";
+
         public static string UserAllergiesListed = "User allergies listed";
         public static string UserAllergiesAdded = "User allergy added";
         public static string UserAllergiesDeleted = "User allergy deleted";
@@ -91,7 +98,6 @@ namespace Business.Constants
         public static string UserAllergiesNotFound = "User allergy not found";
         public static string UserAllergiesExists = "User allergy exists";
 
-        
         public static string UserProfileAdded = "User profile added";
         public static string UserProfileDeleted = "User profile deleted";
         public static string UserProfileUpdated = "User profile updated";
