@@ -26,7 +26,7 @@ namespace Entity.Concrete
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Contact> ContactUsers { get; set; }
         public virtual ICollection<GptChats> GptChats { get; set; }
-        public virtual ICollection<UserOngoingDisease> UserMedicalHistories { get; set; }
+        public virtual ICollection<UserOngoingDisease> UserOngoingDiseases { get; set; }
         public virtual ICollection<UserAllergies> UserAllergies { get; set; }
         public virtual ICollection<UserMedications> UserMedications { get; set; }
 

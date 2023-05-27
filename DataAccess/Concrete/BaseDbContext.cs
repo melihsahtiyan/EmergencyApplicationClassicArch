@@ -98,13 +98,22 @@ namespace DataAccess.Concrete
 
             modelBuilder.Entity<OngoingDisease>(e =>
             {
-                e.ToTable("MedicalHistories").HasKey(k => k.Id);
+                e.ToTable("OngoingDiseases").HasKey(k => k.Id);
                 e.Property(m => m.Id).HasColumnName("Id");
                 e.Property(m => m.Name).HasColumnName("Name");
                 e.Property(m => m.Description).HasColumnName("Description");
                 e.HasMany(m => m.UserOngoingDiseases);
             });
 
+            modelBuilder.Entity<UserOngoingDisease>(e =>
+            {
+                e.ToTable("UserOngoingDiseases").HasKey(k => k.Id);
+                e.Property(u => u.Id).HasColumnName("Id");
+                e.Property(u => u.UserId).HasColumnName("UserId");
+                e.Property(u => u.OngoingDiseaseId).HasColumnName("OngoingDiseaseId");
+                e.HasOne(u => u.User).WithMany(u => u.UserOngoingDiseases).HasForeignKey(u => u.UserId);
+                e.HasOne(u => u.OngoingDisease).WithMany(u => u.UserOngoingDiseases).HasForeignKey(u => u.OngoingDiseaseId);
+            });
 
             modelBuilder.Entity<UserAllergies>(e =>
             {
@@ -114,16 +123,6 @@ namespace DataAccess.Concrete
                 e.Property(u => u.AllergyId).HasColumnName("AllergyId");
                 e.HasOne(u => u.User).WithMany(u => u.UserAllergies).HasForeignKey(u => u.UserId);
                 e.HasOne(u => u.Allergy).WithMany(u => u.UserAllergies).HasForeignKey(u => u.AllergyId);
-            });
-
-            modelBuilder.Entity<UserOngoingDisease>(e =>
-            {
-                e.ToTable("UserMedicalHistories").HasKey(k => k.Id);
-                e.Property(u => u.Id).HasColumnName("Id");
-                e.Property(u => u.UserId).HasColumnName("UserId");
-                e.Property(u => u.OngoingDiseaseId).HasColumnName("OngoingDiseaseId");
-                e.HasOne(u => u.User).WithMany(u => u.UserMedicalHistories).HasForeignKey(u => u.UserId);
-                e.HasOne(u => u.OngoingDisease).WithMany(u => u.UserOngoingDiseases).HasForeignKey(u => u.OngoingDisease);
             });
 
             modelBuilder.Entity<UserMedications>(e =>
