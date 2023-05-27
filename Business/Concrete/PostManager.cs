@@ -41,8 +41,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Post>> GetAll()
         {
-            _postDal.GetAll();
-            return new SuccessDataResult<List<Post>>(Messages.PostsListed);
+            var result = _postDal.GetAll();
+            return new SuccessDataResult<List<Post>>(result, Messages.PostsListed);
         }
 
         public IDataResult<Post> GetById(int postId)

@@ -14,12 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.AllowAnyOrigin());
+});
 builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddDependencyResolvers(new ICoreModule[] {new CoreModule()});
+builder.Services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -68,9 +72,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseDeveloperExceptionPage();
 //}
 
 //if (app.Environment.IsProduction())
