@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class PostManager:IPostService
+    public class PostManager : IPostService
     {
         IPostDal _postDal;
 
@@ -21,13 +21,19 @@ namespace Business.Concrete
             _postDal = postDal;
         }
 
-        public IResult Add(PostForCreateDto post)
+        public IDataResult<List<PostDetailDto>> GetPostDetailsByUserId(int userId)
+        {
+            var result = _postDal.GetPostDetailsByUserId(userId);
+            return new SuccessDataResult<List<PostDetailDto>>(result, Messages.PostsListed);
+        }
+
+        public IResult Add(Post post)
         {
             _postDal.Add(post);
             return new SuccessResult(Messages.PostAdded);
         }
 
-        public IResult Delete(PostForCreateDto post)
+        public IResult Delete(Post post)
         {
             _postDal.Delete(post);
             return new SuccessResult(Messages.PostDeleted);
@@ -41,10 +47,16 @@ namespace Business.Concrete
 
         public IDataResult<Post> GetById(int postId)
         {
-            return new SuccessDataResult<Post>(_postDal.Get(p => p.Id == postId),Messages.PostListed);
+            return new SuccessDataResult<Post>(_postDal.Get(p => p.Id == postId), Messages.PostListed);
         }
 
-        public IResult Update(PostForCreateDto post)
+        public IDataResult<List<PostDetailDto>> GetPostDetails()
+        {
+            var result = _postDal.GetPostDetails();
+            return new SuccessDataResult<List<PostDetailDto>>(result, Messages.PostsListed);
+        }
+
+        public IResult Update(Post post)
         {
             _postDal.Update(post);
             return new SuccessResult(Messages.PostUpdated);

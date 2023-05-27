@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entity.Concrete;
 using Entity.Dtos.Allergy;
 using Entity.Dtos.Post;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ namespace WebApi.Controllers
         {
             _postService = postService;
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -26,6 +28,7 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
@@ -36,8 +39,9 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPost("add")]
-        public IActionResult Add(PostForCreateDto post)
+        public IActionResult Add(Post post)
         {
             var result = _postService.Add(post);
             if (result.Success)
@@ -46,8 +50,9 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPut("update")]
-        public IActionResult Update(PostForCreateDto post)
+        public IActionResult Update(Post post)
         {
             var result = _postService.Update(post);
             if (result.Success)
@@ -56,10 +61,33 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpDelete("delete")]
-        public IActionResult Delete(PostForCreateDto post)
+        public IActionResult Delete(Post post)
         {
             var result = _postService.Delete(post);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getpostdetails")]
+        public IActionResult GetPostDetails()
+        {
+            var result = _postService.GetPostDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getpostdetailsbyuserid")]
+        public IActionResult GetPostDetailsByUserId([FromHeader]int userId)
+        {
+            var result = _postService.GetPostDetailsByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);

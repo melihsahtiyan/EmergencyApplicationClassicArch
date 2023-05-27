@@ -13,8 +13,10 @@ namespace Business.Abstract
     {
         IDataResult<List<Post>> GetAll();
         IDataResult<Post> GetById(int postId);
-        IResult Add(PostForCreateDto post);
-        IResult Update(PostForCreateDto post);
-        IResult Delete(PostForCreateDto post);
+        IDataResult<List<PostDetailDto>> GetPostDetails();
+        IDataResult<List<PostDetailDto>> GetPostDetailsByUserId(int userId);
+        IResult Add(Post post);
+        IResult Update(Post post);
+        IResult Delete(Post post);
     }
 }
