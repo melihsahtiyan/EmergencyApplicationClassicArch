@@ -23,7 +23,7 @@ namespace DataAccess
             services.AddScoped<ICategoryDal, CategoryDal>();
             services.AddScoped<IContactDal, ContactDal>();
             services.AddScoped<IEmailAuthenticatorDal, EmailAuthenticatorDal>();
-            services.AddScoped<IMedicalHistoryDal, MedicalHistoryDal>();
+            services.AddScoped<IOngoingDiseaseDal, OngoingDiseaseDal>();
             services.AddScoped<IMedicationDal, MedicationDal>();
             services.AddScoped<IOperationClaimDal, OperationClaimDal>();
             services.AddScoped<IOtpAuthenticatorDal, OtpAuthenticatorDal>();
@@ -34,7 +34,7 @@ namespace DataAccess
             services.AddScoped<ISystemStaffDal, SystemStaffDal>();
             services.AddScoped<IUserProfileDal, UserProfileDal>();
             services.AddScoped<IUserAllergiesDal, UserAllergiesDal>();
-            services.AddScoped<IUserMedicalHistoryDal, UserMedicalHistoryDal>();
+            services.AddScoped<IUserOngoingDiseaseDal, UserOngoingDiseaseDal>();
             services.AddScoped<IUserMedicationDal, UserMedicationDal>();
             services.AddScoped<IUserOperationClaimDal, UserOperationClaimDal>();
             services.AddScoped<IUserDal, UserDal>();

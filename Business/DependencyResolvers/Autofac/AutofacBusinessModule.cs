@@ -38,8 +38,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AllergyManager>().As<IAllergyService>().SingleInstance();
             builder.RegisterType<AllergyDal>().As<IAllergyDal>().SingleInstance().InstancePerLifetimeScope();
 
-            builder.RegisterType<MedicalHistoryManager>().As<IMedicalHistoryService>().SingleInstance();
-            builder.RegisterType<MedicalHistoryDal>().As<IMedicalHistoryDal>().SingleInstance().InstancePerLifetimeScope();
+            builder.RegisterType<OngoingDiseaseManager>().As<IOngoingDiseaseService>().SingleInstance();
+            builder.RegisterType<OngoingDiseaseDal>().As<IOngoingDiseaseDal>().SingleInstance().InstancePerLifetimeScope();
 
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<CategoryDal>().As<ICategoryDal>().SingleInstance().InstancePerLifetimeScope();

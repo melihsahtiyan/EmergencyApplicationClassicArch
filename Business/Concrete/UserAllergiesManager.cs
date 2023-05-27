@@ -43,13 +43,16 @@ namespace Business.Concrete
         public IResult Add(UserAllergiesForCreateDto userAllergies)
         {
             var result = CheckIfUserAllergiesExists(userAllergies.UserId, userAllergies.AllergyId);
-            if (result == null)
+            if (result != null)
             {
                 return new ErrorResult(Messages.UserAllergiesExists);
             }
 
-            result.UserId = userAllergies.UserId;
-            result.AllergyId = userAllergies.AllergyId;
+            result = new UserAllergies()
+            {
+                UserId = userAllergies.UserId, 
+                AllergyId = userAllergies.AllergyId
+            };
 
             _userAllergiesDal.Add(result);
             return new SuccessResult(Messages.UserAllergiesAdded);

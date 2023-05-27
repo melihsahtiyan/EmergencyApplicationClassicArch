@@ -25,13 +25,13 @@ namespace DataAccess.Concrete
         public DbSet<Category> Categories { get; set; }
         public DbSet<PostTemplates> PostTemplates { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<MedicalHistory> MedicalHistories { get; set; }
+        public DbSet<OngoingDisease> MedicalHistories { get; set; }
         public DbSet<Medication> Medications { get; set; }
         public DbSet<Allergy> Allergies { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserAllergies> UserAllergies { get; set; }
         public DbSet<UserMedications> UserMedications { get; set; }
-        public DbSet<UserMedicalHistories> UserMedicalHistories { get; set; }
+        public DbSet<UserOngoingDisease> UserMedicalHistories { get; set; }
         public DbSet<GptChats> GptChats { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration) : base(dbContextOptions)
@@ -96,13 +96,13 @@ namespace DataAccess.Concrete
                 e.HasOne(c => c.ContactUser).WithMany(u => u.ContactUsers).HasForeignKey(u => u.ContactId);
             });
 
-            modelBuilder.Entity<MedicalHistory>(e =>
+            modelBuilder.Entity<OngoingDisease>(e =>
             {
                 e.ToTable("MedicalHistories").HasKey(k => k.Id);
                 e.Property(m => m.Id).HasColumnName("Id");
                 e.Property(m => m.Name).HasColumnName("Name");
                 e.Property(m => m.Description).HasColumnName("Description");
-                e.HasMany(m => m.UserMedicalHistories);
+                e.HasMany(m => m.UserOngoingDiseases);
             });
 
 
@@ -112,18 +112,18 @@ namespace DataAccess.Concrete
                 e.Property(u => u.Id).HasColumnName("Id");
                 e.Property(u => u.UserId).HasColumnName("UserId");
                 e.Property(u => u.AllergyId).HasColumnName("AllergyId");
-                e.HasOne(u => u.UserProfile).WithMany(u => u.UserAllergies).HasForeignKey(u => u.UserId);
+                e.HasOne(u => u.User).WithMany(u => u.UserAllergies).HasForeignKey(u => u.UserId);
                 e.HasOne(u => u.Allergy).WithMany(u => u.UserAllergies).HasForeignKey(u => u.AllergyId);
             });
 
-            modelBuilder.Entity<UserMedicalHistories>(e =>
+            modelBuilder.Entity<UserOngoingDisease>(e =>
             {
                 e.ToTable("UserMedicalHistories").HasKey(k => k.Id);
                 e.Property(u => u.Id).HasColumnName("Id");
                 e.Property(u => u.UserId).HasColumnName("UserId");
-                e.Property(u => u.MedicalHistoryId).HasColumnName("MedicalHistoryId");
-                e.HasOne(u => u.UserProfile).WithMany(u => u.UserMedicalHistories).HasForeignKey(u => u.UserId);
-                e.HasOne(u => u.MedicalHistory).WithMany(u => u.UserMedicalHistories).HasForeignKey(u => u.MedicalHistoryId);
+                e.Property(u => u.OngoingDiseaseId).HasColumnName("OngoingDiseaseId");
+                e.HasOne(u => u.User).WithMany(u => u.UserMedicalHistories).HasForeignKey(u => u.UserId);
+                e.HasOne(u => u.OngoingDisease).WithMany(u => u.UserOngoingDiseases).HasForeignKey(u => u.OngoingDisease);
             });
 
             modelBuilder.Entity<UserMedications>(e =>
@@ -132,7 +132,7 @@ namespace DataAccess.Concrete
                 e.Property(u => u.Id).HasColumnName("Id");
                 e.Property(u => u.UserId).HasColumnName("UserId");
                 e.Property(u => u.MedicationId).HasColumnName("MedicationId");
-                e.HasOne(u => u.UserProfile).WithMany(u => u.UserMedications).HasForeignKey(u => u.UserId);
+                e.HasOne(u => u.User).WithMany(u => u.UserMedications).HasForeignKey(u => u.UserId);
                 e.HasOne(u => u.Medication).WithMany(u => u.UserMedications).HasForeignKey(u => u.MedicationId);
             });
 
@@ -206,9 +206,6 @@ namespace DataAccess.Concrete
                 e.Property(u => u.PhoneNumber).HasColumnName("PhoneNumber");
                 e.Property(u => u.ProfilePicture).HasColumnName("ProfilePicture");
                 e.HasOne(u => u.User).WithOne(u => u.UserProfile).HasForeignKey<UserProfile>(u => u.UserId);
-                e.HasMany(u => u.UserMedicalHistories);
-                e.HasMany(u => u.UserMedications);
-                e.HasMany(u => u.UserAllergies);
             });
 
             modelBuilder.Entity<RefreshToken>(a =>

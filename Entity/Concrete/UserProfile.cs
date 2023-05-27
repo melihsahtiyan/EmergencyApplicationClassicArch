@@ -16,9 +16,6 @@ namespace Entity.Concrete
         public string Height { get; set; }
         public string Weight { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<UserMedicalHistories> UserMedicalHistories { get; set; }
-        public virtual ICollection<UserAllergies> UserAllergies { get; set; }
-        public virtual ICollection<UserMedications> UserMedications { get; set; }
 
         public UserProfile()
         {

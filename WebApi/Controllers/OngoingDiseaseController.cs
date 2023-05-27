@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Entity.Dtos.MedicalHistory;
+using Entity.Dtos.OngoingDisease;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +8,17 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MedicalHistoriesController : ControllerBase
+    public class OngoingDiseaseController : ControllerBase
     {
-        private IMedicalHistoryService _medicalHistoryService;
-        public MedicalHistoriesController(IMedicalHistoryService medicalHistoryService)
+        private IOngoingDiseaseService _ongoingDiseaseService;
+        public OngoingDiseaseController(IOngoingDiseaseService ongoingDiseaseService)
         {
-            _medicalHistoryService = medicalHistoryService;
+            _ongoingDiseaseService = ongoingDiseaseService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _medicalHistoryService.GetAll();
+            var result = _ongoingDiseaseService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _medicalHistoryService.GetById(id);
+            var result = _ongoingDiseaseService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -36,9 +36,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(MedicalHistoryForCreateDto medicalHistory)
+        public IActionResult Add(OngoingDiseaseForCreateDto ongoingDeseases)
         {
-            var result = _medicalHistoryService.Add(medicalHistory);
+            var result = _ongoingDiseaseService.Add(ongoingDeseases);
             if (result.Success)
             {
                 return Ok(result);
@@ -46,9 +46,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(MedicalHistoryForCreateDto medicalHistory)
+        public IActionResult Update(OngoingDiseaseForCreateDto ongoingDeseases)
         {
-            var result = _medicalHistoryService.Update(medicalHistory);
+            var result = _ongoingDiseaseService.Update(ongoingDeseases);
             if (result.Success)
             {
                 return Ok(result);
@@ -56,9 +56,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpDelete("delete")]
-        public IActionResult Delete(MedicalHistoryForCreateDto medicalHistory)
+        public IActionResult Delete(OngoingDiseaseForCreateDto ongoingDeseases)
         {
-            var result = _medicalHistoryService.Delete(medicalHistory);
+            var result = _ongoingDiseaseService.Delete(ongoingDeseases);
             if (result.Success)
             {
                 return Ok(result);

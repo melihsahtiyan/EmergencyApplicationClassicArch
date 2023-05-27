@@ -18,12 +18,12 @@ namespace Business.DependencyResolvers
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IContactService, ContactManager>();
-            services.AddScoped<IMedicalHistoryService, MedicalHistoryManager>();
+            services.AddScoped<IOngoingDiseaseService, OngoingDiseaseManager>();
             services.AddScoped<IMedicationService, MedicationManager>();
             services.AddScoped<ISourceService, SourceManager>();
             services.AddScoped<ISystemStaffService, SystemStaffManager>();
             services.AddScoped<IUserAllergiesService, UserAllergiesManager>();
-            services.AddScoped<IUserMedicalHistoriesService, UserMedicalHistoriesManager>();
+            services.AddScoped<IUserOngoingDiseaseService, UserOngoingDiseaseManager>();
             services.AddScoped<IUserMedicationsService, UserMedicationsManager>();
             services.AddScoped<IUserProfileService, UserProfileManager>();
             services.AddScoped<IUserService, UserManager>();

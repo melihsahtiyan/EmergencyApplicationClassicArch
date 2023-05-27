@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity.Abstract;
 
-namespace Entity.Dtos.MedicalHistory
+namespace Entity.Dtos.OngoingDisease
 {
-    public class MedicalHistoryForCreateDto : IDto
+    public class OngoingDiseaseForCreateDto : IDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

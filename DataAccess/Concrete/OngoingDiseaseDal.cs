@@ -9,12 +9,9 @@ using Entity.Concrete;
 
 namespace DataAccess.Concrete
 {
-    public class UserMedicalHistoryDal : EfEntityRepositoryBase<UserMedicalHistories, BaseDbContext>,
-        IUserMedicalHistoryDal
-
+    public class OngoingDiseaseDal : EfEntityRepositoryBase<OngoingDisease, BaseDbContext>, IOngoingDiseaseDal
     {
-        public UserMedicalHistoryDal(BaseDbContext context) : base(context)
-        {
-        }
+        public OngoingDiseaseDal(BaseDbContext context) : base(context)
+        { }
     }
 }

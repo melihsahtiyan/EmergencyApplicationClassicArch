@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace Core.DataAccess.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
-        where TEntity : Entity.Concrete.Entity, new()
+        where TEntity : class, IEntity, new()
         where TContext : DbContext
     {
         protected TContext Context { get; }

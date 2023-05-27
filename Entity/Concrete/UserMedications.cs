@@ -5,7 +5,7 @@ namespace Entity.Concrete;
 public class UserMedications : Entity
 {
     public int UserId { get; set; }
-    public virtual UserProfile UserProfile { get; set; }
+    public virtual User User { get; set; }
     public int MedicationId { get; set; }
     public virtual Medication Medication { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Entity.Dtos.MedicalHistory;
+using Entity.Dtos.OngoingDisease;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +8,17 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserMedicalHistoriesController : ControllerBase
+    public class UserOngoingDiseaseController : ControllerBase
     {
-        IUserMedicalHistoriesService _userMedicalHistoriesService;
-        public UserMedicalHistoriesController(IUserMedicalHistoriesService userMedicalHistoryService)
+        IUserOngoingDiseaseService _userOngoingDiseaseService;
+        public UserOngoingDiseaseController(IUserOngoingDiseaseService userOngoingDiseaseService)
         {
-            _userMedicalHistoriesService = userMedicalHistoryService;
+            _userOngoingDiseaseService = userOngoingDiseaseService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _userMedicalHistoriesService.GetAll();
+            var result = _userOngoingDiseaseService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _userMedicalHistoriesService.GetById(id);
+            var result = _userOngoingDiseaseService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         [HttpGet("getbyuserid")]
         public IActionResult GetByUserId(int userId)
         {
-            var result = _userMedicalHistoriesService.GetByUserId(userId);
+            var result = _userOngoingDiseaseService.GetByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);
@@ -46,9 +46,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(UserMedicalHistoriesForCreateDto userMedicalHistory)
+        public IActionResult Add(UserOngoingDiseaseForCreateDto userMedicalHistory)
         {
-            var result = _userMedicalHistoriesService.Add(userMedicalHistory);
+            var result = _userOngoingDiseaseService.Add(userMedicalHistory);
             if (result.Success)
             {
                 return Ok(result);
@@ -56,9 +56,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(UserMedicalHistoriesForCreateDto userMedicalHistory)
+        public IActionResult Update(UserOngoingDiseaseForCreateDto userMedicalHistory)
         {
-            var result = _userMedicalHistoriesService.Update(userMedicalHistory);
+            var result = _userOngoingDiseaseService.Update(userMedicalHistory);
             if (result.Success)
             {
                 return Ok(result);
@@ -66,9 +66,9 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         [HttpDelete("delete")]
-        public IActionResult Delete(UserMedicalHistoriesForCreateDto userMedicalHistory)
+        public IActionResult Delete(UserOngoingDiseaseForCreateDto userMedicalHistory)
         {
-            var result = _userMedicalHistoriesService.Delete(userMedicalHistory);
+            var result = _userOngoingDiseaseService.Delete(userMedicalHistory);
             if (result.Success)
             {
                 return Ok(result);
