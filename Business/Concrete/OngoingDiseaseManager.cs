@@ -36,58 +36,103 @@ namespace Business.Concrete
             return new SuccessDataResult<OngoingDisease>(result, Messages.MedicalHistoryListed);
         }
 
-        public IResult Add(OngoingDiseaseForCreateDto ongoingDeseases)
+        public IResult Add(OngoingDiseaseForCreateDto ongoingDiseases)
         {
-            var result = CheckIfMedicalHistoryExists(ongoingDeseases.Name);
+            var result = CheckIfMedicalHistoryExists(ongoingDiseases.Name);
 
             if (result != null)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            result.Name = ongoingDeseases.Name;
-            result.Description = ongoingDeseases.Description;
+            result.Name = ongoingDiseases.Name;
+            result.Description = ongoingDiseases.Description;
 
             _ongoingDiseaseDal.Add(result);
             return new SuccessResult(Messages.MedicalHistoryAdded);
         }
 
-        public IResult Update(OngoingDiseaseForCreateDto ongoingDeseases)
+        public IResult AddList(List<OngoingDiseaseForCreateDto> ongoingDiseases)
         {
-            var result = CheckIfMedicalHistoryExists(ongoingDeseases.Id);
+            foreach (var ongoingDeseases in ongoingDiseases)
+            {
+                var result = CheckIfMedicalHistoryExists(ongoingDeseases.Name);
+
+                if (result != null)
+                {
+                    return new ErrorResult(Messages.MedicalHistoryExists);
+                }
+
+                result.Name = ongoingDeseases.Name;
+                result.Description = ongoingDeseases.Description;
+
+                _ongoingDiseaseDal.Add(result);
+            }
+
+            return new SuccessResult(Messages.MedicalHistoryAdded);
+        }
+
+        public IResult Update(OngoingDiseaseForCreateDto ongoingDiseases)
+        {
+            var result = CheckIfMedicalHistoryExists(ongoingDiseases.Id);
 
             if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            var checkName = CheckIfMedicalHistoryExists(ongoingDeseases.Name);
+            var checkName = CheckIfMedicalHistoryExists(ongoingDiseases.Name);
 
             if (result != null)
             {
                 return new ErrorResult(Messages.MedicalHistoryExists);
             }
 
-            result.Name = ongoingDeseases.Name;
-            result.Description = ongoingDeseases.Description;
+            result.Name = ongoingDiseases.Name;
+            result.Description = ongoingDiseases.Description;
 
             _ongoingDiseaseDal.Update(result);
             return new SuccessResult(Messages.MedicalHistoryUpdated);
         }
 
-        public IResult Delete(OngoingDiseaseForCreateDto ongoingDeseases)
+        public IResult UpdateList(List<OngoingDiseaseForCreateDto> ongoingDiseases)
         {
-            var result = CheckIfMedicalHistoryExists(ongoingDeseases.Id);
+            throw new NotImplementedException();
+        }
+
+        public IResult Delete(OngoingDiseaseForCreateDto ongoingDiseases)
+        {
+            var result = CheckIfMedicalHistoryExists(ongoingDiseases.Id);
 
             if (result == null)
             {
                 return new ErrorResult(Messages.MedicalHistoryNotFound);
             }
 
-            result.Name = ongoingDeseases.Name;
-            result.Description = ongoingDeseases.Description;
+            result.Name = ongoingDiseases.Name;
+            result.Description = ongoingDiseases.Description;
 
             _ongoingDiseaseDal.Delete(result);
+            return new SuccessResult(Messages.MedicalHistoryDeleted);
+        }
+
+        public IResult DeleteList(List<OngoingDiseaseForCreateDto> ongoingDiseases)
+        {
+            foreach (var ongoingDisease in ongoingDiseases)
+            {
+                var result = CheckIfMedicalHistoryExists(ongoingDisease.Id);
+
+                if (result == null)
+                {
+                    return new ErrorResult(Messages.MedicalHistoryNotFound);
+                }
+
+                result.Name = ongoingDisease.Name;
+                result.Description = ongoingDisease.Description;
+
+                _ongoingDiseaseDal.Delete(result);
+            }
+
             return new SuccessResult(Messages.MedicalHistoryDeleted);
         }
 

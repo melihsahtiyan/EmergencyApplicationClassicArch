@@ -51,6 +51,17 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("addlist")]
+        public IActionResult AddList(List<Post> posts)
+        {
+            var result = _postService.AddList(posts);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPut("update")]
         public IActionResult Update(Post post)
         {
@@ -66,6 +77,17 @@ namespace WebApi.Controllers
         public IActionResult Delete(Post post)
         {
             var result = _postService.Delete(post);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete("deletelist")]
+        public IActionResult DeleteList(List<Post> posts)
+        {
+            var result = _postService.DeleteList(posts);
             if (result.Success)
             {
                 return Ok(result);

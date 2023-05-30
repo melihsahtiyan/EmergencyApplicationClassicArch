@@ -29,7 +29,7 @@ namespace Business.DependencyResolvers
             services.AddScoped<IUserService, UserManager>();
             //services.AddScoped<IOperationClaimService, OperationClaimManager>();
             services.AddScoped<IPostService, PostManager>();
-            //services.AddScoped<IPostTemplateService, PostTemplateManager>();
+            services.AddScoped<IPostTemplateService, PostTemplateManager>();
             //services.AddScoped<IRefreshTokenService, RefreshTokenManager>();
             //services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
             services.AddScoped<ITokenHelper,JwtHelper>();

@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Entity.Dtos.Allergy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +7,19 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AllergiesController : ControllerBase
+    public class PostTemplatesController : ControllerBase
     {
-        private readonly IAllergyService _allergyService;
-        public AllergiesController(IAllergyService allergyService)
+        private readonly IPostTemplateService _postTemplateService;
+
+        public PostTemplatesController(IPostTemplateService postTemplateService)
         {
-            _allergyService = allergyService;
+            _postTemplateService = postTemplateService;
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _allergyService.GetAll();
+            var result = _postTemplateService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -27,20 +28,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int postTemplateId)
         {
-            var result = _allergyService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        
-        [HttpPost("add")]
-        public IActionResult Add(AllergyForCreateDto allergy)
-        {
-            var result = _allergyService.Add(allergy);
+            var result = _postTemplateService.GetById(postTemplateId);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,10 +38,21 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("addlist")]
-        public IActionResult AddList(List<AllergyForCreateDto> allergies)
+        [HttpPost("add")]
+        public IActionResult Add(PostTemplate postTemplate)
         {
-            var result = _allergyService.AddList(allergies);
+            var result = _postTemplateService.Add(postTemplate);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("addlist")]
+        public IActionResult AddList(List<PostTemplate> postTemplates)
+        {
+            var result = _postTemplateService.AddList(postTemplates);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,20 +61,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(AllergyForCreateDto allergy)
+        public IActionResult Update(PostTemplate postTemplate)
         {
-            var result = _allergyService.Update(allergy);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPut("updatelist")]
-        public IActionResult UpdateList(List<AllergyForCreateDto> allergies)
-        {
-            var result = _allergyService.UpdateList(allergies);
+            var result = _postTemplateService.Update(postTemplate);
             if (result.Success)
             {
                 return Ok(result);
@@ -82,9 +72,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(AllergyForCreateDto allergy)
+        public IActionResult Delete(PostTemplate postTemplate)
         {
-            var result = _allergyService.Delete(allergy);
+            var result = _postTemplateService.Delete(postTemplate);
             if (result.Success)
             {
                 return Ok(result);
@@ -93,14 +83,15 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("deletelist")]
-        public IActionResult DeleteList(List<AllergyForCreateDto> allergies)
+        public IActionResult DeleteList(List<PostTemplate> postTemplates)
         {
-            var result = _allergyService.DeleteList(allergies);
+            var result = _postTemplateService.DeleteList(postTemplates);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
     }
 }

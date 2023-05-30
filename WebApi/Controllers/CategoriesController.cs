@@ -29,6 +29,8 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int categoryId)
         {

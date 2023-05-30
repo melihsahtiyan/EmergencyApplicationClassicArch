@@ -9,86 +9,94 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string UserRegistered = "User registered!";
-        public static string PasswordError = "Password error!";
-        public static string SuccessfulLogin = "Successful login";
-        public static string UserAlreadyExists = "User already exists";
-        public static string AccessTokenCreated = "Access token created!";
-        public static string WrongEmailOrPassword = "Wrong email or password";
+        public static string PostTemplatesListed = "Post templates listed!";
+        public static string PostTemplateListed = "Post template listed!";
+        public static string PostTemplateNotFound = "Post templates not found!";
+        public static string PostTemplateAdded = "Post templates added!";
+        public static string PostTemplateExists = "Post templates already exists!";
+        public static string PostTemplateDeleted = "Post templates deleted!";
+        public static string PostTemplateUpdated = "Post templates updated!";
 
-        public static string CategoryAdded = "Category added";
-        public static string CategoryDeleted = "Category deleted";
-        public static string CategoryUpdated = "Category updated";
-        public static string CategoriesListed = "Category listed";
+
+        public static string UserRegistered = "User registered successfully!";
+        public static string PasswordError = "Incorrect password!";
+        public static string SuccessfulLogin = "Login successful";
+        public static string UserAlreadyExists = "User already exists";
+        public static string AccessTokenCreated = "Access token created successfully!";
+        public static string WrongEmailOrPassword = "Incorrect email or password";
+
+        public static string CategoryAdded = "Category added successfully";
+        public static string CategoryDeleted = "Category deleted successfully";
+        public static string CategoryUpdated = "Category updated successfully";
+        public static string CategoriesListed = "Categories listed";
         public static string CategoryListed = "Category listed";
         public static string CategoryNotFound = "Category not found";
-        public static string CategoryExists = "Category exists";
+        public static string CategoryExists = "Category already exists";
 
-        public static string MedicationAdded = "Medication added";
-        public static string MedicationDeleted = "Medication deleted";
-        public static string MedicationUpdated = "Medication updated";
+        public static string MedicationAdded = "Medication added successfully";
+        public static string MedicationDeleted = "Medication deleted successfully";
+        public static string MedicationUpdated = "Medication updated successfully";
         public static string MedicationsListed = "Medications listed";
         public static string MedicationListed = "Medication listed";
         public static string MedicationNotFound = "Medication not found";
-        public static string MedicationExists = "Medication is already exists";
+        public static string MedicationExists = "Medication already exists";
 
-        public static string SystemStaffAdded = "System Staff added";
-        public static string SystemStaffDeleted = "System Staff deleted";
-        public static string SystemStaffUpdated = "System Staff updated";
-        public static string SystemStaffsListed = "System Staffs listed";
-        public static string SystemStaffExists = "System Staff is already exists";
-        public static string SystemStaffNotFound = "System Staff not found";
+        public static string SystemStaffAdded = "System staff added successfully";
+        public static string SystemStaffDeleted = "System staff deleted successfully";
+        public static string SystemStaffUpdated = "System staff updated successfully";
+        public static string SystemStaffsListed = "System staffs listed";
+        public static string SystemStaffExists = "System staff already exists";
+        public static string SystemStaffNotFound = "System staff not found";
 
-        public static string UserMedicationAdded = "User medications added";
-        public static string UserMedicationDeleted = "User medications deleted";
-        public static string UserMedicationUpdated = "User medications Updated";
+        public static string UserMedicationAdded = "User medication added successfully";
+        public static string UserMedicationDeleted = "User medication deleted successfully";
+        public static string UserMedicationUpdated = "User medication updated successfully";
         public static string UserMedicationsListed = "User medications listed";
-        public static string UserMedicationNotFound = "User Medication Not Found";
-        public static string UserMedicationExists = "User Medication Exists";
-        public static string UserMedicationListed = "User Medication listed";
+        public static string UserMedicationNotFound = "User medication not found";
+        public static string UserMedicationExists = "User medication already exists";
+        public static string UserMedicationListed = "User medication listed";
 
-        public static string UserAdded = "User added";
-        public static string UserDeleted = "User deleted";
-        public static string UserUpdated = "User updated";
+        public static string UserAdded = "User added successfully";
+        public static string UserDeleted = "User deleted successfully";
+        public static string UserUpdated = "User updated successfully";
         public static string UsersListed = "Users listed";
         public static string UserListed = "User listed";
         public static string UserNotFound = "User not found";
-        public static string UserExists = "User exists";
+        public static string UserExists = "User already exists";
 
-
-        public static string AllergyAdded = "Allergy added";
-        public static string AllergyDeleted = "Allergy deleted";
-        public static string AllergyUpdated = "Allergy updated";
-        public static string AllergiesListed = "Allergy listed";
+        public static string AllergyAdded = "Allergy added successfully";
+        public static string AllergyDeleted = "Allergy deleted successfully";
+        public static string AllergyUpdated = "Allergy updated successfully";
+        public static string AllergiesListed = "Allergies listed";
         public static string AllergyListed = "Allergy listed";
         public static string AllergyNotFound = "Allergy not found";
-        public static string AllergyExists = "Allergy exists";
+        public static string AllergyExists = "Allergy already exists";
 
         public static string AuthorizationDenied = "Authorization denied!";
 
         public static string ContactListed = "Contact listed";
-        public static string ContactExists = "Contact exists";
-        public static string ContactAdded = "Contact added";
-        public static string ContactNotExists = "Contact not exists";
-        public static string ContactDeleted = "Contact deleted";
+        public static string ContactExists = "Contact already exists";
+        public static string ContactAdded = "Contact added successfully";
+        public static string ContactNotExists = "Contact does not exist";
+        public static string ContactDeleted = "Contact deleted successfully";
         public static string ContactLimitExceeded = "Contact limit exceeded";
-        public static string ContactUpdated = "Contact updated";
+        public static string ContactUpdated = "Contact updated successfully";
         public static string ContactNotFound = "Contact not found";
 
         public static string MedicalHistoriesListed = "Medical histories listed";
         public static string MedicalHistoryListed = "Medical history listed";
         public static string MedicalHistoryNotFound = "Medical history not found";
-        public static string MedicalHistoryAdded = "Medical history added";
-        public static string MedicalHistoryExists = "Medical history exists";
-        public static string MedicalHistoryDeleted = "Medical history deleted";
-        public static string MedicalHistoryUpdated = "Medical history updated";
+        public static string MedicalHistoryAdded = "Medical history added successfully";
+        public static string MedicalHistoryExists = "Medical history already exists";
+        public static string MedicalHistoryDeleted = "Medical history deleted successfully";
+        public static string MedicalHistoryUpdated = "Medical history updated successfully";
 
         public static string PostsListed = "Posts listed";
         public static string PostListed = "Post listed";
         public static string PostNotFound = "Post not found";
-        public static string PostAdded = "Post added";
-        public static string PostDeleted = "Post deleted";
-        public static string PostUpdated = "Post updated";
+        public static string PostAdded = "Post added successfully";
+        public static string PostDeleted = "Post deleted successfully";
+        public static string PostUpdated = "Post updated successfully";
 
         public static string UserAllergiesListed = "User allergies listed";
         public static string UserAllergiesAdded = "User allergy added";
@@ -96,15 +104,17 @@ namespace Business.Constants
         public static string UserAllergiesUpdated = "User allergy updated";
         public static string UserAllergyListed = "User allergy listed";
         public static string UserAllergiesNotFound = "User allergy not found";
-        public static string UserAllergiesExists = "User allergy exists";
+        public static string UserAllergiesExists = "User allergy already exists";
 
-        public static string UserProfileAdded = "User profile added";
-        public static string UserProfileDeleted = "User profile deleted";
-        public static string UserProfileUpdated = "User profile updated";
+        public static string UserProfileAdded = "User profile added successfully";
+        public static string UserProfileDeleted = "User profile deleted successfully";
+        public static string UserProfileUpdated = "User profile updated successfully";
         public static string UserProfilesListed = "User profiles listed";
         public static string UserProfileListed = "User profile listed";
         public static string UserProfileNotFound = "User profile not found";
-        public static string UserProfileExists = "User profile exists";
-        public static string UserNotRegister = "User not register";
+        public static string UserProfileExists = "User profile already exists";
+        public static string UserRegisterFailure = "Failed to register user";
+        
+        public static string SourceAdded = "Source file added successfully";
     }
 }

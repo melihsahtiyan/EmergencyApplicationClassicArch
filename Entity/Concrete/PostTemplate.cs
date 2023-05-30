@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Concrete
 {
-    public class PostTemplates : Entity
+    public class PostTemplate : Entity
     {
         public int Id { get; set; }
         public string Title { get; set; }

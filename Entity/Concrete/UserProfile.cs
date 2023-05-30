@@ -13,6 +13,7 @@ namespace Entity.Concrete
         public string Address { get; set; }
         public string ProfilePicture { get; set; }
         public string BloodType { get; set; }
+        public string Gender { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
         public virtual User User { get; set; }

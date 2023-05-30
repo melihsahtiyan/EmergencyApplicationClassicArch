@@ -14,8 +14,11 @@ namespace Business.Abstract
     {
         IDataResult<List<OngoingDisease>> GetAll();
         IDataResult<OngoingDisease> GetById(int medicalHistoryId);
-        IResult Add(OngoingDiseaseForCreateDto ongoingDeseases);
-        IResult Update(OngoingDiseaseForCreateDto ongoingDeseases);
-        IResult Delete(OngoingDiseaseForCreateDto ongoingDeseases);
+        IResult Add(OngoingDiseaseForCreateDto ongoingDiseases);
+        IResult AddList(List<OngoingDiseaseForCreateDto> ongoingDiseases);
+        IResult Update(OngoingDiseaseForCreateDto ongoingDiseases);
+        IResult UpdateList(List<OngoingDiseaseForCreateDto> ongoingDiseases);
+        IResult Delete(OngoingDiseaseForCreateDto ongoingDiseases);
+        IResult DeleteList(List<OngoingDiseaseForCreateDto> ongoingDiseases);
     }
 }

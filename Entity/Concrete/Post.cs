@@ -22,9 +22,7 @@ namespace Entity.Concrete
         public virtual ICollection<GptChats> GptChats { get; set; }
 
         public Post()
-        {
-
-        }
+        { }
 
         public Post(int id, int categoryId, int userId, string description, DateTime date, double latitude,
             double longitude, string title) : this()

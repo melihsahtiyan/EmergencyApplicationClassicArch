@@ -64,6 +64,17 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("addlist")]
+        public IActionResult AddList(List<ContactForCreateDto> contacts)
+        {
+            var result = _contactService.AddList(contacts);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPut]
         [Route("update")]
         public IActionResult Update(ContactForCreateDto contact)
@@ -76,11 +87,35 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPut]
+        [Route("updatelist")]
+        public IActionResult UpdateList(List<ContactForCreateDto> contacts)
+        {
+            var result = _contactService.UpdateList(contacts);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpDelete]
         [Route("delete")]
         public IActionResult Delete(ContactForCreateDto contact)
         {
             var result = _contactService.Delete(contact);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete]
+        [Route("deletelist")]
+        public IActionResult DeleteList(List<ContactForCreateDto> contacts)
+        {
+            var result = _contactService.DeleteList(contacts);
             if (result.Success)
             {
                 return Ok(result);

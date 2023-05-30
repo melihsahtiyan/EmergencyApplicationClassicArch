@@ -45,62 +45,105 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.MedicationExists);
             }
 
-            result.Name = medication.Name;
-            result.Description = medication.Description;
+            result = new Medication
+            {
+                Name = medication.Name,
+                Description = medication.Description
+            };
 
             _medicationDal.Add(result);
+            return new SuccessResult(Messages.MedicationAdded);
+        }
+
+        public IResult AddList(List<MedicationForCreateDto> medications)
+        {
+            foreach (var medication in medications)
+            {
+                var result = CheckIfMedicationExists(medication.Name);
+                if (result != null)
+                {
+                    return new ErrorResult(Messages.MedicationExists);
+                }
+
+                result = new Medication
+                {
+                    Name = medication.Name,
+                    Description = medication.Description
+                };
+
+                _medicationDal.Add(result);
+            }
             return new SuccessResult(Messages.MedicationAdded);
         }
 
         public IResult Update(MedicationForCreateDto medication)
         {
             var result = CheckIfMedicationExists(medication.Id);
-            
+
             if (result == null)
             {
                 return new ErrorResult(Messages.MedicationNotFound);
             }
-            
+
             var checkName = CheckIfMedicationExists(medication.Name);
-            
+
             if (checkName != null)
             {
                 return new ErrorResult(Messages.MedicationExists);
             }
 
-            
+
 
             _medicationDal.Update(result);
             return new SuccessResult(Messages.MedicationUpdated);
         }
 
+        public IResult UpdateList(List<MedicationForCreateDto> medications)
+        {
+            throw new NotImplementedException();
+        }
+
         public IResult Delete(MedicationForCreateDto medication)
         {
             var result = CheckIfMedicationExists(medication.Id);
-            
+
             if (result == null)
             {
                 return new ErrorResult(Messages.MedicationNotFound);
             }
 
-            result.Name = medication.Name;
-            result.Description = medication.Description;
-
             _medicationDal.Delete(result);
+            return new SuccessResult(Messages.MedicationDeleted);
+        }
+
+        public IResult DeleteList(List<MedicationForCreateDto> medications)
+        {
+            foreach (var medication in medications)
+            {
+                var result = CheckIfMedicationExists(medication.Id);
+
+                if (result == null)
+                {
+                    return new ErrorResult(Messages.MedicationNotFound);
+                }
+
+                _medicationDal.Delete(result);
+            }
+
             return new SuccessResult(Messages.MedicationDeleted);
         }
 
         private Medication CheckIfMedicationExists(string name)
         {
             var result = _medicationDal.Get(m => m.Name == name);
-            
+
             return result;
         }
 
         private Medication CheckIfMedicationExists(int id)
         {
             var result = _medicationDal.Get(m => m.Id == id);
-            
+
             return result;
         }
     }

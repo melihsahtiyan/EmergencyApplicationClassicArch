@@ -61,6 +61,18 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("addlist")]
+        public IActionResult AddList([FromForm] SourceForCreateDto sourceForCreateDto,
+            [FromForm(Name = "Source")] IFormFileCollection files)
+        {
+            var result = _sourceService.AddRange(sourceForCreateDto, files);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("update")]
         public IActionResult Update(SourceForCreateDto sourceForCreateDto)
         {

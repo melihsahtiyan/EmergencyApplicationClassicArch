@@ -9,7 +9,7 @@ using Entity.Concrete;
 
 namespace DataAccess.Concrete
 {
-    public class PostTemplateDal : EfEntityRepositoryBase<PostTemplates, BaseDbContext>, IPostTemplateDal
+    public class PostTemplateDal : EfEntityRepositoryBase<PostTemplate, BaseDbContext>, IPostTemplateDal
     {
         public PostTemplateDal(BaseDbContext context) : base(context)
         {

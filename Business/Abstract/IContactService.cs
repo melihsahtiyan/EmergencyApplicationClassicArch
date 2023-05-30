@@ -15,7 +15,10 @@ namespace Business.Abstract
         IDataResult<List<Contact>> GetById(int contactId);
         IDataResult<List<Contact>> GetContactsByUserId(int userId);
         IResult Add(ContactForCreateDto contact);
+        IResult AddList(List<ContactForCreateDto> contacts);
         IResult Update(ContactForCreateDto contact);
+        IResult UpdateList(List<ContactForCreateDto> contacts);
         IResult Delete(ContactForCreateDto contact);
+        IResult DeleteList(List<ContactForCreateDto> contacts);
     }
 }

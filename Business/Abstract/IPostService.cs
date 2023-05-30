@@ -16,7 +16,9 @@ namespace Business.Abstract
         IDataResult<List<PostDetailDto>> GetPostDetails();
         IDataResult<List<PostDetailDto>> GetPostDetailsByUserId(int userId);
         IResult Add(Post post);
+        IResult AddList(List<Post> posts);
         IResult Update(Post post);
         IResult Delete(Post post);
+        IResult DeleteList(List<Post> posts);
     }
 }

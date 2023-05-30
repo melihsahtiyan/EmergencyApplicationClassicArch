@@ -16,5 +16,8 @@ namespace Business.Abstract
         IResult Add(AllergyForCreateDto allergy);
         IResult Update(AllergyForCreateDto allergy);
         IResult Delete(AllergyForCreateDto allergy);
+        IResult DeleteList(List<AllergyForCreateDto> allergies);
+        IResult AddList(List<AllergyForCreateDto> allergies);
+        IResult UpdateList(List<AllergyForCreateDto> allergies);
     }
 }

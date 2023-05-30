@@ -28,9 +28,11 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.AllergyExists);
             }
-
-            result.Name = allergy.Name;
-            result.Description = allergy.Description;
+            result = new Allergy()
+            {
+                Name = allergy.Name,
+                Description = allergy.Description
+            };
 
             _allergyDal.Add(result);
             return new SuccessResult(Messages.AllergyAdded);
@@ -50,6 +52,65 @@ namespace Business.Concrete
             
             _allergyDal.Delete(result);
             return new SuccessResult(Messages.AllergyDeleted);
+        }
+
+        public IResult DeleteList(List<AllergyForCreateDto> allergies)
+        {
+            foreach (var allergy in allergies)
+            {
+                var result = CheckIfAllergyExists(allergy.Id, allergy.Name);
+
+                if (result == null)
+                {
+                    return new ErrorResult(Messages.AllergyNotFound);
+                }
+
+                result.Name = allergy.Name;
+                result.Description = allergy.Description;
+
+                _allergyDal.Delete(result);
+            }
+            return new SuccessResult(Messages.AllergyDeleted);
+        }
+
+        public IResult AddList(List<AllergyForCreateDto> allergies)
+        {
+            foreach (var allergy in allergies)
+            {
+                var result = CheckIfAllergyExists(null, allergy.Name);
+                if (result != null)
+                {
+                    return new ErrorResult(Messages.AllergyExists);
+                }
+
+                result = new Allergy()
+                {
+                    Name = allergy.Name,
+                    Description = allergy.Description
+                };
+
+                _allergyDal.Add(result);
+            }
+            return new SuccessResult(Messages.AllergyAdded);
+        }
+
+        public IResult UpdateList(List<AllergyForCreateDto> allergies)
+        {
+            foreach (var allergy in allergies)
+            {
+                var result = CheckIfAllergyExists(allergy.Id, allergy.Name);
+
+                if (result == null)
+                {
+                    return new ErrorResult(Messages.AllergyNotFound);
+                }
+
+                result.Name = allergy.Name;
+                result.Description = allergy.Description;
+
+                _allergyDal.Update(result);
+            }
+            return new SuccessResult(Messages.AllergyUpdated);
         }
 
         public IDataResult<List<Allergy>> GetAll()

@@ -23,15 +23,15 @@ namespace DataAccess.Concrete
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<PostTemplates> PostTemplates { get; set; }
+        public DbSet<PostTemplate> PostTemplates { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<OngoingDisease> MedicalHistories { get; set; }
+        public DbSet<OngoingDisease> OngoingDiseases { get; set; }
         public DbSet<Medication> Medications { get; set; }
         public DbSet<Allergy> Allergies { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserAllergies> UserAllergies { get; set; }
         public DbSet<UserMedications> UserMedications { get; set; }
-        public DbSet<UserOngoingDisease> UserMedicalHistories { get; set; }
+        public DbSet<UserOngoingDisease> UserOngoingDiseases { get; set; }
         public DbSet<GptChats> GptChats { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration) : base(dbContextOptions)
@@ -204,6 +204,7 @@ namespace DataAccess.Concrete
                 e.Property(u => u.Address).HasColumnName("Address");
                 e.Property(u => u.PhoneNumber).HasColumnName("PhoneNumber");
                 e.Property(u => u.ProfilePicture).HasColumnName("ProfilePicture");
+                e.Property(u => u.Gender).HasColumnName("Gender");
                 e.HasOne(u => u.User).WithOne(u => u.UserProfile).HasForeignKey<UserProfile>(u => u.UserId);
             });
 
@@ -232,7 +233,7 @@ namespace DataAccess.Concrete
                 a.HasMany(u => u.UserOperationClaims);
             });
 
-            modelBuilder.Entity<PostTemplates>(a =>
+            modelBuilder.Entity<PostTemplate>(a =>
             {
                 a.ToTable("PostTemplates").HasKey(k => k.Id);
                 a.Property(o => o.Id).HasColumnName("Id");

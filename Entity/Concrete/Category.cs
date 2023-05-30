@@ -10,7 +10,7 @@ namespace Entity.Concrete
     {
         public string CategoryName { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<PostTemplates> PostTemplates { get; set; }
+        public virtual ICollection<PostTemplate> PostTemplates { get; set; }
 
         public Category()
         {

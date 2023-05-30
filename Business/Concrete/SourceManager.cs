@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Constants;
 using Core.Utilities.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
@@ -42,6 +43,28 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult AddRange(SourceForCreateDto sourceForCreateDto, IFormFileCollection files)
+        {
+            foreach (var file in files)
+            {
+                var sourcePath = FormFileHelper.Add(file);
+                if (sourcePath == null)
+                {
+                    return new ErrorResult("File could not be added!");
+                }
+                var result = new Source()
+                {
+                    Date = sourceForCreateDto.Date,
+                    PostId = sourceForCreateDto.PostId,
+                    SourceCategory = sourceForCreateDto.SourceCategory,
+                    SourcePath = sourceForCreateDto.SourcePath
+                };
+                _sourceDal.Add(result);
+            }
+
+            return new SuccessResult(Messages.SourceAdded);
+        }
+
         public IResult Delete(SourceForCreateDto sourceForCreateDto)
         {
             var result = CheckIfSourceExists(sourceForCreateDto.Id);
@@ -52,6 +75,23 @@ namespace Business.Concrete
             }
 
             _sourceDal.Delete(result);
+            return new SuccessResult();
+        }
+
+        public IResult DeleteRange(List<SourceForCreateDto> sourceForCreateDtos)
+        {
+            foreach (var source in sourceForCreateDtos)
+            {
+                var result = CheckIfSourceExists(source.Id);
+
+                if (result == null)
+                {
+                    return new ErrorResult("Source could not be found!");
+                }
+
+                _sourceDal.Delete(result);
+            }
+
             return new SuccessResult();
         }
 

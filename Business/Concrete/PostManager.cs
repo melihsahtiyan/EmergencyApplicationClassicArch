@@ -33,9 +33,27 @@ namespace Business.Concrete
             return new SuccessResult(Messages.PostAdded);
         }
 
+        public IResult AddList(List<Post> posts)
+        {
+            foreach (var post in posts)
+            {
+                _postDal.Add(post);
+            }
+            return new SuccessResult(Messages.PostAdded);
+        }
+
         public IResult Delete(Post post)
         {
             _postDal.Delete(post);
+            return new SuccessResult(Messages.PostDeleted);
+        }
+
+        public IResult DeleteList(List<Post> posts)
+        {
+            foreach (var post in posts)
+            {
+                _postDal.Delete(post);
+            }
             return new SuccessResult(Messages.PostDeleted);
         }
 

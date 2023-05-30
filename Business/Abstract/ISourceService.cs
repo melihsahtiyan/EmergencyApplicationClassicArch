@@ -18,7 +18,9 @@ namespace Business.Abstract
         IDataResult<Source> GetById(int sourceId);
         //IDataResult<List<Source>> GetSourcesByUser(int userId);
         IResult Add(SourceForCreateDto sourceForCreateDto, IFormFile file);
+        IResult AddRange(SourceForCreateDto sourceForCreateDto, IFormFileCollection files);
         IResult Update(SourceForCreateDto sourceForCreateDto);
         IResult Delete(SourceForCreateDto sourceForCreateDto);
+        IResult DeleteRange(List<SourceForCreateDto> sourceForCreateDtos);
     }
 }
