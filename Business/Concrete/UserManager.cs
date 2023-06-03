@@ -65,6 +65,16 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(result, Messages.UserListed);
         }
 
+        public IDataResult<User> GetByEMail(string email)
+        {
+            var result = _userDal.Get(u => u.Email == email);
+            if (result == null)
+            {
+                return new ErrorDataResult<User>(Messages.UserNotFound);
+            }
+            return new SuccessDataResult<User>(result, Messages.UserListed);
+        }
+
         public IResult Update(User user)
         {
             var check = CheckIfUserUserExists(user.Id, user.IdentityNumber);

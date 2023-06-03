@@ -28,6 +28,8 @@ namespace DataAccess.Concrete
                               CategoryName = category.CategoryName,
                               Title = post.Title,
                               Description = post.Description,
+                              Height = userProfile.Height,
+                              Weight = userProfile.Weight,
                               Date = post.Date,
                               Latitude = post.Latitude,
                               Longitude = post.Longitude,
@@ -66,6 +68,8 @@ namespace DataAccess.Concrete
                               CategoryName = category.CategoryName,
                               Title = post.Title,
                               Description = post.Description,
+                              Height = userProfile.Height,
+                              Weight = userProfile.Weight,
                               Date = post.Date,
                               Latitude = post.Latitude,
                               Longitude = post.Longitude,
@@ -77,7 +81,7 @@ namespace DataAccess.Concrete
                                            join allergy in Context.Allergies on userAllergy.AllergyId
                                                equals allergy.Id
                                            where userAllergy.UserId == post.UserId
-                                           select allergy.Name).ToArray(),
+                                           select allergy.Name).ToArray(), 
                               Diseases = (from userDisease in Context.UserOngoingDiseases
                                           join ongoingDisease in Context.OngoingDiseases on
                                               userDisease.OngoingDiseaseId equals ongoingDisease.Id

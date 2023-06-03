@@ -23,16 +23,16 @@ namespace WebApi.Controllers
             var userToLogin = _authService.Login(userForLoginDto);
             if (!userToLogin.Success)
             {
-                return BadRequest(userToLogin.Message);
+                return BadRequest(userToLogin);
             }
 
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("register")]
@@ -41,17 +41,17 @@ namespace WebApi.Controllers
             var userExists = _authService.UserExists(userForRegisterDto.Email);
             if (!userExists.Success)
             {
-                return BadRequest(userExists.Message);
+                return BadRequest(userExists);
             }
 
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             if (registerResult.Success)
             {
                 var result = _authService.CreateAccessToken(registerResult.Data);
-                return Ok(result.Data);
+                return Ok(result);
             }
 
-            return BadRequest(registerResult.Message);
+            return BadRequest(registerResult);
         }
 
         [HttpPost("resgisterStaff")]
@@ -60,17 +60,17 @@ namespace WebApi.Controllers
             var staffExists = _authService.UserExists(staffForCreateDto.Email);
             if (!staffExists.Success)
             {
-                return BadRequest(staffExists.Message);
+                return BadRequest(staffExists);
             }
 
             var registerResult = _authService.SystemStaffRegister(staffForCreateDto);
             if (registerResult.Success)
             {
                 var result = _authService.CreateAccessToken(registerResult.Data);
-                return Ok(result.Data);
+                return Ok(result);
             }
 
-            return BadRequest(registerResult.Message);
+            return BadRequest(registerResult);
         }
 
         [HttpPost("loginStaff")]
@@ -79,16 +79,16 @@ namespace WebApi.Controllers
             var staffToLogin = _authService.SystemStaffLogin(staffForLoginDto);
             if (!staffToLogin.Success)
             {
-                return BadRequest(staffToLogin.Message);
+                return BadRequest(staffToLogin);
             }
 
             var result = _authService.CreateAccessToken(staffToLogin.Data);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
     }
 }
