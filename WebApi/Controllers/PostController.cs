@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Post post)
+        public IActionResult Add(PostForCreateDto post)
         {
             var result = _postService.Add(post);
             if (result.Success)
@@ -52,7 +52,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("addlist")]
-        public IActionResult AddList(List<Post> posts)
+        public IActionResult AddList(List<PostForCreateDto> posts)
         {
             var result = _postService.AddList(posts);
             if (result.Success)
@@ -63,7 +63,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Post post)
+        public IActionResult Update(PostForCreateDto post)
         {
             var result = _postService.Update(post);
             if (result.Success)

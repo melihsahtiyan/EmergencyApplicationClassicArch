@@ -27,17 +27,40 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PostDetailDto>>(result, Messages.PostsListed);
         }
 
-        public IResult Add(Post post)
+        public IResult Add(PostForCreateDto post)
         {
-            _postDal.Add(post);
+            var postToAdd = new Post
+            {
+                CategoryId = post.CategoryId,
+                UserId = post.UserId,
+                Description = post.Description,
+                Date = post.Date,
+                Latitude = post.Latitude,
+                Longitude = post.Longitude,
+                Altitude = post.Altitude,
+                Title = post.Title
+            };
+
+            _postDal.Add(postToAdd);
             return new SuccessResult(Messages.PostAdded);
         }
 
-        public IResult AddList(List<Post> posts)
+        public IResult AddList(List<PostForCreateDto> posts)
         {
             foreach (var post in posts)
             {
-                _postDal.Add(post);
+                var postToAdd = new Post
+                {
+                    CategoryId = post.CategoryId,
+                    UserId = post.UserId,
+                    Description = post.Description,
+                    Date = post.Date,
+                    Latitude = post.Latitude,
+                    Longitude = post.Longitude,
+                    Altitude = post.Altitude,
+                    Title = post.Title
+                };
+                _postDal.Add(postToAdd);
             }
             return new SuccessResult(Messages.PostAdded);
         }
@@ -74,9 +97,22 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PostDetailDto>>(result, Messages.PostsListed);
         }
 
-        public IResult Update(Post post)
+        public IResult Update(PostForCreateDto post)
         {
-            _postDal.Update(post);
+            var postToUpdate = new Post
+            {
+                Id = post.Id,
+                CategoryId = post.CategoryId,
+                UserId = post.UserId,
+                Description = post.Description,
+                Date = post.Date,
+                Latitude = post.Latitude,
+                Longitude = post.Longitude,
+                Altitude = post.Altitude,
+                Title = post.Title
+            };
+
+            _postDal.Update(postToUpdate);
             return new SuccessResult(Messages.PostUpdated);
         }
     }
