@@ -27,6 +27,7 @@ namespace Business.DependencyResolvers
             services.AddScoped<IUserMedicationsService, UserMedicationsManager>();
             services.AddScoped<IUserProfileService, UserProfileManager>();
             services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IGptChatsService, GptChatsManager>();
             //services.AddScoped<IOperationClaimService, OperationClaimManager>();
             services.AddScoped<IPostService, PostManager>();
             services.AddScoped<IPostTemplateService, PostTemplateManager>();

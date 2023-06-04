@@ -116,5 +116,13 @@ namespace Business.Constants
         public static string UserRegisterFailure = "Failed to register user";
         
         public static string SourceAdded = "Source file added successfully";
+
+        public static string GptChatsExists = "Gpt chats already exists";
+        public static string GptChatsAdded = "Gpt chats added successfully";
+        public static string GptChatsDeleted = "Gpt chats deleted successfully";
+        public static string GptChatsUpdated = "Gpt chats updated successfully";
+        public static string GptChatsListed = "Gpt chats listed";
+        public static string GptChatsNotFound = "Gpt chats not found";
+
     }
 }

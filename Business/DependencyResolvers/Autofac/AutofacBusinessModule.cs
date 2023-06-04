@@ -44,6 +44,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<CategoryDal>().As<ICategoryDal>().SingleInstance().InstancePerLifetimeScope();
 
+            builder.RegisterType<GptChatsManager>().As<IGptChatsService>().SingleInstance();
+            builder.RegisterType<GptChatsDal>().As<IGptChatsDal>().SingleInstance().InstancePerLifetimeScope();
+
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             
 

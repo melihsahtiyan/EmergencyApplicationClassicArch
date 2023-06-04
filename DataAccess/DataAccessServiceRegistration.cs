@@ -38,6 +38,7 @@ namespace DataAccess
             services.AddScoped<IUserMedicationDal, UserMedicationDal>();
             services.AddScoped<IUserOperationClaimDal, UserOperationClaimDal>();
             services.AddScoped<IUserDal, UserDal>();
+            services.AddScoped<IGptChatsDal, GptChatsDal>();
             return services;
         }
     }

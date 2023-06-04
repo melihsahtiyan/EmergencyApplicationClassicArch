@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrete;
+using Entity.Dtos.GptChats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,14 @@ namespace Business.Abstract
     {
         IDataResult<List<GptChats>> GetAll();
         IDataResult<GptChats> GetById(int id);
-        IDataResult<List<GptChats>> GetByUserId(int userId);
-        IDataResult<List<GptChats>> GetByPostId(int postId);
-        IDataResult<List<GptChats>> GetByResponseId(string responseId);
-        IResult Add(GptChats gptChats);
-        IResult Update(GptChats gptChats);
-        IResult Delete(GptChats gptChats);
+        IDataResult<GptChats> GetByUserId(int userId);
+        IDataResult<GptChats> GetByPostId(int postId);
+        IDataResult<GptChats> GetByResponseId(string responseId);
+        IResult Add(GptChatsForCreateDto gptChats);
+        IResult Update(GptChatsForCreateDto gptChats);
+        IResult Delete(GptChatsForCreateDto gptChats);
+        IResult DeleteList(List<GptChatsForCreateDto> gptChats);
+        IResult AddList(List<GptChatsForCreateDto> gptChats);
+        IResult UpdateList(List<GptChatsForCreateDto> gptChats);
     }
 }
