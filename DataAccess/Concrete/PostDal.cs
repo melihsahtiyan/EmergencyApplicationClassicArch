@@ -17,7 +17,7 @@ namespace DataAccess.Concrete
         {
             var result = (from post in Context.Posts
                           join user in Context.Users on post.UserId equals user.Id
-                          join userProfile in Context.UserProfiles on post.Id equals userProfile.UserId
+                          join userProfile in Context.UserProfiles on post.UserId equals userProfile.UserId
                           join category in Context.Categories on post.CategoryId equals category.Id
                           select new PostDetailDto
                           {
@@ -56,7 +56,7 @@ namespace DataAccess.Concrete
         {
             var result = (from post in Context.Posts
                           join user in Context.Users on post.UserId equals user.Id
-                          join userProfile in Context.UserProfiles on post.Id equals userProfile.UserId
+                          join userProfile in Context.UserProfiles on post.UserId equals userProfile.UserId
                           join category in Context.Categories on post.CategoryId equals category.Id
                           where post.UserId == userId
                           select new PostDetailDto()
@@ -96,9 +96,9 @@ namespace DataAccess.Concrete
         {
             var result = (from post in Context.Posts
                           join user in Context.Users on post.UserId equals user.Id
-                          join userProfile in Context.UserProfiles on post.Id equals userProfile.UserId
+                          join userProfile in Context.UserProfiles on post.UserId equals userProfile.UserId
                           join category in Context.Categories on post.CategoryId equals category.Id
-                          where post.UserId == postId
+                          where post.Id == postId
                           select new PostDetailDto()
                           {
                               Id = post.Id,
@@ -127,7 +127,7 @@ namespace DataAccess.Concrete
                                               userDisease.OngoingDiseaseId equals ongoingDisease.Id
                                           where userDisease.UserId == post.UserId
                                           select ongoingDisease.Name).ToArray()
-                          }).FirstOrDefault();
+                          }).SingleOrDefault();
 
             return result;
         }

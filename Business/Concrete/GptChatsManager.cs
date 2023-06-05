@@ -57,6 +57,10 @@ namespace Business.Concrete
         {
 
             var postDetails = _postService.GetPostDetailsByPostId(gptChats.PostId).Data;
+            if (postDetails == null)
+            {
+                return new ErrorResult(Messages.PostNotFound);
+            }
 
             string prompt = gptChats.Message != "string" ? gptChats.Message :
                 $"Act as a chatbot. You are a chatbot designed to help humans in emergency. Current emergency reported is {postDetails.Title}." +
