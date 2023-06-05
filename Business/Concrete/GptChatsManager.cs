@@ -86,15 +86,10 @@ namespace Business.Concrete
                 };
 
                 var requestContent = JsonConvert.SerializeObject(requestBody);
-
                 var request = await client.PostAsync("https://api.openai.com/v1/chat/completions", new StringContent(requestContent, Encoding.UTF8, "application/json"));
-
                 var responseContent = await request.Content.ReadAsStringAsync();
-
                 dynamic response = JObject.Parse(responseContent);
-
-                //if (response != null)
-                //{
+                
                 var gptChatByUser = new GptChats
                 {
                     Message = gptChats.Message != null ? gptChats.Message : null,
