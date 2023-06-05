@@ -23,6 +23,7 @@ builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
+
 builder.Services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -66,6 +67,11 @@ builder.Services.AddSwaggerGen(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
 
 
 var app = builder.Build();

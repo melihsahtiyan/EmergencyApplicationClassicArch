@@ -81,13 +81,53 @@ namespace DataAccess.Concrete
                                            join allergy in Context.Allergies on userAllergy.AllergyId
                                                equals allergy.Id
                                            where userAllergy.UserId == post.UserId
-                                           select allergy.Name).ToArray(), 
+                                           select allergy.Name).ToArray(),
                               Diseases = (from userDisease in Context.UserOngoingDiseases
                                           join ongoingDisease in Context.OngoingDiseases on
                                               userDisease.OngoingDiseaseId equals ongoingDisease.Id
                                           where userDisease.UserId == post.UserId
                                           select ongoingDisease.Name).ToArray()
                           }).ToList();
+
+            return result;
+        }
+
+        public PostDetailDto GetPostDetailsByPostId(int postId)
+        {
+            var result = (from post in Context.Posts
+                          join user in Context.Users on post.UserId equals user.Id
+                          join userProfile in Context.UserProfiles on post.Id equals userProfile.UserId
+                          join category in Context.Categories on post.CategoryId equals category.Id
+                          where post.UserId == postId
+                          select new PostDetailDto()
+                          {
+                              Id = post.Id,
+                              FirstName = user.FirstName,
+                              LastName = user.LastName,
+                              IdentityNumber = user.IdentityNumber,
+                              CategoryName = category.CategoryName,
+                              Title = post.Title,
+                              Description = post.Description,
+                              Height = userProfile.Height,
+                              Weight = userProfile.Weight,
+                              Date = post.Date,
+                              Latitude = post.Latitude,
+                              Longitude = post.Longitude,
+                              Altitude = post.Altitude,
+                              BloodType = userProfile.BloodType,
+                              Gender = userProfile.Gender,
+                              Age = post.Date.Year - user.BirthDate.Year,
+                              Allergies = (from userAllergy in Context.UserAllergies
+                                           join allergy in Context.Allergies on userAllergy.AllergyId
+                                               equals allergy.Id
+                                           where userAllergy.UserId == post.UserId
+                                           select allergy.Name).ToArray(),
+                              Diseases = (from userDisease in Context.UserOngoingDiseases
+                                          join ongoingDisease in Context.OngoingDiseases on
+                                              userDisease.OngoingDiseaseId equals ongoingDisease.Id
+                                          where userDisease.UserId == post.UserId
+                                          select ongoingDisease.Name).ToArray()
+                          }).FirstOrDefault();
 
             return result;
         }

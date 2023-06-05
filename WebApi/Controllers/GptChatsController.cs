@@ -10,10 +10,12 @@ namespace WebApi.Controllers
     public class GptChatsController : ControllerBase
     {
         private readonly IGptChatsService _gptChatsService;
+        private readonly IConfiguration _configuration;
 
-        public GptChatsController(IGptChatsService gptChatsService)
+        public GptChatsController(IGptChatsService gptChatsService, IConfiguration configuration)
         {
             _gptChatsService = gptChatsService;
+            _configuration = configuration;
         }
 
         [HttpGet("getall")]
@@ -60,7 +62,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("getbyresponseid")]
+        [HttpGet("getbyresponseid")]
         public IActionResult GetByResponseId(string responseId)
         {
             var result = _gptChatsService.GetByResponseId(responseId);
@@ -72,9 +74,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(GptChatsForCreateDto gptChat)
+        public async Task<IActionResult> AddByUser(GptChatsForCreateDto gptChat)
         {
-            var result = _gptChatsService.Add(gptChat);
+            var result =
+                await _gptChatsService.AddByUser(gptChat, _configuration.GetConnectionString("GptApiKeyString"));
             if (result.Success)
             {
                 return Ok(result);
@@ -82,8 +85,19 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update(GptChatsForCreateDto gptChat)
+        [HttpPost("addlist")]
+        public async Task<IActionResult> AddList(List<GptChatsForCreateDto> gptChats)
+        {
+            var result = await _gptChatsService.AddList(gptChats, _configuration.GetConnectionString("GptApiKeyString"));
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public IActionResult Update(GptChatsForUpdateDto gptChat)
         {
             var result = _gptChatsService.Update(gptChat);
             if (result.Success)
@@ -93,8 +107,19 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(GptChatsForCreateDto gptChat)
+        [HttpPut("updatelist")]
+        public IActionResult UpdateList(List<GptChatsForUpdateDto> gptChats)
+        {
+            var result = _gptChatsService.UpdateList(gptChats);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(GptChatsForUpdateDto gptChat)
         {
             var result = _gptChatsService.Delete(gptChat);
             if (result.Success)
@@ -104,8 +129,8 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("deletelist")]
-        public IActionResult DeleteList(List<GptChatsForCreateDto> gptChats)
+        [HttpDelete("deletelist")]
+        public IActionResult DeleteList(List<GptChatsForUpdateDto> gptChats)
         {
             var result = _gptChatsService.DeleteList(gptChats);
             if (result.Success)
@@ -115,26 +140,5 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("addlist")]
-        public IActionResult AddList(List<GptChatsForCreateDto> gptChats)
-        {
-            var result = _gptChatsService.AddList(gptChats);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPost("updatelist")]
-        public IActionResult UpdateList(List<GptChatsForCreateDto> gptChats)
-        {
-            var result = _gptChatsService.UpdateList(gptChats);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
     }
 }

@@ -15,6 +15,7 @@ namespace Entity.Concrete
         public string Usage { get; set; }
         public string Message { get; set; }
         public bool Status { get; set; }
+        public string SentBy { get; set; }
         public virtual Post Post { get; set; }
         public virtual User User { get; set; }
         public GptChats()

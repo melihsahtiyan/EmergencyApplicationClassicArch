@@ -15,10 +15,12 @@ namespace Business.Abstract
         IDataResult<Post> GetById(int postId);
         IDataResult<List<PostDetailDto>> GetPostDetails();
         IDataResult<List<PostDetailDto>> GetPostDetailsByUserId(int userId);
+        IDataResult<PostDetailDto> GetPostDetailsByPostId(int postId);
         IResult Add(PostForCreateDto post);
         IResult AddList(List<PostForCreateDto> posts);
         IResult Update(PostForCreateDto post);
         IResult Delete(Post post);
+        IResult DeleteById(int postId);
         IResult DeleteList(List<Post> posts);
     }
 }

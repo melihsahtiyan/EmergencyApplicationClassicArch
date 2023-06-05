@@ -13,5 +13,6 @@ namespace DataAccess.Abstract
     {
         List<PostDetailDto> GetPostDetails();
         List<PostDetailDto> GetPostDetailsByUserId(int userId);
+        PostDetailDto GetPostDetailsByPostId(int postId);
     }
 }

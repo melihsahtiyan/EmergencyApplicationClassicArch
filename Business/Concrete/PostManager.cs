@@ -27,6 +27,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PostDetailDto>>(result, Messages.PostsListed);
         }
 
+        public IDataResult<PostDetailDto> GetPostDetailsByPostId(int postId)
+        {
+            var result = _postDal.GetPostDetailsByPostId(postId);
+            return new SuccessDataResult<PostDetailDto>(result, Messages.PostsListed);
+        }
+
         public IResult Add(PostForCreateDto post)
         {
             var postToAdd = new Post
@@ -68,6 +74,17 @@ namespace Business.Concrete
         public IResult Delete(Post post)
         {
             _postDal.Delete(post);
+            return new SuccessResult(Messages.PostDeleted);
+        }
+
+        public IResult DeleteById(int postId)
+        {
+            var postToCheck = _postDal.Get(p => p.Id == postId);
+            if (postToCheck == null)
+            {
+                return new ErrorResult(Messages.PostNotFound);
+            }
+            _postDal.Delete(postToCheck);
             return new SuccessResult(Messages.PostDeleted);
         }
 

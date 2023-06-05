@@ -80,7 +80,8 @@ namespace DataAccess.Concrete
                 e.Property(g => g.UserId).HasColumnName("UserId");
                 e.Property(g => g.PostId).HasColumnName("PostId");
                 e.Property(g => g.ResponseId).HasColumnName("ResponseId");
-                e.Property(g => g.Status);
+                e.Property(g => g.SentBy).HasColumnName("SentBy");
+                e.Property(g => g.Status).HasColumnName("Status");
                 e.HasOne(g => g.User).WithMany(u => u.GptChats).HasForeignKey(u => u.UserId);
                 e.HasOne(g => g.Post).WithMany(p => p.GptChats).HasForeignKey(p => p.PostId);
             });

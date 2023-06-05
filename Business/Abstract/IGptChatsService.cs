@@ -16,11 +16,11 @@ namespace Business.Abstract
         IDataResult<GptChats> GetByUserId(int userId);
         IDataResult<GptChats> GetByPostId(int postId);
         IDataResult<GptChats> GetByResponseId(string responseId);
-        IResult Add(GptChatsForCreateDto gptChats);
-        IResult Update(GptChatsForCreateDto gptChats);
-        IResult Delete(GptChatsForCreateDto gptChats);
-        IResult DeleteList(List<GptChatsForCreateDto> gptChats);
-        IResult AddList(List<GptChatsForCreateDto> gptChats);
-        IResult UpdateList(List<GptChatsForCreateDto> gptChats);
+        Task<IResult> AddByUser(GptChatsForCreateDto gptChats, string apiKey);
+        Task<IResult> AddList(List<GptChatsForCreateDto> gptChats, string apiKey);
+        IResult Update(GptChatsForUpdateDto gptChats);
+        IResult UpdateList(List<GptChatsForUpdateDto> gptChats);
+        IResult Delete(GptChatsForUpdateDto gptChats);
+        IResult DeleteList(List<GptChatsForUpdateDto> gptChats);
     }
 }
