@@ -15,6 +15,7 @@ namespace WebApi.Controllers
         {
             _userProfileService = userProfileService;
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -25,6 +26,7 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
@@ -35,16 +37,29 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPost("add")]
-        public IActionResult Add(UserProfileForCreateDto userProfile, [FromForm] IFormFile file)
+        public IActionResult Add(UserProfileForCreateDto userProfile/*, [FromForm] IFormFile file*/)
         {
-            var result = _userProfileService.Add(userProfile, file);
+            var result = _userProfileService.Add(userProfile/*, file*/);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+        [HttpPost("addList")]
+        public IActionResult AddList(List<UserProfileForCreateDto> userProfiles)
+        {
+            var result = _userProfileService.AddList(userProfiles);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPut("update")]
         public IActionResult Update(UserProfileForCreateDto userProfile, [FromForm] IFormFile file)
         {
@@ -55,6 +70,7 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpDelete("delete")]
         public IActionResult Delete(UserProfileForCreateDto userProfile)
         {

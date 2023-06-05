@@ -38,25 +38,37 @@ namespace Business.Concrete
             return new SuccessDataResult<UserProfile>(result, Messages.UserProfilesListed);
         }
 
-        public IResult Add(UserProfileForCreateDto userProfile, IFormFile image)
+        public IResult Add(UserProfileForCreateDto userProfile/*, IFormFile image*/)
         {
             var result = CheckIfUserProfileExists(userProfile.UserId);
             if (result != null)
             {
                 return new ErrorResult(Messages.UserProfileExists);
             }
-            
-            var profilePicturePath = FormFileHelper.Add(image);
 
-            result.Address = userProfile.Address;
-            result.BloodType = userProfile.BloodType;
-            result.Height = userProfile.Height;
-            result.Weight = userProfile.Weight;
-            result.PhoneNumber = userProfile.PhoneNumber;
-            result.ProfilePicture = profilePicturePath;
-            result.UserId = userProfile.UserId;
+            //var profilePicturePath = FormFileHelper.Add(image);
+            result = new UserProfile()
+            {
+                Address = userProfile.Address,
+                BloodType = userProfile.BloodType,
+                Height = userProfile.Height,
+                Weight = userProfile.Weight,
+                PhoneNumber = userProfile.PhoneNumber,
+                ProfilePicture = "" /*profilePicturePath*/,
+                Gender = userProfile.Gender,
+                UserId = userProfile.UserId
+            };
 
             _userProfileDal.Add(result);
+            return new SuccessResult(Messages.UserProfileAdded);
+        }
+
+        public IResult AddList(List<UserProfileForCreateDto> userProfiles)
+        {
+            foreach (var userProfile in userProfiles)
+            {
+                Add(userProfile);
+            }
             return new SuccessResult(Messages.UserProfileAdded);
         }
 

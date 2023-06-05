@@ -15,7 +15,8 @@ namespace Business.Abstract
     {
         IDataResult<List<UserProfile>> GetAll();
         IDataResult<UserProfile> GetById(int userProfileId);
-        IResult Add(UserProfileForCreateDto userProfile, IFormFile image);
+        IResult Add(UserProfileForCreateDto userProfile/*, IFormFile image*/);
+        IResult AddList(List<UserProfileForCreateDto> userProfiles);
         IResult Update(UserProfileForCreateDto userProfile, IFormFile image);
         IResult Delete(UserProfileForCreateDto userProfile);
     }

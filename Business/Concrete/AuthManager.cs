@@ -52,6 +52,37 @@ namespace Business.Concrete
             return new ErrorDataResult<User>(Messages.UserRegisterFailure);
         }
 
+        public IDataResult<User> RegisterList(List<UserForRegisterDto> usersForRegisterDto, string password)
+        {
+            foreach (var userForRegisterDto in usersForRegisterDto)
+            {
+                var userToCheck = _userService.GetByMail(userForRegisterDto.Email).Data;
+                if (userToCheck != null)
+                {
+                    return new ErrorDataResult<User>(Messages.UserAlreadyExists);
+                }
+                byte[] passwordHash, passwordSalt;
+                HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                var user = new User()
+                {
+                    Email = userForRegisterDto.Email,
+                    FirstName = userForRegisterDto.FirstName,
+                    LastName = userForRegisterDto.LastName,
+                    PasswordHash = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    IdentityNumber = userForRegisterDto.IdentityNumber,
+                    BirthDate = userForRegisterDto.BirthDate,
+                    Status = true
+                };
+                var result = _userService.Add(user);
+                if (!result.Success)
+                {
+                    return new ErrorDataResult<User>(Messages.UserRegisterFailure);
+                }
+            }
+            return new SuccessDataResult<User>(Messages.UserRegistered);
+        }
+
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;

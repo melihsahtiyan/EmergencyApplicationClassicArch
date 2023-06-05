@@ -17,5 +17,6 @@ namespace Entity.Dtos.UserProfile
         public string BloodType { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
+        public string Gender { get; set; }
     }
 }

@@ -54,6 +54,19 @@ namespace WebApi.Controllers
             return BadRequest(registerResult);
         }
 
+        [HttpPost("registerList")]
+        public ActionResult RegisterList(List<UserForRegisterDto> usersForRegisterDto)
+        {
+            var registerResult = _authService.RegisterList(usersForRegisterDto, usersForRegisterDto[0].Password);
+            if (registerResult.Success)
+            {
+                var result = _authService.CreateAccessToken(registerResult.Data);
+                return Ok(result);
+            }
+
+            return BadRequest(registerResult);
+        }
+
         [HttpPost("resgisterStaff")]
         public ActionResult RegisterStaff(SystemStaffForRegisterDto staffForCreateDto)
         {

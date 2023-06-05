@@ -13,9 +13,9 @@ namespace Business.Abstract
     {
         IDataResult<List<GptChats>> GetAll();
         IDataResult<GptChats> GetById(int id);
-        IDataResult<GptChats> GetByUserId(int userId);
-        IDataResult<GptChats> GetByPostId(int postId);
-        IDataResult<GptChats> GetByResponseId(string responseId);
+        IDataResult<List<GptChats>> GetByUserId(int userId);
+        IDataResult<List<GptChats>> GetByPostId(int postId);
+        IDataResult<List<GptChats>> GetByResponseId(string responseId);
         Task<IResult> AddByUser(GptChatsForCreateDto gptChats, string apiKey);
         Task<IResult> AddList(List<GptChatsForCreateDto> gptChats, string apiKey);
         IResult Update(GptChatsForUpdateDto gptChats);

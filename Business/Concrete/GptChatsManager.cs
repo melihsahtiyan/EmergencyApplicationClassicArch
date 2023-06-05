@@ -37,21 +37,21 @@ namespace Business.Concrete
             return new SuccessDataResult<GptChats>(_gptChatsDal.Get(g => g.Id == gptChatsId));
         }
 
-        public IDataResult<GptChats> GetByUserId(int userId)
+        public IDataResult<List<GptChats>> GetByUserId(int userId)
         {
-            return new SuccessDataResult<GptChats>(_gptChatsDal.Get(g => g.UserId == userId));
+            return new SuccessDataResult<List<GptChats>>(_gptChatsDal.GetAll(g => g.UserId == userId));
         }
 
-        public IDataResult<GptChats> GetByPostId(int postId)
+        public IDataResult<List<GptChats>> GetByPostId(int postId)
         {
-            return new SuccessDataResult<GptChats>(_gptChatsDal.Get(g => g.PostId == postId));
+            return new SuccessDataResult<List<GptChats>>(_gptChatsDal.GetAll(g => g.PostId == postId));
         }
 
-        public IDataResult<GptChats> GetByResponseId(string responseId)
+        public IDataResult<List<GptChats>> GetByResponseId(string responseId)
         {
-            return new SuccessDataResult<GptChats>(_gptChatsDal.Get(g => g.ResponseId == responseId));
+            return new SuccessDataResult<List<GptChats>>(_gptChatsDal.GetAll(g => g.ResponseId == responseId));
         }
-        
+
 
         public async Task<IResult> AddByUser(GptChatsForCreateDto gptChats, string apiKey)
         {
@@ -61,6 +61,8 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.PostNotFound);
             }
+
+            var oldChats = GetByPostId(gptChats.PostId).Data;
 
             string prompt = gptChats.Message != "string" ? gptChats.Message :
                 $"Act as a chatbot. You are a chatbot designed to help humans in emergency. Current emergency reported is {postDetails.Title}." +
@@ -72,18 +74,29 @@ namespace Business.Concrete
             var model = "gpt-3.5-turbo";
             var maxTokens = 150;
 
+            var messages = new List<object>();
+
+            messages.Add(new
+            {
+                role = "user",
+                content = prompt,
+            });
+
+            foreach (var oldChat in oldChats)
+            {
+                messages.Add(new
+                {
+                    role = "user",
+                    content = oldChat.Message,
+                });
+            }
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
                 var requestBody = new
                 {
-                    messages = new[]
-                    {
-                        new {
-                            role = "user",
-                            content = prompt,
-                        }
-                    },
+                    messages = messages,
                     model = model,
                     max_tokens = maxTokens,
                     temperature = 0.7,
@@ -93,10 +106,10 @@ namespace Business.Concrete
                 var request = await client.PostAsync("https://api.openai.com/v1/chat/completions", new StringContent(requestContent, Encoding.UTF8, "application/json"));
                 var responseContent = await request.Content.ReadAsStringAsync();
                 dynamic response = JObject.Parse(responseContent);
-                
+
                 var gptChatByUser = new GptChats
                 {
-                    Message = gptChats.Message != null ? gptChats.Message : null,
+                    Message = gptChats.Message != "string" ? gptChats.Message : null,
                     Model = response.model.ToString(),
                     ResponseId = response.id.ToString(),
                     Status = true,
@@ -105,7 +118,7 @@ namespace Business.Concrete
                     PostId = gptChats.PostId,
                     SentBy = "User"
                 };
-                if( gptChatByUser.Message != null )
+                if (gptChatByUser.Message != null)
                     _gptChatsDal.Add(gptChatByUser);
 
                 var result = new GptChats
