@@ -59,7 +59,7 @@ namespace Business.Concrete
             var postDetails = _postService.GetPostDetailsByPostId(gptChats.PostId).Data;
 
             string prompt = gptChats.Message != "string" ? gptChats.Message :
-                $"Act as a chat$ot. You are a chatbot designed to help humans in emergency. Current emergency reported is {postDetails.Title}." +
+                $"Act as a chatbot. You are a chatbot designed to help humans in emergency. Current emergency reported is {postDetails.Title}." +
                 $"Note that user's height is {postDetails.Height}, gender is {postDetails.Gender}, blood type is {postDetails.BloodType}. " +
                 $"User is allergic to {postDetails.Allergies}, and has {postDetails.Diseases} and is {postDetails.Age} years old." +
                 " Suggest possible actions. Start first message with \"Hi, I'm ResQ Helpbot!\". " +

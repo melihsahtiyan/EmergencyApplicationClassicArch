@@ -16,7 +16,7 @@ namespace Business.Abstract
         IDataResult<List<PostDetailDto>> GetPostDetails();
         IDataResult<List<PostDetailDto>> GetPostDetailsByUserId(int userId);
         IDataResult<PostDetailDto> GetPostDetailsByPostId(int postId);
-        IResult Add(PostForCreateDto post);
+        IDataResult<int> Add(PostForCreateDto post);
         IResult AddList(List<PostForCreateDto> posts);
         IResult Update(PostForCreateDto post);
         IResult Delete(Post post);

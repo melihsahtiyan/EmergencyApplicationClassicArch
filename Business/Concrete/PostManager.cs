@@ -33,7 +33,7 @@ namespace Business.Concrete
             return new SuccessDataResult<PostDetailDto>(result, Messages.PostsListed);
         }
 
-        public IResult Add(PostForCreateDto post)
+        public IDataResult<int> Add(PostForCreateDto post)
         {
             var postToAdd = new Post
             {
@@ -48,7 +48,7 @@ namespace Business.Concrete
             };
 
             _postDal.Add(postToAdd);
-            return new SuccessResult(Messages.PostAdded);
+            return new SuccessDataResult<int>(postToAdd.Id ,Messages.PostAdded);
         }
 
         public IResult AddList(List<PostForCreateDto> posts)

@@ -40,6 +40,28 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getpostdetails")]
+        public IActionResult GetPostDetails()
+        {
+            var result = _postService.GetPostDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getpostdetailsbyuserid")]
+        public IActionResult GetPostDetailsByUserId([FromHeader] int userId)
+        {
+            var result = _postService.GetPostDetailsByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add")]
         public IActionResult Add(PostForCreateDto post)
         {
@@ -84,32 +106,21 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpDelete("deletebyid")]
+        public IActionResult DeleteById(int id)
+        {
+            var result = _postService.DeleteById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpDelete("deletelist")]
         public IActionResult DeleteList(List<Post> posts)
         {
             var result = _postService.DeleteList(posts);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getpostdetails")]
-        public IActionResult GetPostDetails()
-        {
-            var result = _postService.GetPostDetails();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getpostdetailsbyuserid")]
-        public IActionResult GetPostDetailsByUserId([FromHeader]int userId)
-        {
-            var result = _postService.GetPostDetailsByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);
